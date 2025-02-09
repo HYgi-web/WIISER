@@ -50,6 +50,11 @@
             font-weight: bold;
             text-decoration: none;
         }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+  
 
         .nav-links {
             display: flex;
@@ -89,19 +94,36 @@
             background-color: #000;
             color: white;
         }
+        @media (max-width: 768px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+  
+            .hamburger {
+                display: block;
+            }
+  
+        }
+         /* Mobile menu when active */
+         .nav-links.active, .aut-buttons.active{
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: white;
+          padding: 1rem;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
 
         .container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-        @media screen and (max-width: 768px) {
-            .navbar 
-            {
-                flex-direction: column;
-                 background-attachment: scroll;
-                }
-            }
+       
 
         .header {
             text-align: center;
@@ -206,6 +228,7 @@
             <a href="#" class="btn btn-outline">Contact Us</a>
             <a href="#" class="btn btn-filled">Join us</a>
         </div>
+        <div class="hamburger">☰</div>
     </nav>
 
     <div class="container">
@@ -224,8 +247,7 @@
             <option value="sem6">Semester 6</option>
             <option value="sem7">Semester 7</option>
             <option value="sem8">Semester 8</option>
-            <option value="sem9">Semester 9</option>
-            <option value="sem10">Semester 10</option>
+            
         </select>
 
         <div class="subjects-container">
@@ -521,74 +543,7 @@
                     </div>
                 </div>
             </div>
-            <div id="sem9" class="semester-content">
-                <div class="subjects-grid">
-                    <div class="subject-card">
-                        <h3>Physics I</h3>
-                        <p>Introduction to Mechanics and Thermodynamics</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Chemistry I</h3>
-                        <p>Basic Concepts in Organic Chemistry</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Mathematics I</h3>
-                        <p>Calculus and Linear Algebra</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Biology I</h3>
-                        <p>Cell Biology and Genetics</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Earth Sciences I</h3>
-                        <p>Introduction to Earth Systems</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Computer Science I</h3>
-                        <p>Programming Fundamentals</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                </div>
-            </div>
-            <div id="sem10" class="semester-content">
-                <div class="subjects-grid">
-                    <div class="subject-card">
-                        <h3>Physics I</h3>
-                        <p>Introduction to Mechanics and Thermodynamics</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Chemistry I</h3>
-                        <p>Basic Concepts in Organic Chemistry</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Mathematics I</h3>
-                        <p>Calculus and Linear Algebra</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Biology I</h3>
-                        <p>Cell Biology and Genetics</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Earth Sciences I</h3>
-                        <p>Introduction to Earth Systems</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                    <div class="subject-card">
-                        <h3>Computer Science I</h3>
-                        <p>Programming Fundamentals</p>
-                        <a href="#" class="view-notes-btn">View Notes</a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
     
@@ -611,7 +566,15 @@
                 }
             }
         }
-       
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+      
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            authButtons.classList.toggle('active');
+        });
+     
     </script>
 </body>
 </html>

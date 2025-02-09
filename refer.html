@@ -47,7 +47,11 @@
             font-weight: bold;
             text-decoration: none;
         }
-
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+  
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -86,6 +90,28 @@
             background-color: #000;
             color: white;
         }
+        @media (max-width: 768px) {
+            .nav-links, .nav-buttons {
+                display: none;
+            }
+  
+            .hamburger {
+                display: block;
+            }
+  
+        }
+         /* Mobile menu when active */
+         .nav-links.active, .aut-buttons.active{
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background: white;
+          padding: 1rem;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
 
         .container {
             max-width: 1200px;
@@ -202,6 +228,7 @@
             <a href="#" class="btn btn-outline">Contact Us</a>
             <a href="#" class="btn btn-filled">Join us</a>
         </div>
+        <div class="hamburger">☰</div>
     </nav>
 
 
@@ -220,8 +247,6 @@
             <option value="sem6">Semester 6</option>
             <option value="sem7">Semester 7</option>
             <option value="sem8">Semester 8</option>
-            <option value="sem9">Semester 9</option>
-            <option value="sem10">Semester 10</option>
             <option value="advanced">Advanced Topics</option>
             <option value="special">Special Lectures</option>
         </select>
@@ -267,6 +292,14 @@
             links.forEach(link => link.classList.remove('active'));
             element.classList.add('active');
         }
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+      
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            authButtons.classList.toggle('active');
+        });
     </script>
 </body>
 </html>

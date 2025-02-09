@@ -48,6 +48,11 @@
         font-weight: bold;
         text-decoration: none;
     }
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
+
     .nav-links {
         display: flex;
         gap: 2rem;
@@ -86,6 +91,28 @@
         background-color: #000;
         color: white;
     }
+    @media (max-width: 768px) {
+        .nav-links, .nav-buttons {
+            display: none;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+    }
+     /* Mobile menu when active */
+     .nav-links.active, .aut-buttons.active{
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
     .header {
         text-align: center;
         margin-bottom: 2rem;
@@ -186,6 +213,7 @@
             <a href="https://chatgpt.com" class="btn btn-outline">Open AI</a>
             <a href="#" class="btn btn-filled">Join Us</a>
         </div>
+        <div class="hamburger">☰</div>
     </nav>
     <br>
     <div class="container">
@@ -204,19 +232,23 @@
         <div class="notes-card">
             <h3>Biochemistry 8th Edition</h3>
             <p>by Jeremy M. Berg, J.L.Tymoczko,G.J Gatto</p>
-            <a href="https://drive.google.com/file/d/1GpjD0J9B8onp20u2vbEPKT33mpwPvMhG/view?usp=drive_link" class="view-notes-btn">Open Book</a>
+            <a href="https://drive.google.com/file/d/1GpjD0J9B8onp20u2vbEPKT33mpwPvMhG/view?usp=sharing" class="view-notes-btn">Open Book</a>
         </div>
         <div class="notes-card">
             <h3>Fundamentals of Biochemistry (5TH EDITION)</h3>
             <p>Voet D. , Voet J.G</p>
-            <a href="https://drive.google.com/file/d/12-yKPMhi9FEg5Xb-dvbh6Gwd6TYyDMGH/view?usp=sharing" class="view-notes-btn">Open Book</a>
+            <a href="https://drive.google.com/file/d/19sKL5U1mTvaE9enm1gFAeVq3oO_c12os/view?usp=drive_link" class="view-notes-btn">Open Book</a>
         </div>
         <div class="notes-card">
             <h3>Molecular Biology of the Cell</h3>
             <p>By-Alberts, Johnson ,Lewis ,Raff</p>
             <a href="https://drive.google.com/file/d/12-yKPMhi9FEg5Xb-dvbh6Gwd6TYyDMGH/view?usp=sharing" class="view-notes-btn">Open Book</a>
         </div>
-        
+        <div class="notes-card">
+            <h3>Cartoon Guide to Genetics</h3>
+            <p>By-Larry Gonick & Mark Wheelis</p>
+            <a href="https://drive.google.com/file/d/1y0s2CKlyTp_fa5jciCbIH3NVJn3px1bZ/view?usp=sharing" class="view-notes-btn">View Notes</a>
+        </div>
     </div>
     <br>
     <br>
@@ -231,4 +263,12 @@
     function goBack() {
         window.history.back();
       }
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const navButtons = document.querySelector('.nav-buttons');
+    
+      hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          authButtons.classList.toggle('active');
+      });
 </script>

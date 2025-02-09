@@ -86,6 +86,28 @@
         background-color: #000;
         color: white;
     }
+    @media (max-width: 768px) {
+        .nav-links, .nav-buttons {
+            display: none;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+    }
+     /* Mobile menu when active */
+     .nav-links.active, .aut-buttons.active{
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
     .header {
         text-align: center;
         margin-bottom: 2rem;
@@ -186,6 +208,7 @@
             <a href="https://chatgpt.com" class="btn btn-outline">Open AI</a>
             <a href="#" class="btn btn-filled">Join Us</a>
         </div>
+        <div class="hamburger">☰</div>
     </nav>
     <br>
     <div class="container">
@@ -236,4 +259,12 @@
     function goBack() {
         window.history.back();
       }
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const navButtons = document.querySelector('.nav-buttons');
+    
+      hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          authButtons.classList.toggle('active');
+      });
 </script>

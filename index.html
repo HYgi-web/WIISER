@@ -34,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1rem 5%;
             border-bottom: 1px solid #e0e0e0;
         }
        
@@ -86,10 +86,17 @@
         .btn-outline:hover{
             color: #2196f3;
         }
+        .hamburger {
+          display: none;
+          cursor: pointer;
+      }
+
 
         /* Hero Section */
         .hero {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 4rem 2rem;
             gap: 2rem;
             max-width: 1200px;
@@ -118,7 +125,45 @@
             margin-bottom: 2rem;
             line-height: 1.6;
         }
+        @media (max-width: 768px) {
+          .nav-links, .auth-buttons {
+              display: none;
+          }
 
+          .hamburger {
+              display: block;
+          }
+
+          .hero {
+              flex-direction: column;
+              text-align: center;
+              gap: 2rem;
+          }
+
+          .btn-outline, .btn-primary {
+              justify-content: center;
+          }
+
+          .hero-image {
+              max-width: 100%;
+              order: -1;
+            }
+          .features-grid {
+              grid-template-columns: 1fr;
+          }
+      }
+       /* Mobile menu when active */
+       .nav-links.active, .aut-buttons.active{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
         /* Features Section */
         .features {
             padding: 4rem 2rem;
@@ -127,7 +172,7 @@
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));;
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -154,6 +199,33 @@
             align-items: center;
             gap: 0.5rem;
         }
+        .fimg{
+          float: right;
+          margin: 3px;
+          
+          border-radius: 50%;
+          
+        }
+        .feature-card p{
+          text-align: justify;
+        }
+        
+        .aiauth-buttons {
+          display: flex;
+          gap: 1rem;
+      }
+
+        .aibtn {
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+
+      .aibtn-primary {
+          background-color: #000;
+          color: white;
+          border: none;
+      }
 
         /* Stats Section */
         .stats {
@@ -240,23 +312,9 @@
           .social-links a:hover {
             color: #0d6efd;
           }
-          .fimg{
-            float: right;
-            margin: 3px;
-            
-            border-radius: 50%;
-            
-          }
-          .feature-card p{
-            text-align: justify;
-          }
-          .darkmode{
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid #2d2d2d;
-          }
+        
           .mark{
-            background-color: #0d6efd;
+            background-color: #20BEFF;
             font-weight: 800;
             color: #e0e0e0;
           }
@@ -278,9 +336,10 @@
         </nav>
         <div class="auth-buttons">
             <a href="#"><button class="btn btn-outline">Contact Us</button></a>
-            <a href="https://chat.whatsapp.com/LfTrZnIdKD8KfrW7go4Vbo"><button class="btn btn-primary">Join us </button></a>
+            <a href="#"><button class="btn btn-primary">Join us </button></a>
            
         </div>
+        <div class="hamburger">☰</div>
     </header>
     <marquee class="mark">
       <p>Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
@@ -320,7 +379,7 @@
             <div class="feature-card">
                 <h3>Learners</h3>
                 <img src="images/home logo.png" class="fimg" width="90px">
-                <p>Take a deep dive into the notes, PYQ's, Assignments, and boost acadamically</p>
+                <p>Take a deep dive into the comprehensive notes, PYQ's, Assignments, to enhance your academic performance effectively. </p>
                 <br>
                 <ul class="feature-list">
                     
@@ -328,17 +387,17 @@
             </div>
             <div class="feature-card">
                 <h3>Developers</h3>
-                <p>An effort from our side to make the availablity of resources easy and in an innovative way. </p>
+                <p>Facilitating easier access to resources in an efficient and innovative manner.</p>
                 <br>
             </div>
             <div class="feature-card">
                 <h3>Take Help</h3>
                 <img src="images/chatgpt.png" width="80px" class="fimg">
-                <p>Click on button below to resolve doubts and queries</p>
+                <p>Click on button below to access AI and resolve doubts and queries</p>
                 <br>
-                <div class="auth-buttons">
+                <div class="aiauth-buttons">
                 
-                <a href="https://chatgpt.com"><button class="btn btn-primary"><h2>Open AI</h2></button></a>
+                <a href="https://chatgpt.com"><button class="aibtn aibtn-primary"><h2>Open AI</h2></button></a>
                 
                 <!--<br>
                 <ul class="feature-list">
@@ -372,8 +431,8 @@
           <div class="footer-section">
             <h3>About</h3>
             <ul>
-              <li><a href="about.html">About IISERites Platform</a></li>
-              <li><a href="team.html">Our Team</a></li>
+              <li><a href="about.html">About WIISER</a></li>
+              <li><a href="#">Our Team</a></li>
               <li><a href="#">Contact Us</a></li>
               <li><a href="#">Join Us</a></li>
             </ul>
@@ -421,6 +480,14 @@
       </footer>
 
 </body>
-</html>
-</body>
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const authButtons = document.querySelector('.auth-buttons');
+
+  hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      authButtons.classList.toggle('active');
+  });
+</script>
 </html>
