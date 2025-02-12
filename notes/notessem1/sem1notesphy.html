@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sem1notesphy</title>
+    <title>sem1notestd</title>
 <style>
     * {
         margin: 0;
@@ -48,6 +48,11 @@
         font-weight: bold;
         text-decoration: none;
     }
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
+
     .nav-links {
         display: flex;
         gap: 2rem;
@@ -64,6 +69,7 @@
     .nav-links a:hover {
         color: #2196f3;
     }
+
     .nav-buttons {
         display: flex;
         gap: 1rem;
@@ -85,6 +91,28 @@
         background-color: #000;
         color: white;
     }
+    @media (max-width: 768px) {
+        .nav-links, .nav-buttons {
+            display: none;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+    }
+     /* Mobile menu when active */
+     .nav-links.active, .aut-buttons.active{
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
     .header {
         text-align: center;
         margin-bottom: 2rem;
@@ -134,10 +162,10 @@
         color: white;
         text-decoration: none;
         border-radius: 6px;
-        transition: background-color 0.2s;
+        transition-duration: 1s;
     }
     .view-notes-btn:hover {
-        background-color: #1976d2;
+        box-shadow: 3px 3px 18px #333;
     }
     .btn-outline:hover{
         color:#2196f3;
@@ -185,46 +213,48 @@
             <a href="https://chatgpt.com" class="btn btn-outline">Open AI</a>
             <a href="#" class="btn btn-filled">Join Us</a>
         </div>
+        <div class="hamburger">☰</div>
     </nav>
     <br>
     <div class="container">
         <div class="header">
-            <h1>SEMESTER-1 PHYSICS NOTES</h1>
+            <h2>PH1113 NOTES</h2>
+            <P>(Introductory Mechanics)</P>
         </div>
     <br>
     <br>
      <div class="notes-grid">
         <div class="notes-card">
-            <h3>Unit 1</h3>
-            <p>Introduction to Mechanics and Thermodynamics</p>
+            <h3>Part 1</h3>
+            <p></p>
             <a href="#" class="view-notes-btn">View Notes</a>
         </div>
         <div class="notes-card">
-            <h3>Unit 2</h3>
-            <p>Basic Concepts in Organic Chemistry</p>
+            <h3>Part 2</h3>
+            <p></p>
             <a href="#" class="view-notes-btn">View Notes</a>
         </div>
         <div class="notes-card">
-            <h3>Unit 3</h3>
-            <p>Calculus and Linear Algebra</p>
+            <h3>Part 3</h3>
+            <p></p>
             <a href="#" class="view-notes-btn">View Notes</a>
         </div>
         <div class="notes-card">
-            <h3>Unit 4</h3>
-            <p>Cell Biology and Genetics</p>
+            <h3>Part 4</h3>
+            <p></p>
             <a href="#" class="view-notes-btn">View Notes</a>
         </div>
         <div class="notes-card">
-            <h3>Unit 5</h3>
-            <p>Introduction to Earth Systems</p>
+            <h3>Part 5</h3>
+            <p></p>
             <a href="#" class="view-notes-btn">View Notes</a>
         </div>
-        <div class="notes-card">
-            <h3>Unit 6</h3>
-            <p>Programming Fundamentals</p>
-            <a href="#" class="view-notes-btn">View Notes</a>
-        </div>
+        
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <footer class="footer back-button">
         <button class="back-button" onclick="goBack()">← Back</button>
     </footer>
@@ -234,4 +264,12 @@
     function goBack() {
         window.history.back();
       }
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      const navButtons = document.querySelector('.nav-buttons');
+    
+      hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          authButtons.classList.toggle('active');
+      });
 </script>
