@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Opportunities - Wiiser Extended</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #f59e0b;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/300');
+            background-size: cover;
+            opacity: 0.1;
+        }
+
+        .page-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .filter-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 5px;
+            font-size: 1rem;
+            color: var(--gray-700);
+            background-color: white;
+        }
+
+        .filter-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e69009;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-filter {
+            height: 100%;
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+
+        .year-section {
+            margin: 4rem 0;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 0.5rem;
+        }
+
+        .year-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .year-header p {
+            color: var(--gray-600);
+        }
+
+        .internships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .internship-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .internship-company-logo {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .internship-company-logo img {
+            max-height: 80%;
+            max-width: 80%;
+            object-fit: contain;
+        }
+
+        .internship-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .internship-badge-remote {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .internship-badge-hybrid {
+            background-color: var(--info);
+            color: white;
+        }
+
+        .internship-badge-onsite {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .internship-content {
+            padding: 1.5rem;
+        }
+
+        .internship-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .internship-company {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .internship-company i {
+            margin-right: 0.5rem;
+            color: var(--gray-500);
+        }
+
+        .internship-details {
+            margin-bottom: 1.5rem;
+        }
+
+        .internship-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+        }
+
+        .internship-detail i {
+            width: 25px;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        .internship-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .internship-tag {
+            background-color: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .internship-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .internship-deadline {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        .internship-deadline span {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .pagination-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .pagination-item {
+            margin: 0 0.3rem;
+        }
+
+        .pagination-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            background-color: white;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid var(--gray-300);
+        }
+
+        .pagination-link:hover {
+            background-color: var(--gray-100);
+        }
+
+        .pagination-link.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pagination-dots {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            color: var(--gray-600);
+        }
+
+        .year-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .year-tab {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--gray-700);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .year-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .year-tab.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+            z-index: 2;
+        }
+
+        .search-bar {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--gray-300);
+            border-radius: 50px;
+            font-size: 1rem;
+            padding-left: 3rem;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+        }
+
+        .no-results {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--gray-400);
+            margin-bottom: 1rem;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            color: var(--gray-700);
+            margin-bottom: 1rem;
+        }
+
+        .no-results p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-col p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #323e52;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .internships-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .btn-filter {
+                width: 100%;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                Wiiser<span>Extended</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="newindex.html">Home</a></li>
+                    <li><a href="newindex.html#services">Services</a></li>
+                    <li><a href="newindex.html#cv-resume">CV & Resume</a></li>
+                    <li><a href="newindex.html#linkedin">LinkedIn</a></li>
+                    <li><a href="newindex.html#internships">Internships</a></li>
+                    <li><a href="newindex.html#research">Research</a></li>
+                    <li><a href="newindex.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container page-header-content">
+            <h1>Internship Opportunities</h1>
+            <p>Find the perfect internship to jumpstart your career based on your academic year and interests</p>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <label for="location">Location</label>
+                <select id="location" class="filter-control">
+                    <option value="">All Locations</option>
+                    <option value="remote">Remote</option>
+                    <option value="hybrid">Hybrid</option>
+                    <option value="onsite">On-site</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="industry">Industry</label>
+                <select id="industry" class="filter-control">
+                    <option value="">All Industries</option>
+                    <option value="tech">Technology</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="engineering">Engineering</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="duration">Duration</label>
+                <select id="duration" class="filter-control">
+                    <option value="">Any Duration</option>
+                    <option value="summer">Summer (2-3 months)</option>
+                    <option value="semester">Semester (3-4 months)</option>
+                    <option value="half-year">Half Year (6 months)</option>
+                    <option value="year">Full Year</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="compensation">Compensation</label>
+                <select id="compensation" class="filter-control">
+                    <option value="">Any</option>
+                    <option value="paid">Paid</option>
+                    <option value="unpaid">Unpaid</option>
+                    <option value="stipend">Stipend</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-filter">Apply Filters</button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search internships by title, company, or keyword...">
+        </div>
+
+        <!-- Year Tabs -->
+        <div class="year-tabs">
+            <button class="year-tab active" data-year="first">First Year</button>
+            <button class="year-tab" data-year="second">Second Year</button>
+            <button class="year-tab" data-year="third">Third Year</button>
+            <button class="year-tab" data-year="fourth">Fourth Year</button>
+            <button class="year-tab" data-year="graduate">Graduate</button>
+        </div>
+
+        <!-- First Year Internships -->
+        <section id="first-year" class="year-section">
+            <div class="year-header">
+                <h2>First Year Opportunities</h2>
+                <p>Early career exposure and foundational experiences</p>
+            </div>
+            <div class="internships-grid">
+                <!-- Internship 1 -->
+                <div class="internship-card">
+                    <div class="internship-badge internship-badge-remote">Remote</div>
+                    <div class="internship-company-logo">
+                        <img src="/api/placeholder/200/100" alt="Google">
+                    </div>
+                    <div class="internship-content">
+                        <h3 class="internship-title">Software Development Explorer</h3>
+                        <div class="internship-company">
+                            <i class="fas fa-building"></i> Google
+                        </div>
+                        <div class="internship-details">
+                            <div class="internship-detail">
+                                <i class="fas fa-map-marker-alt"></i> Mountain View, CA (Remote)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-calendar-alt"></i> Summer 2025 (8 weeks)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-money-bill-wave"></i> Paid ($25/hour)
+                            </div>
+                        </div>
+                        <div class="internship-tags">
+                            <span class="internship-tag">Python</span>
+                            <span class="internship-tag">Web Development</span>
+                            <span class="internship-tag">First Year</span>
+                        </div>
+                        <div class="internship-actions">
+                            <div class="internship-deadline">Deadline: <span>May 15, 2025</span></div>
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Internship 2 -->
+                <div class="internship-card">
+                    <div class="internship-badge internship-badge-onsite">On-site</div>
+                    <div class="internship-company-logo">
+                        <img src="/api/placeholder/200/100" alt="Microsoft">
+                    </div>
+                    <div class="internship-content">
+                        <h3 class="internship-title">Freshman Tech Program</h3>
+                        <div class="internship-company">
+                            <i class="fas fa-building"></i> Microsoft
+                        </div>
+                        <div class="internship-details">
+                            <div class="internship-detail">
+                                <i class="fas fa-map-marker-alt"></i> Redmond, WA
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-calendar-alt"></i> Summer 2025 (10 weeks)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-money-bill-wave"></i> Paid ($30/hour)
+                            </div>
+                        </div>
+                        <div class="internship-tags">
+                            <span class="internship-tag">C#</span>
+                            <span class="internship-tag">Cloud Computing</span>
+                            <span class="internship-tag">First Year</span>
+                        </div>
+                        <div class="internship-actions">
+                            <div class="internship-deadline">Deadline: <span>May 20, 2025</span></div>
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Internship 3 -->
+                <div class="internship-card">
+                    <div class="featured-badge">Featured</div>
+                    <div class="internship-badge internship-badge-hybrid">Hybrid</div>
+                    <div class="internship-company-logo">
+                        <img src="/api/placeholder/200/100" alt="IBM">
+                    </div>
+                    <div class="internship-content">
+                        <h3 class="internship-title">First Year Innovation Program</h3>
+                        <div class="internship-company">
+                            <i class="fas fa-building"></i> IBM
+                        </div>
+                        <div class="internship-details">
+                            <div class="internship-detail">
+                                <i class="fas fa-map-marker-alt"></i> Austin, TX (Hybrid)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-calendar-alt"></i> Summer 2025 (8 weeks)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-money-bill-wave"></i> Paid ($28/hour)
+                            </div>
+                        </div>
+                        <div class="internship-tags">
+                            <span class="internship-tag">AI</span>
+                            <span class="internship-tag">Data Science</span>
+                            <span class="internship-tag">First Year</span>
+                        </div>
+                        <div class="internship-actions">
+                            <div class="internship-deadline">Deadline: <span>April 30, 2025</span></div>
+                            <a href="#" class="btn btn-secondary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Internship 4 -->
+                <div class="internship-card">
+                    <div class="internship-badge internship-badge-remote">Remote</div>
+                    <div class="internship-company-logo">
+                        <img src="/api/placeholder/200/100" alt="NASA">
+                    </div>
+                    <div class="internship-content">
+                        <h3 class="internship-title">Aerospace Explorer Program</h3>
+                        <div class="internship-company">
+                            <i class="fas fa-building"></i> NASA
+                        </div>
+                        <div class="internship-details">
+                            <div class="internship-detail">
+                                <i class="fas fa-map-marker-alt"></i> Houston, TX (Remote)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-calendar-alt"></i> Summer 2025 (10 weeks)
+                            </div>
+                            <div class="internship-detail">
+                                <i class="fas fa-money-bill-wave"></i> Stipend ($5,000)
+                            </div>
+                        </div>
+                        <div class="internship-tags">
+                            <span class="internship-tag">Engineering</span>
+                            <span class="internship-tag">Physics</span>
+                            <span class="internship-tag">First Year</span>
+                        </div>
+                        <div class="internship-actions">
+                            <div class="internship-deadline">Deadline: <span>May 10, 2025</span></div>
+                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Internship 5 -->
+                <div class="internship-card">
+                    <div class="internship-badge internship-badge-onsite">On-site</div>
+                    <div class="internship-company-logo">
+                        <img src="/api/placeholder/200/100" alt="Bank of America">
+                    </div>
+                    <div class="internship-content">
+                        <h3 class="internship-title">Financial Services

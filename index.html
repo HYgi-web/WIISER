@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IISERites OWN  Platform</title>
+    <title>WIISER</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon_io/site.webmanifest">
+</head>
     <style>
         * {
             margin: 0;
@@ -31,11 +36,12 @@
         }
         /* Header Styles */
         .header {
+            background: none;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            border-bottom: 1px solid #e0e0e0;
         }
        
 
@@ -66,9 +72,10 @@
         }
 
         .btn {
-            padding: 0.5rem 1rem;
+           padding: 0.5rem 1rem;
             border-radius: 4px;
-            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.65rem;
         }
 
         .btn-primary {
@@ -125,6 +132,10 @@
             margin-bottom: 2rem;
             line-height: 1.6;
         }
+          .reg-buttons {
+            display: flex;
+            gap: 1rem;
+        }
         @media (max-width: 768px) {
           .nav-links, .auth-buttons {
               display: none;
@@ -153,17 +164,38 @@
           }
       }
        /* Mobile menu when active */
-       .nav-links.active, .aut-buttons.active{
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: white;
-        padding: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+            /* Ensure the nav and auth buttons appear as a vertical menu */
+        .nav-links.active {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          right: 0;
+          background: white;
+          padding: 2px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .auth-buttons.active {
+          display: flex;
+          flex-direction: column; /* Stack buttons vertically */
+          position:absolute;
+         
+          top: calc(22.1rem); /* Push below nav-links */
+          left: 0;
+          right: 0;
+          background: white;
+          padding: 2px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          gap: 4px; /* Adds space between buttons */
+          align-items: center; /* Center buttons */
+        }
+        .reg-buttons  { display: flex;
+        gap: 1rem;
+        justify-content: center;
+          }
+          
         /* Features Section */
         .features {
             padding: 4rem 2rem;
@@ -319,6 +351,7 @@
             color: #e0e0e0;
           }
         </style>
+        <link rel="stylesheet" href="dark.css">
 </head>
 <body>
     <header class="header">
@@ -332,36 +365,53 @@
             <a href="refer.html">References</a>
         </nav>
         <div class="auth-buttons">
-            <a href="mailto:wiiser0131@gmail.com"><button class="btn btn-outline">Contact Us</button></a>
-            <a href="#"><button class="btn btn-primary">Join us </button></a>
+            <a href="mailto:wiiser0131@gmail.com"><button class="btn btn-primary">Contact us </button></a>
+            <button id="dark-mode-toggle" class="btn btn-outline">🌙</button>
            
         </div>
         <div class="hamburger">☰</div>
     </header>
     <marquee class="mark">
-      <p>Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+      <p>
+         <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+       <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+     <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+        <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+        <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+       <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.
+        <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Fully fuctioning for SEMESTER-2 students now. Further upgrades will come soon.</p>
+      <a href="https://forms.gle/eU2yr8PLGFt3h8dn7" >Please fill the feedback form</a>
+           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Fully functioning for SEMESTER-2 students now. Further upgrades will come soon.</p>
     </marquee>
 
     <section class="hero">
         <div class="hero-content">
             <h1>IISERites own Platform</h1>
             <br>
-            <p> A place where all of you can access standard books,well written notes, Assignments, Previous year papers, Lab work and various reference links to increase your understanding .</p>
-            <div class="auth-buttons">
+            <p> A place where all of you can access standard books, well written notes, Assignments, Previous year papers, Lab work and various reference links to increase your understanding .</p>
+            <div class="reg-buttons">
                 <button class="btn btn-primary">Register with Google</button>
                 <button class="btn btn-outline">Register with Email</button>
             </div>
@@ -442,15 +492,15 @@
             <ul>
               <li><a href="notes.html">Notes</a></li>
               <li><a href="pyq.html">PYQ's</a></li>
-              <li><a href="lab.html">Lab Work</a></li>
-              <li><a href="assig.html">Assignments</a></li>
+              <li><a href="lab.html">Books</a></li>
+              <li><a href="assig.html">Tutorials</a></li>
             </ul>
           </div>
           
           <div class="footer-section">
             <h3>Help & Support</h3>
             <ul>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="faq.html">FAQ</a></li>
               <li><a href="#">Terms of Use</a></li>
               <li><a href="#">Privacy Policy</a></li>
               <li><a href="#">Support</a></li>
@@ -462,7 +512,7 @@
             <ul>
               <li><a href="#">Discord Community</a></li>
               <li><a href="https://forms.gle/eU2yr8PLGFt3h8dn7"> Feedback </a></li>
-              <li><a href="#">Report an Issue</a></li>
+              <li><a href="mailto:support@wiiser.in">Report an Issue</a></li>
             </ul>
             <div class="social-links">
               <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -489,4 +539,5 @@
       authButtons.classList.toggle('active');
   });
 </script>
+<script src="dark.js"></script>
 </html>
