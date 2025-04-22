@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiiser Extended - Career Growth Platform</title>
+    <title>Wiiser+ - Career Growth Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -102,29 +102,36 @@
         }
 
         .hero {
+            display: flex;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 5rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
+            
         }
 
         .hero::before {
             content: '';
             position: absolute;
+            align-items: center;
+            justify-content: space-between;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('/api/placeholder/1200/600');
+            background-image: url('images/bg.jpg');
             background-size: cover;
             opacity: 0.1;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
+            flex: 1;
+            margin-left: 3rem;
+        }
+        .hero-image{
+            flex: 1;
         }
 
         .hero h1 {
@@ -136,7 +143,8 @@
         .hero p {
             font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 2rem;
+            margin-left: 1rem;
+            margin-bottom: 1.5rem;
             animation: fadeInUp 1.2s ease;
         }
 
@@ -1033,7 +1041,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#cv-resume">CV & Resume</a></li>
                     <li><a href="#linkedin">LinkedIn</a></li>
@@ -1054,6 +1062,9 @@
                 <a href="#services" class="btn btn-primary">Explore Services</a>
                 <a href="#contact" class="btn btn-outline">Contact Us</a>
             </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/photo.jpg" alt="heroimage" width="320px">
         </div>
     </section>
 
@@ -1399,7 +1410,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        <p>"Using Wiiser Extended's resume builder and LinkedIn optimization tools helped me land my dream job at a top tech company. The personalized feedback was invaluable!"</p>
+                        <p>"Using Wiiser+'s resume builder and LinkedIn optimization tools helped me land my dream job at a top tech company. The personalized feedback was invaluable!"</p>
                         <div class="testimonial-author">
                             <div class="testimonial-author-avatar">
                                 <img src="/api/placeholder/50/50" alt="User">
@@ -1466,21 +1477,14 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
                             <h4>Location</h4>
-                            <p>123 Innovation Drive, San Francisco, CA 94103</p>
+                            <p>IISER Pune</p>
                         </div>
                     </div>
                     <div class="contact-info-item">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>
-                            <p>support@wiiserextended.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+1 (555) 123-4567</p>
+                            <p>wiiser0131@gmail.com</p>
                         </div>
                     </div>
                     <div class="social-links">
@@ -1521,7 +1525,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>Wiiser Extended</h3>
+                    <h3>Wiiser+</h3>
                     <p>Comprehensive resources for professional development, career advancement, and academic excellence.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -1559,7 +1563,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Wiiser Extended. All Rights Reserved.</p>
+                <p>&copy; 2025 Wiiser+. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
