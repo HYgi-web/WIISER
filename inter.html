@@ -3,956 +3,982 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Opportunities - Wiiser Extended</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>WiiserExtended - Internship Opportunities</title>
     <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #f59e0b;
-            --light: #f3f4f6;
-            --dark: #1f2937;
-            --success: #10b981;
-            --info: #3b82f6;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-300: #d1d5db;
-            --gray-400: #9ca3af;
-            --gray-500: #6b7280;
-            --gray-600: #4b5563;
-            --gray-700: #374151;
-            --gray-800: #1f2937;
-            --gray-900: #111827;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
-
+        
         body {
-            background-color: #f8fafc;
-            color: var(--dark);
+            background-color: #f5f5f5;
+            color: #333;
             line-height: 1.6;
         }
-
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
+        
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-
-        .nav-container {
+        
+        /* Navigation */
+        .navbar {
+            background-color: #4169e1;
+            padding: 15px 0;
+            color: white;
+        }
+        
+        .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
+        
         .logo {
             font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
+            font-weight: bold;
         }
-
+        
         .logo span {
-            color: var(--secondary);
+            color: #ffa500;
         }
-
-        nav ul {
+        
+        .nav-links {
             display: flex;
             list-style: none;
         }
-
-        nav ul li {
-            margin-left: 1.5rem;
+        
+        .nav-links li {
+            margin-left: 20px;
         }
-
-        nav ul li a {
+        
+        .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
         }
-
-        nav ul li a:hover {
-            color: var(--secondary);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary);
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .page-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        
+        /* Hero Section */
+        .hero {
+            background-color: #4169e1;
             color: white;
-            padding: 3rem 0;
+            padding: 30px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('/api/placeholder/1200/300');
-            background-size: cover;
-            opacity: 0.1;
-        }
-
-        .page-header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-header h1 {
+        
+        .hero h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
+            margin-bottom: 15px;
         }
-
-        .page-header p {
+        
+        .hero p {
             font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
-            animation: fadeInUp 1.2s ease;
         }
-
-        .filters {
+        
+        /* Filters Section */
+        .filters-section {
             background-color: white;
-            padding: 1.5rem;
+            padding: 20px;
             border-radius: 10px;
-            margin-top: -2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: -20px;
             position: relative;
             z-index: 10;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            align-items: center;
         }
-
-        .filter-group {
-            flex: 1;
-            min-width: 200px;
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
         }
-
+        
         .filter-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 5px;
             font-weight: 500;
-            color: var(--gray-700);
+            color: #555;
         }
-
-        .filter-control {
+        
+        .filter-select {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--gray-300);
+            padding: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
-            color: var(--gray-700);
-            background-color: white;
-        }
-
-        .filter-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23555' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 10px) center;
             cursor: pointer;
-            text-align: center;
         }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-        }
-
-        .btn-secondary:hover {
-            background-color: #e69009;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-filter {
-            height: 100%;
-            margin-top: 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 3rem 0 2rem;
+        
+        .search-bar {
             position: relative;
+            margin-top: 15px;
         }
-
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--dark);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary);
-        }
-
-        .year-section {
-            margin: 4rem 0;
-        }
-
-        .year-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--gray-200);
-            padding-bottom: 0.5rem;
-        }
-
-        .year-header h2 {
-            font-size: 1.8rem;
-            color: var(--primary);
-        }
-
-        .year-header p {
-            color: var(--gray-600);
-        }
-
-        .internships-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .internship-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .internship-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .internship-company-logo {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            padding: 1rem;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        .internship-company-logo img {
-            max-height: 80%;
-            max-width: 80%;
-            object-fit: contain;
-        }
-
-        .internship-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 2;
-        }
-
-        .internship-badge-remote {
-            background-color: var(--success);
-            color: white;
-        }
-
-        .internship-badge-hybrid {
-            background-color: var(--info);
-            color: white;
-        }
-
-        .internship-badge-onsite {
-            background-color: var(--warning);
-            color: white;
-        }
-
-        .internship-content {
-            padding: 1.5rem;
-        }
-
-        .internship-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .internship-company {
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 40px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
             font-size: 1rem;
-            color: var(--gray-600);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
         }
-
-        .internship-company i {
-            margin-right: 0.5rem;
-            color: var(--gray-500);
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
         }
-
-        .internship-details {
-            margin-bottom: 1.5rem;
-        }
-
-        .internship-detail {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            color: var(--gray-700);
-        }
-
-        .internship-detail i {
-            width: 25px;
-            margin-right: 0.5rem;
-            color: var(--primary);
-        }
-
-        .internship-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .internship-tag {
-            background-color: var(--gray-100);
-            color: var(--gray-700);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .internship-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .internship-deadline {
-            font-size: 0.9rem;
-            color: var(--gray-600);
-        }
-
-        .internship-deadline span {
-            color: var(--danger);
-            font-weight: 600;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin: 3rem 0;
-        }
-
-        .pagination-list {
-            display: flex;
-            list-style: none;
-        }
-
-        .pagination-item {
-            margin: 0 0.3rem;
-        }
-
-        .pagination-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 5px;
-            background-color: white;
-            color: var(--gray-700);
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 1px solid var(--gray-300);
-        }
-
-        .pagination-link:hover {
-            background-color: var(--gray-100);
-        }
-
-        .pagination-link.active {
-            background-color: var(--primary);
+        
+        .apply-btn {
+            padding: 10px 25px;
+            background-color: #4169e1;
             color: white;
-            border-color: var(--primary);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
-
-        .pagination-dots {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            color: var(--gray-600);
+        
+        .apply-btn:hover {
+            background-color: #3558c4;
         }
-
+        
+        /* Year Tabs */
         .year-tabs {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+            margin: 30px 0;
+            gap: 10px;
         }
-
+        
         .year-tab {
-            padding: 0.8rem 1.5rem;
-            background-color: white;
-            border: 2px solid var(--gray-200);
-            border-radius: 50px;
-            font-weight: 600;
-            color: var(--gray-700);
+            padding: 10px 20px;
+            border: 1px solid #4169e1;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 500;
         }
-
-        .year-tab:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
+        
         .year-tab.active {
-            background-color: var(--primary);
+            background-color: #4169e1;
             color: white;
-            border-color: var(--primary);
         }
-
-        .featured-badge {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.3rem 1rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-            z-index: 2;
+        
+        .year-tab:hover:not(.active) {
+            background-color: #f0f5ff;
         }
-
-        .search-bar {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 1px solid var(--gray-300);
-            border-radius: 50px;
-            font-size: 1rem;
-            padding-left: 3rem;
-        }
-
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-500);
-        }
-
-        .no-results {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .no-results i {
-            font-size: 3rem;
-            color: var(--gray-400);
-            margin-bottom: 1rem;
-        }
-
-        .no-results h3 {
-            font-size: 1.5rem;
-            color: var(--gray-700);
-            margin-bottom: 1rem;
-        }
-
-        .no-results p {
-            color: var(--gray-600);
-            margin-bottom: 1.5rem;
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 4rem 0 2rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-col ul li a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--secondary);
-        }
-
-        .footer-col p {
-            color: #cbd5e1;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links {
+        
+        /* Opportunities Section */
+        .opportunities-section h2 {
+            color: #4169e1;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-
-        .social-links a {
+        
+        .opportunities-description {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .opportunity-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .opportunity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            position: relative;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #323e52;
-            border-radius: 50%;
-            margin-right: 0.8rem;
+        }
+        
+        .company-logo img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+        
+        .location-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .remote {
+            background-color: #4caf50;
             color: white;
-            transition: background-color 0.3s, transform 0.3s;
         }
-
-        .social-links a:hover {
-            background-color: var(--secondary);
-            transform: translateY(-5px);
+        
+        .on-site {
+            background-color: #ff9800;
+            color: white;
         }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #334155;
-            color: #cbd5e1;
+        
+        .hybrid {
+            background-color: #4169e1;
+            color: white;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        .featured-tag {
+            position: absolute;
+            top: 15px;
+            right: 90px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background-color: #ffc107;
+            color: #333;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
-
-        .animate-fadeIn {
-            animation: fadeIn 1s ease;
+        
+        .card-body {
+            padding: 15px;
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        
+        .internship-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
         }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            nav ul {
-                margin-top: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            nav ul li {
-                margin: 0.5rem;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .internships-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .filters {
-                flex-direction: column;
-            }
-
-            .filter-group {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .btn-filter {
-                width: 100%;
-                margin-top: 1rem;
-            }
+        
+        .company-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .company-icon, .location-icon, .calendar-icon {
+            margin-right: 8px;
+            color: #4169e1;
+        }
+        
+        .location-info, .duration-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* Divider */
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 15px 0;
+        }
+        
+        /* Year sections visibility */
+        .year-content {
+            display: none;
+        }
+        
+        .year-content.active {
+            display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                Wiiser<span>Extended</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="newindex.html">Home</a></li>
-                    <li><a href="newindex.html#services">Services</a></li>
-                    <li><a href="newindex.html#cv-resume">CV & Resume</a></li>
-                    <li><a href="newindex.html#linkedin">LinkedIn</a></li>
-                    <li><a href="newindex.html#internships">Internships</a></li>
-                    <li><a href="newindex.html#research">Research</a></li>
-                    <li><a href="newindex.html#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Wiiser<span>Extended</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">CV & Resume</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Internships</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
         </div>
-    </header>
-
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container page-header-content">
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
             <h1>Internship Opportunities</h1>
             <p>Find the perfect internship to jumpstart your career based on your academic year and interests</p>
         </div>
     </section>
-
+    
     <!-- Filters Section -->
     <div class="container">
-        <div class="filters">
-            <div class="filter-group">
-                <label for="location">Location</label>
-                <select id="location" class="filter-control">
-                    <option value="">All Locations</option>
-                    <option value="remote">Remote</option>
-                    <option value="hybrid">Hybrid</option>
-                    <option value="onsite">On-site</option>
-                </select>
+        <div class="filters-section">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="location">Location</label>
+                    <select id="location" class="filter-select">
+                        <option value="on-site">On-site</option>
+                        <option value="remote">Remote</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="any">Any Location</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" class="filter-select">
+                        <option value="all">All Industries</option>
+                        <option value="tech">Technology</option>
+                        <option value="finance">Finance</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="engineering">Engineering</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration" class="filter-select">
+                        <option value="any">Any Duration</option>
+                        <option value="summer">Summer (2-3 months)</option>
+                        <option value="semester">Semester (3-4 months)</option>
+                        <option value="year">Year-long (6-12 months)</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="compensation">Compensation</label>
+                    <select id="compensation" class="filter-select">
+                        <option value="any">Any</option>
+                        <option value="paid">Paid</option>
+                        <option value="stipend">Stipend</option>
+                        <option value="unpaid">Unpaid</option>
+                    </select>
+                </div>
             </div>
-            <div class="filter-group">
-                <label for="industry">Industry</label>
-                <select id="industry" class="filter-control">
-                    <option value="">All Industries</option>
-                    <option value="tech">Technology</option>
-                    <option value="finance">Finance</option>
-                    <option value="healthcare">Healthcare</option>
-                    <option value="marketing">Marketing</option>
-                    <option value="engineering">Engineering</option>
-                </select>
+            
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="apply-btn">Apply Filters</button>
             </div>
-            <div class="filter-group">
-                <label for="duration">Duration</label>
-                <select id="duration" class="filter-control">
-                    <option value="">Any Duration</option>
-                    <option value="summer">Summer (2-3 months)</option>
-                    <option value="semester">Semester (3-4 months)</option>
-                    <option value="half-year">Half Year (6 months)</option>
-                    <option value="year">Full Year</option>
-                </select>
+            
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search internships by title, company, or keyword...">
             </div>
-            <div class="filter-group">
-                <label for="compensation">Compensation</label>
-                <select id="compensation" class="filter-control">
-                    <option value="">Any</option>
-                    <option value="paid">Paid</option>
-                    <option value="unpaid">Unpaid</option>
-                    <option value="stipend">Stipend</option>
-                </select>
-            </div>
-            <button class="btn btn-primary btn-filter">Apply Filters</button>
         </div>
-
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Search internships by title, company, or keyword...">
-        </div>
-
-        <!-- Year Tabs -->
+    </div>
+    
+    <!-- Year Tabs -->
+    <div class="container">
         <div class="year-tabs">
-            <button class="year-tab active" data-year="first">First Year</button>
-            <button class="year-tab" data-year="second">Second Year</button>
-            <button class="year-tab" data-year="third">Third Year</button>
-            <button class="year-tab" data-year="fourth">Fourth Year</button>
-            <button class="year-tab" data-year="graduate">Graduate</button>
+            <div class="year-tab active" data-year="first"><a href="#first-year"></a>First Year</div>
+            <div class="year-tab" data-year="second"><a href="#second-year"></a>Second Year</div>
+            <div class="year-tab" data-year="third">Third Year</div>
+            <div class="year-tab" data-year="fourth">Fourth Year</div>
+            <div class="year-tab" data-year="graduate">Graduate</div>
         </div>
-
-        <!-- First Year Internships -->
-        <section id="first-year" class="year-section">
-            <div class="year-header">
-                <h2>First Year Opportunities</h2>
-                <p>Early career exposure and foundational experiences</p>
+    </div>
+    
+    <!-- First Year Opportunities -->
+    <div class="container">
+        <div id="first-year" class="year-content active">
+            <div class="opportunities-section">
+                <h2>First Year Opportunities </h2>
+                
+                <div class="opportunities-grid">
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="NIUS">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">National Initiative On Undergraduate Sciences</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                HBCSE (TIFR)
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Mumbai,Maharastra
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer (2-4 weeks)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Microsoft">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                            <span class="featured-tag">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">Freshman Tech Program</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Microsoft
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Redmond, WA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (10 weeks)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="IBM">
+                            </div>
+                            <span class="location-tag hybrid">Hybrid</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">First Year Innovation Program</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                IBM
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Austin, TX (Hybrid)
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (8 weeks)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Amazon">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">First Year Undergraduate Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Amazon
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Seattle, WA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="internships-grid">
-                <!-- Internship 1 -->
-                <div class="internship-card">
-                    <div class="internship-badge internship-badge-remote">Remote</div>
-                    <div class="internship-company-logo">
-                        <img src="/api/placeholder/200/100" alt="Google">
+        </div>
+        
+        <!-- Second Year Opportunities -->
+        <div id="second-year" class="year-content">
+            <div class="opportunities-section">
+                <h2>Second Year Opportunities <span class="opportunities-description">Building technical skills and industry knowledge</span></h2>
+                
+                <div class="opportunities-grid">
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Meta">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                            <span class="featured-tag">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">Software Engineering Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Meta
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Menlo Park, CA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
+                        </div>
                     </div>
-                    <div class="internship-content">
-                        <h3 class="internship-title">Software Development Explorer</h3>
-                        <div class="internship-company">
-                            <i class="fas fa-building"></i> Google
-                        </div>
-                        <div class="internship-details">
-                            <div class="internship-detail">
-                                <i class="fas fa-map-marker-alt"></i> Mountain View, CA (Remote)
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Apple">
                             </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-calendar-alt"></i> Summer 2025 (8 weeks)
+                            <span class="location-tag hybrid">Hybrid</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">iOS Development Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Apple
                             </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-money-bill-wave"></i> Paid ($25/hour)
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Cupertino, CA (Hybrid)
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (10 weeks)
                             </div>
                         </div>
-                        <div class="internship-tags">
-                            <span class="internship-tag">Python</span>
-                            <span class="internship-tag">Web Development</span>
-                            <span class="internship-tag">First Year</span>
+                    </div>
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Netflix">
+                            </div>
+                            <span class="location-tag remote">Remote</span>
                         </div>
-                        <div class="internship-actions">
-                            <div class="internship-deadline">Deadline: <span>May 15, 2025</span></div>
-                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        <div class="card-body">
+                            <h3 class="internship-title">Data Science Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Netflix
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Los Gatos, CA (Remote)
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Third Year Opportunities -->
+        <div id="third-year" class="year-content">
+            <div class="opportunities-section">
+                <h2>Third Year Opportunities <span class="opportunities-description">Advanced projects and leadership development</span></h2>
                 
-                <!-- Internship 2 -->
-                <div class="internship-card">
-                    <div class="internship-badge internship-badge-onsite">On-site</div>
-                    <div class="internship-company-logo">
-                        <img src="/api/placeholder/200/100" alt="Microsoft">
+                <div class="opportunities-grid">
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Google">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                            <span class="featured-tag">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">Software Engineering Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Google
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Mountain View, CA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
+                        </div>
                     </div>
-                    <div class="internship-content">
-                        <h3 class="internship-title">Freshman Tech Program</h3>
-                        <div class="internship-company">
-                            <i class="fas fa-building"></i> Microsoft
-                        </div>
-                        <div class="internship-details">
-                            <div class="internship-detail">
-                                <i class="fas fa-map-marker-alt"></i> Redmond, WA
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Amazon">
                             </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-calendar-alt"></i> Summer 2025 (10 weeks)
-                            </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-money-bill-wave"></i> Paid ($30/hour)
-                            </div>
+                            <span class="location-tag hybrid">Hybrid</span>
                         </div>
-                        <div class="internship-tags">
-                            <span class="internship-tag">C#</span>
-                            <span class="internship-tag">Cloud Computing</span>
-                            <span class="internship-tag">First Year</span>
-                        </div>
-                        <div class="internship-actions">
-                            <div class="internship-deadline">Deadline: <span>May 20, 2025</span></div>
-                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        <div class="card-body">
+                            <h3 class="internship-title">Product Management Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Amazon
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Seattle, WA (Hybrid)
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Fourth Year Opportunities -->
+        <div id="fourth-year" class="year-content">
+            <div class="opportunities-section">
+                <h2>Fourth Year Opportunities <span class="opportunities-description">Pre-professional opportunities with high conversion rates</span></h2>
                 
-                <!-- Internship 3 -->
-                <div class="internship-card">
-                    <div class="featured-badge">Featured</div>
-                    <div class="internship-badge internship-badge-hybrid">Hybrid</div>
-                    <div class="internship-company-logo">
-                        <img src="/api/placeholder/200/100" alt="IBM">
+                <div class="opportunities-grid">
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Microsoft">
+                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                            <span class="featured-tag">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">Software Development Engineer</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Microsoft
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Redmond, WA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (16 weeks)
+                            </div>
+                        </div>
                     </div>
-                    <div class="internship-content">
-                        <h3 class="internship-title">First Year Innovation Program</h3>
-                        <div class="internship-company">
-                            <i class="fas fa-building"></i> IBM
-                        </div>
-                        <div class="internship-details">
-                            <div class="internship-detail">
-                                <i class="fas fa-map-marker-alt"></i> Austin, TX (Hybrid)
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Apple">
                             </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-calendar-alt"></i> Summer 2025 (8 weeks)
-                            </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-money-bill-wave"></i> Paid ($28/hour)
-                            </div>
+                            <span class="location-tag on-site">On-site</span>
                         </div>
-                        <div class="internship-tags">
-                            <span class="internship-tag">AI</span>
-                            <span class="internship-tag">Data Science</span>
-                            <span class="internship-tag">First Year</span>
-                        </div>
-                        <div class="internship-actions">
-                            <div class="internship-deadline">Deadline: <span>April 30, 2025</span></div>
-                            <a href="#" class="btn btn-secondary">Apply Now</a>
+                        <div class="card-body">
+                            <h3 class="internship-title">Hardware Engineering Intern</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Apple
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Cupertino, CA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Graduate Opportunities -->
+        <div id="graduate-year" class="year-content">
+            <div class="opportunities-section">
+                <h2>Graduate Opportunities <span class="opportunities-description">Specialized roles with research focus</span></h2>
                 
-                <!-- Internship 4 -->
-                <div class="internship-card">
-                    <div class="internship-badge internship-badge-remote">Remote</div>
-                    <div class="internship-company-logo">
-                        <img src="/api/placeholder/200/100" alt="NASA">
+                <div class="opportunities-grid">
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="IBM">
+                            </div>
+                            <span class="location-tag hybrid">Hybrid</span>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="internship-title">AI Research Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                IBM Research
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Yorktown Heights, NY (Hybrid)
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
+                        </div>
                     </div>
-                    <div class="internship-content">
-                        <h3 class="internship-title">Aerospace Explorer Program</h3>
-                        <div class="internship-company">
-                            <i class="fas fa-building"></i> NASA
-                        </div>
-                        <div class="internship-details">
-                            <div class="internship-detail">
-                                <i class="fas fa-map-marker-alt"></i> Houston, TX (Remote)
+                    
+                    <div class="opportunity-card">
+                        <div class="card-header">
+                            <div class="company-logo">
+                                <img src="/api/placeholder/60/60" alt="Google">
                             </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-calendar-alt"></i> Summer 2025 (10 weeks)
-                            </div>
-                            <div class="internship-detail">
-                                <i class="fas fa-money-bill-wave"></i> Stipend ($5,000)
-                            </div>
+                            <span class="location-tag on-site">On-site</span>
+                            <span class="featured-tag">Featured</span>
                         </div>
-                        <div class="internship-tags">
-                            <span class="internship-tag">Engineering</span>
-                            <span class="internship-tag">Physics</span>
-                            <span class="internship-tag">First Year</span>
-                        </div>
-                        <div class="internship-actions">
-                            <div class="internship-deadline">Deadline: <span>May 10, 2025</span></div>
-                            <a href="#" class="btn btn-primary">Apply Now</a>
+                        <div class="card-body">
+                            <h3 class="internship-title">PhD Research Internship</h3>
+                            <div class="company-info">
+                                <span class="company-icon">🏢</span>
+                                Google AI
+                            </div>
+                            <div class="location-info">
+                                <span class="location-icon">📍</span>
+                                Mountain View, CA
+                            </div>
+                            <div class="duration-info">
+                                <span class="calendar-icon">📅</span>
+                                Summer 2025 (12 weeks)
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            initializePage();
+        });
+        
+        function initializePage() {
+            // Initialize all interactive elements
+            setupTabs();
+            setupSearch();
+            setupFilters();
+        }
+        
+        // Tab functionality
+        function setupTabs() {
+            const yearTabs = document.querySelectorAll('.year-tab');
+            const yearContents = document.querySelectorAll('.year-content');
+            
+            yearTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    console.log('Tab clicked:', tab.getAttribute('data-year'));
+                    
+                    // Remove active class from all tabs
+                    yearTabs.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Hide all content sections
+                    yearContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show the selected content section
+                    const year = tab.getAttribute('data-year');
+                    let targetSection = null;
+                    
+                    if (year === 'first') {
+                        targetSection = document.getElementById('first-year');
+                    } else if (year === 'second') {
+                        targetSection = document.getElementById('second-year');
+                    } else if (year === 'third') {
+                        targetSection = document.getElementById('third-year');
+                    } else if (year === 'fourth') {
+                        targetSection = document.getElementById('fourth-year');
+                    } else if (year === 'graduate') {
+                        targetSection = document.getElementById('graduate-year');
+                    }
+                    
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                        console.log('Activated section:', targetSection.id);
+                    }
+                    
+                    // Clear search field and reset filters when switching tabs
+                    document.querySelector('.search-input').value = '';
+                    resetFilters();
+                    
+                    // Show all cards in the active tab
+                    const activeYearContent = document.querySelector('.year-content.active');
+                    if (activeYearContent) {
+                        const cardsInActiveYear = activeYearContent.querySelectorAll('.opportunity-card');
+                        cardsInActiveYear.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    }
+                });
+            });
+        }
+        
+        // Search functionality
+        function setupSearch() {
+            const searchInput = document.querySelector('.search-input');
+            
+            searchInput.addEventListener('input', function() {
+                console.log('Search input:', this.value);
+                const searchTerm = this.value.toLowerCase().trim();
                 
-                <!-- Internship 5 -->
-                <div class="internship-card">
-                    <div class="internship-badge internship-badge-onsite">On-site</div>
-                    <div class="internship-company-logo">
-                        <img src="/api/placeholder/200/100" alt="Bank of America">
-                    </div>
-                    <div class="internship-content">
-                        <h3 class="internship-title">Financial Services
+                // If search field is empty, show all cards that belong to the active tab
+                if (searchTerm === '') {
+                    const activeYearContent = document.querySelector('.year-content.active');
+                    if (activeYearContent) {
+                        const cardsInActiveYear = activeYearContent.querySelectorAll('.opportunity-card');
+                        cardsInActiveYear.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    }
+                    return;
+                }
+                
+                // Loop through all cards in all tabs
+                document.querySelectorAll('.year-content').forEach(yearContent => {
+                    const isActiveYear = yearContent.classList.contains('active');
+                    const cardsInYear = yearContent.querySelectorAll('.opportunity-card');
+                    
+                    cardsInYear.forEach(card => {
+                        const title = card.querySelector('.internship-title').textContent.toLowerCase();
+                        const company = card.querySelector('.company-info').textContent.toLowerCase();
+                        const location = card.querySelector('.location-info').textContent.toLowerCase();
+                        const duration = card.querySelector('.duration-info').textContent.toLowerCase();
+                        
+                        const matchesSearch = title.includes(searchTerm) || 
+                                             company.includes(searchTerm) || 
+                                             location.includes(searchTerm) ||
+                                             duration.includes(searchTerm);
+                        
+                        // Only show the card if it matches the search and is in the active tab
+                        card.style.display = (matchesSearch && isActiveYear) ? 'block' : 'none';
+                        
+                        if (matchesSearch && isActiveYear) {
+                            console.log('Match found:', title);
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Filter functionality
+        const applyFilterBtn = document.querySelector('.apply-btn');
+        const locationFilter = document.getElementById('location');
+        const industryFilter = document.getElementById('industry');
+        const durationFilter = document.getElementById('duration');
+        const compensationFilter = document.getElementById('compensation');
+        
+        // Function to reset filters to default values
+        function resetFilters() {
+            locationFilter.value = 'on-site';
+            industryFilter.value = 'all';
+            durationFilter.value = 'any';
+            compensationFilter.value = 'any';
+        }
+        
+        function setupFilters() {
+            const applyFilterBtn = document.querySelector('.apply-btn');
+            const locationFilter = document.getElementById('location');
+            const industryFilter = document.getElementById('industry');
+            const durationFilter = document.getElementById('duration');
+            const compensationFilter = document.getElementById('compensation');
+            
+            applyFilterBtn.addEventListener('click', () => {
+                console.log('Applying filters');
+                const locationValue = locationFilter.value;
+                const industryValue = industryFilter.value;
+                const durationValue = durationFilter.value;
+                const compensationValue = compensationFilter.value;
+                
+                console.log('Filters:', {
+                    location: locationValue,
+                    industry: industryValue,
+                    duration: durationValue,
+                    compensation: compensationValue
+                });
+                
+                // Only filter cards in the active tab
+                const activeYearContent = document.querySelector('.year-content.active');
+                if (!activeYearContent) return;
+                
+                const cardsInActiveYear = activeYearContent.querySelectorAll('.opportunity-card');
+                
+                cardsInActiveYear.forEach(card => {
+                    // Get the card location type from the location tag class
+                    const locationTag = card.querySelector('.location-tag');
+                    const cardLocation = locationTag ? 
+                                       locationTag.classList.contains('remote') ? 'remote' : 
+                                       locationTag.classList.contains('on-site') ? 'on-site' : 
+                                       locationTag.classList.contains('hybrid') ? 'hybrid' : 'any' : 'any';
+                    
+                    // Get company/industry from the company info
+                    const companyInfo = card.querySelector('.company-info').textContent.trim().toLowerCase();
+                    const cardIndustry = companyInfo.includes('google') || companyInfo.includes('microsoft') || 
+                                         companyInfo.includes('apple') || companyInfo.includes('meta') || 
+                                         companyInfo.includes('amazon') || companyInfo.includes('netflix') ? 'tech' : 
+                                         companyInfo.includes('ibm') ? 'tech' : 'all';
+                    
+                    // Get duration from the duration info
+                    const durationInfo = card.querySelector('.duration-info').textContent.trim().toLowerCase();
+                    const cardDuration = durationInfo.includes('8 weeks') || durationInfo.includes('10 weeks') ? 'summer' :
+                                         durationInfo.includes('12 weeks') ? 'summer' :
+                                         durationInfo.includes('16 weeks') ? 'semester' : 'any';
+                    
+                    // For this demo, we'll assume all internships are paid
+                    const cardCompensation = 'paid';
+                    
+                    // Check if the card matches all selected filters
+                    const matchesLocation = locationValue === 'any' || locationValue === cardLocation;
+                    const matchesIndustry = industryValue === 'all' || industryValue === cardIndustry;
+                    const matchesDuration = durationValue === 'any' || durationValue === cardDuration;
+                    const matchesCompensation = compensationValue === 'any' || compensationValue === cardCompensation;
+                    
+                    const isVisible = matchesLocation && matchesIndustry && matchesDuration && matchesCompensation;
+                    
+                    card.style.display = isVisible ? 'block' : 'none';
+                    
+                    if (isVisible) {
+                        console.log('Showing card:', card.querySelector('.internship-title').textContent);
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>
