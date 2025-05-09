@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiiser+ Research Blogs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+        }
+        .navbar {
+            background-color: #3f51b5;
+            padding: 15px 0;
+            color: white;
+        }
+        .container {
+            width: 85%;
+            margin: 0 auto;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #ffc107;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .header {
+            text-align: center;
+            padding: 50px 0 30px;
+        }
+        .header h1 {
+            font-size: 42px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .header p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .divider {
+            width: 100px;
+            height: 4px;
+            background-color: #ffc107;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+        .filter-bar {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+        .filter-dropdown {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            font-size: 14px;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+        .search-input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+            width: 200px;
+        }
+        .search-button {
+            padding: 8px 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .blogs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .blog-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .blog-image {
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blog-content {
+            padding: 20px;
+        }
+        .blog-category {
+            background-color: #e3f2fd;
+            color: #3f51b5;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .blog-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .blog-excerpt {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .author-image {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .featured-blog {
+            grid-column: span 2;
+            display: flex;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .featured-blog-image {
+            flex: 0 0 40%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .featured-blog-content {
+            flex: 0 0 60%;
+            padding: 30px;
+        }
+        .featured-tag {
+            background-color: #ffc107;
+            color: white;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+        .page-link {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #3f51b5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .page-link.active {
+            background-color: #3f51b5;
+            color: white;
+            border-color: #3f51b5;
+        }
+        .newsletter {
+            background-color: #3f51b5;
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .newsletter h2 {
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        .newsletter p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 14px;
+        }
+        .newsletter-button {
+            padding: 12px 25px;
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: #263238;
+            color: white;
+            padding: 50px 0 20px;
+        }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #ffc107;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: #ffc107;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #455a64;
+            font-size: 14px;
+            color: #b0bec5;
+        }
+        .read-more {
+            color: #3f51b5;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Wiiser<span>+</span></a>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <a href="#">CV & Resume</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Internships</a>
+                <a href="#">Research</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1>Research Blogs</h1>
+            <p>In-depth articles, insights, and latest developments across multiple disciplines</p>
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-options">
+                <select class="filter-dropdown">
+                    <option>All Categories</option>
+                    <option>AI Research</option>
+                    <option>Sustainable Energy</option>
+                    <option>Medical Research</option>
+                    <option>Social Sciences</option>
+                    <option>Technology</option>
+                </select>
+                <select class="filter-dropdown">
+                    <option>Most Recent</option>
+                    <option>Most Popular</option>
+                    <option>Trending</option>
+                </select>
+            </div>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search blogs...">
+                <button class="search-button">Search</button>
+            </div>
+        </div>
+
+        <!-- Featured Blog -->
+        <div class="featured-blog">
+            <div class="featured-blog-image">
+                <img src="/api/placeholder/400/320" alt="AI Ethics Research">
+            </div>
+            <div class="featured-blog-content">
+                <span class="featured-tag">Featured</span>
+                <span class="blog-category">AI Research</span>
+                <h2 class="blog-title">The Ethical Implications of Advanced AI Systems in Healthcare</h2>
+                <p class="blog-excerpt">A comprehensive analysis of how artificial intelligence is transforming healthcare delivery while raising important ethical questions about privacy, decision-making, and the future of patient care. This research explores the balance between technological innovation and ethical considerations in medical settings.</p>
+                <div class="blog-meta">
+                    <div class="blog-author">
+                        <div class="author-image">
+                            <img src="/api/placeholder/30/30" alt="Dr. Sarah Chen">
+                        </div>
+                        <span>Dr. Sarah Chen</span>
+                    </div>
+                    <div class="blog-date">May 2, 2025</div>
+                </div>
+                <a href="#" class="read-more">Read Full Article →</a>
+            </div>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blogs-container">
+            <!-- Blog Card 1 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="Neural Networks">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">AI Research</span>
+                    <h3 class="blog-title">Advances in Neural Network Architecture for Natural Language Processing</h3>
+                    <p class="blog-excerpt">Exploring the latest developments in transformer models and their applications in understanding context and semantics in human language.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Dr. Sarah Chen">
+                            </div>
+                            <span>Dr. Sarah Chen</span>
+                        </div>
+                        <div class="blog-date">April 10, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 2 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="Solar Panels">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Sustainable Energy</span>
+                    <h3 class="blog-title">Breakthrough in Solar Panel Efficiency: The Next Generation</h3>
+                    <p class="blog-excerpt">New research findings reveal significant improvements in photovoltaic cell technology, potentially revolutionizing renewable energy implementation.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Prof. James Wilson">
+                            </div>
+                            <span>Prof. James Wilson</span>
+                        </div>
+                        <div class="blog-date">April 5, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 3 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="Medical Research">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Medical Research</span>
+                    <h3 class="blog-title">Novel Approaches to Cancer Treatment: Immunotherapy Advancements</h3>
+                    <p class="blog-excerpt">Recent clinical trials show promising results in targeted immunotherapy treatments for previously resistant forms of cancer.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Dr. Michael Rodriguez">
+                            </div>
+                            <span>Dr. Michael Rodriguez</span>
+                        </div>
+                        <div class="blog-date">March 28, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 4 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="Urban Planning">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Sustainable Energy</span>
+                    <h3 class="blog-title">Smart Grid Implementation in Urban Environments</h3>
+                    <p class="blog-excerpt">Case studies from major metropolitan areas demonstrate the effectiveness of smart grid technology in reducing energy consumption.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Prof. James Wilson">
+                            </div>
+                            <span>Prof. James Wilson</span>
+                        </div>
+                        <div class="blog-date">March 22, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 5 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="AI in Manufacturing">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">AI Research</span>
+                    <h3 class="blog-title">AI-Powered Predictive Maintenance in Manufacturing</h3>
+                    <p class="blog-excerpt">How machine learning algorithms are transforming equipment maintenance protocols and increasing operational efficiency.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Dr. Alex Wong">
+                            </div>
+                            <span>Dr. Alex Wong</span>
+                        </div>
+                        <div class="blog-date">March 15, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 6 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <img src="/api/placeholder/350/200" alt="Gene Therapy">
+                </div>
+                <div class="blog-content">
+                    <span class="blog-category">Medical Research</span>
+                    <h3 class="blog-title">Advancements in Gene Therapy for Rare Genetic Disorders</h3>
+                    <p class="blog-excerpt">New clinical research shows promising outcomes for CRISPR-based treatments targeting previously untreatable genetic conditions.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="/api/placeholder/30/30" alt="Dr. Emily Patel">
+                            </div>
+                            <span>Dr. Emily Patel</span>
+                        </div>
+                        <div class="blog-date">March 8, 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">5</a>
+            <a href="#" class="page-link">Next →</a>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated with Latest Research</h2>
+            <p>Subscribe to our newsletter and receive notifications about new research papers, breakthrough discoveries, and upcoming academic events.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address">
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>About Wiiser+</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Mission</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Career Opportunities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Research Areas</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">AI Research</a></li>
+                        <li><a href="#">Sustainable Energy</a></li>
+                        <li><a href="#">Medical Research</a></li>
+                        <li><a href="#">Social Sciences</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Blog Articles</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Academic Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Phone</a></li>
+                        <li><a href="#">Office Locations</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2025 Wiiser+ Career Growth Platform. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
