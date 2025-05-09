@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Navigation */
+        .navbar {
+            background-color: #4169e1;
+            padding: 15px 0;
+            color: white;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #ffa500;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+         .hero {
+            background-color: #4169e1;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /*service card */
+        .services {
+            padding: 5rem 0;
+            background-color: #f1f5f9;
+        }
+        .resume-templates {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+          }
+          
+          .template-card {
+            width: 230px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            text-align: center;
+          }
+          
+          .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          }
+          
+          .template-card canvas {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid #eee;
+          }
+          
+          .template-label {
+            padding: 12px;
+            font-weight: 600;
+            background: #f8f8f8;
+            font-size: 16px;
+          }
+
+          .editable{
+            margin: 5px;
+          }
+          .edit{
+            text-decoration: none;
+            color:#4169e1;
+          }
+          .edit:hover{
+            color: rgb(68, 68, 69);
+          }
+          
+        #pdf-preview-wrapper {
+            width: 230px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+           
+          }
+          #pdf-canvas {
+            width: 100%; /* ensures canvas scales to 230px */
+            display: block;
+          }
+          
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Wiiser<span>+</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">CV & Resume</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Internships</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Professional Templates</h1>
+            <p>Our collection of ATS-friendly, professionally designed resume templates suitable for various industries.</p>
+        </div>
+    </section>
+   
+    <div class="resume-templates">
+        <div class="template-card" onclick="openPDF('/pdfs/template1.pdf')">
+          <canvas id="pdf-canvas-1" width="230"></canvas>
+          <div class="template-label">Template One</div>
+          <div class="editable">   
+                <a href="https://docs.google.com/document/d/1yqUgTABUyuf1crFS8x0dOFhICDVwzzmKmkxU296byIk/edit?usp=sharing" class="edit">🔗Editable Link </a>
+        </div>
+
+        </div>
+      
+        <div class="template-card" onclick="openPDF('/pdfs/template2.pdf')">
+          <canvas id="pdf-canvas-2" width="230"></canvas>
+          <div class="template-label">Template Two</div>
+          <div class="editable"><a href="https://docs.google.com/document/d/1VQWk6m52vbq01Vs1XTiMy6oKbjph2KWNQTbTMOJusYA/edit?usp=sharing" class="edit">🔗Editable Link</a></div>
+          
+        </div>
+      
+        <div class="template-card" onclick="openPDF('/pdfs/template3.pdf')">
+          <canvas id="pdf-canvas-3" width="230"></canvas>
+          <div class="template-label">Template Three</div>
+          <div class="editable">
+            <a href="https://docs.google.com/document/d/1M9CoGMkRzMFFAri_Sb0HxZoqwXbim0QN3sueqiGN8A8/edit?usp=sharing" class="edit">🔗Editable Link</a>
+        </div>
+        </div>
+      </div>
+      
+
+   
+   
+<script>
+  const pdfjsLib = window['pdfjs-dist/build/pdf'];
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  const templates = [
+    { canvasId: 'pdf-canvas-1', url: '/pdfs/template1.pdf' },
+    { canvasId: 'pdf-canvas-2', url: '/pdfs/template2.pdf' },
+    { canvasId: 'pdf-canvas-3', url: '/pdfs/template3.pdf' }
+  ];
+
+  templates.forEach(template => {
+    pdfjsLib.getDocument(template.url).promise.then(pdfDoc => {
+      pdfDoc.getPage(1).then(page => {
+        const viewport = page.getViewport({ scale: 1 });
+        const canvas = document.getElementById(template.canvasId);
+        const context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        page.render({ canvasContext: context, viewport: viewport });
+      });
+    });
+  });
+
+  function openPDF(url) {
+    window.open(url, '_blank');
+  }
+</script>
+
+</body>
+</html>
