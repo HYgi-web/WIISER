@@ -200,7 +200,7 @@
           
         </div>
       
-        <div class="template-card" onclick="openPDF('/pdfs/template3.pdf')">
+        <div class="template-card" onclick="openPDF('pdfs/template3.pdf')">
           <canvas id="pdf-canvas-3" width="230"></canvas>
           <div class="template-label">Template Three</div>
           <div class="editable">
@@ -218,8 +218,8 @@
 
   const templates = [
     { canvasId: 'pdf-canvas-1', url: 'pdfs/template1.pdf' },
-    { canvasId: 'pdf-canvas-2', url: '/pdfs/template2.pdf' },
-    { canvasId: 'pdf-canvas-3', url: '/pdfs/template3.pdf' }
+    { canvasId: 'pdf-canvas-2', url: 'pdfs/template2.pdf' },
+    { canvasId: 'pdf-canvas-3', url: 'pdfs/template3.pdf' }
   ];
 
   templates.forEach(template => {
