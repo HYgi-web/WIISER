@@ -182,7 +182,7 @@
 
    
     <div class="resume-templates">
-        <div class="template-card" onclick="openPDF('/pdfs/template1.pdf')">
+        <div class="template-card" onclick="openPDF('pdfs/template1.pdf')">
           <canvas id="pdf-canvas-1" width="230"></canvas>
           <div class="template-label">Template One</div>
           <div class="editable">   
@@ -191,10 +191,12 @@
 
         </div>
       
-        <div class="template-card" onclick="openPDF('/pdfs/template2.pdf')">
+        <div class="template-card" onclick="openPDF('pdfs/template2.pdf')">
           <canvas id="pdf-canvas-2" width="230"></canvas>
           <div class="template-label">Template Two</div>
-          <div class="editable"><a href="https://docs.google.com/document/d/1VQWk6m52vbq01Vs1XTiMy6oKbjph2KWNQTbTMOJusYA/edit?usp=sharing" class="edit">🔗Editable Link</a></div>
+          <div class="editable">
+            <a href="https://docs.google.com/document/d/1VQWk6m52vbq01Vs1XTiMy6oKbjph2KWNQTbTMOJusYA/edit?usp=sharing" class="edit">🔗Editable Link</a>
+          </div>
           
         </div>
       
@@ -215,7 +217,7 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
   const templates = [
-    { canvasId: 'pdf-canvas-1', url: '/pdfs/template1.pdf' },
+    { canvasId: 'pdf-canvas-1', url: 'pdfs/template1.pdf' },
     { canvasId: 'pdf-canvas-2', url: '/pdfs/template2.pdf' },
     { canvasId: 'pdf-canvas-3', url: '/pdfs/template3.pdf' }
   ];

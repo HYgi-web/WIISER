@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .resume-builder {
+            display: flex;
+            gap: 40px;
+            padding: 20px;
+            font-family: sans-serif;
+            flex-wrap: wrap;
+          }
+          .form-section, .preview-section {
+            flex: 1 1 400px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+          }
+          input, textarea {
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            font-size: 14px;
+          }
+          button {
+            margin-right: 10px;
+            padding: 10px 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+          }
+          button:hover {
+            background-color: #0056b3;
+          }
+          .preview-section h1, .preview-section h3, .preview-section h4 {
+            margin-bottom: 8px;
+          }
+          ul {
+            list-style-type: square;
+            margin-left: 20px;
+          }
+          
+    </style>
+</head>
+<body>
+    <div class="resume-builder">
+        <div class="form-section">
+          <h2>Build Your Resume</h2>
+      
+          <!-- Personal Info -->
+          <label>Full Name</label>
+          <input type="text" id="nameInput" placeholder="ABC" />
+      
+          <label>Title</label>
+          <input type="text" id="titleInput" placeholder="BS-MS Students" />
+      
+          <label>Summary</label>
+          <textarea id="summaryInput" placeholder="Brief professional summary..."></textarea>
+      
+          <!-- Education -->
+          <label>Education</label>
+          <textarea id="educationInput" placeholder="Class 12 , XYZ School (2023)"></textarea>
+      
+          <!-- Experience -->
+          <label>Experience</label>
+          <textarea id="experienceInput" placeholder="Intern at ABC Corp, June 2025 – August 2025"></textarea>
+      
+          <!-- Skills -->
+          <label>Skills (comma-separated)</label>
+          <input type="text" id="skillsInput" placeholder="HTML, java , content writing" />
+      
+          <button onclick="updatePreview()">Preview</button>
+          <button onclick="downloadPDF()">Download PDF</button>
+        </div>
+      
+        <div class="preview-section" id="resumePreview">
+          <h1 id="previewName">Your Name</h1>
+          <h3 id="previewTitle">Your Title</h3>
+          <p id="previewSummary">Your summary will appear here.</p>
+      
+          <h4>Education</h4>
+          <p id="previewEducation">Your education goes here.</p>
+      
+          <h4>Experience</h4>
+          <p id="previewExperience">Your experience goes here.</p>
+      
+          <h4>Skills</h4>
+          <ul id="previewSkills"></ul>
+        </div>
+      </div>
+      
+      <script>
+        function updatePreview() {
+          document.getElementById('previewName').textContent = document.getElementById('nameInput').value;
+          document.getElementById('previewTitle').textContent = document.getElementById('titleInput').value;
+          document.getElementById('previewSummary').textContent = document.getElementById('summaryInput').value;
+          document.getElementById('previewEducation').textContent = document.getElementById('educationInput').value;
+          document.getElementById('previewExperience').textContent = document.getElementById('experienceInput').value;
+      
+          const skills = document.getElementById('skillsInput').value.split(',').map(skill => skill.trim());
+          const skillsList = document.getElementById('previewSkills');
+          skillsList.innerHTML = '';
+          skills.forEach(skill => {
+            const li = document.createElement('li');
+            li.textContent = skill;
+            skillsList.appendChild(li);
+          });
+        }
+      
+        async function downloadPDF() {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+      
+          let y = 20;
+          doc.setFontSize(18);
+          doc.text(document.getElementById('previewName').textContent, 10, y); y += 10;
+          doc.setFontSize(14);
+          doc.text(document.getElementById('previewTitle').textContent, 10, y); y += 10;
+      
+          doc.setFontSize(12);
+          doc.text("Summary:", 10, y); y += 7;
+          doc.text(document.getElementById('previewSummary').textContent, 10, y); y += 10;
+      
+          doc.text("Education:", 10, y); y += 7;
+          doc.text(document.getElementById('previewEducation').textContent, 10, y); y += 10;
+      
+          doc.text("Experience:", 10, y); y += 7;
+          doc.text(document.getElementById('previewExperience').textContent, 10, y); y += 10;
+      
+          doc.text("Skills:", 10, y); y += 7;
+          Array.from(document.getElementById('previewSkills').children).forEach((li) => {
+            doc.text(`- ${li.textContent}`, 15, y);
+            y += 7;
+          });
+      
+          doc.save("my_resume.pdf");
+        }
+      </script>
+       
+</body>
+</html>
