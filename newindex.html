@@ -1030,6 +1030,44 @@
             animation-delay: 0.6s;
         }
 
+        /*Internship review box styling*/
+        .featured-blog {
+            width: 600px;
+            flex-direction: row;
+            display: inline-block;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px black;
+            margin-bottom: 30px;
+            margin-right: 5rem;
+            margin-top: 15px;
+        }
+        .featured-blog-image {
+            flex: 0 0 30%;
+            background-color: #e0e0e0;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+        }
+        .featured-blog-content {
+            flex: 0 0 70%;
+            padding: 30px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+             white-space: normal;
+        }
+        
+        .featured-tag {
+            background-color: #ffc107;
+            color: white;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -1061,8 +1099,8 @@
             <h1>CAMPUS TO CAREER</h1>
             <p>Explore curated guidance for research opportunities, grad school applications, industry careers, personel insights and more- all built <b>by and for IISERites</b>.</p>
             <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Explore Services</a>
-                <a href="mailto:wiiser0131@gmail.com" class="btn btn-outline">Contact Us</a>
+                <a href="#services" ><button class="btn btn-primary">Explore Services</button></a>
+                <button class="btn btn-outline"><a href="wiiser.in">Contact Us</a></button>
             </div>
         </div>
         <div class="hero-image">
@@ -1333,6 +1371,60 @@
             <div class="text-center" style="text-align: center; margin-top: 2rem;">
                 <a href="inter.html" class="btn btn-primary">View All Opportunities</a>
             </div>
+        </div>
+        <br><br>
+        <div class="container">
+            <div class="section-title">
+                <h2>Internship Reviews</h2>
+                <p>Internship and job experience reviews shared by students. Tips, and insights to help you make informed decisions</p>
+            </div>
+        <marquee>
+
+            <div class="featured-blog" >
+                <!-- <div class="featured-blog-image">
+                    <img src="/api/placeholder/400/320" alt="NIUS">
+                </div> -->
+                <div class="featured-blog-content">
+                    <span class="featured-tag">Positive</span>
+                    <span class="blog-category"></span>
+                    <h2 class="blog-title">National Initiative On Undergraduate Sciences</h2>
+                    <p class="blog-excerpt">Review......................................................It offers a variety of opportunities, including nurture camps and research projects, with a primary aim of fostering a deep understanding of scientific principles.</p>
+                    <br>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="images/photo.jpg" width="40px" alt="ABCD">
+                            </div>
+                            <span>ABCD</span>
+                        </div>
+                        <div class="blog-date">May,2025</div>
+                    </div> 
+                </div>
+            </div>
+            <div class="featured-blog" >
+                <!-- <div class="featured-blog-image">
+                    <img src="/api/placeholder/400/320" alt="NIUS">
+                </div> -->
+                <div class="featured-blog-content">
+                    <span class="featured-tag">Positive</span>
+                    <span class="blog-category"></span>
+                    <h2 class="blog-title">National Initiative On Undergraduate Sciences</h2>
+                    <p class="blog-excerpt">Review......................................................It offers a variety of opportunities, including nurture camps and research projects, with a primary aim of fostering a deep understanding of scientific principles.</p>
+                    <br>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="images/photo.jpg" width="40px" alt="ABCD">
+                            </div>
+                            <span>ABCD</span>
+                        </div>
+                        <div class="blog-date">May,2025</div>
+                    </div> 
+                </div>
+            </div>
+        </marquee>
+        <div class="text-center" style="text-align: center; margin-top: 2rem;">
+            <a href="#" class="btn btn-primary">View All Reviews</a>
         </div>
     </section>
 
