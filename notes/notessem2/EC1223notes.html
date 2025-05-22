@@ -161,12 +161,33 @@
         color: white;
         text-decoration: none;
         border-radius: 6px;
-        transition-duration: 1s;
-       
+        transition-duration: 1s;  
     }
+    .audio-notes-btn{
+        display: inline-block;
+        padding: 8px 8px;
+        background-color: #2196f3;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition-duration: 1s;  
+    }
+    #mindmaps{
+        border: 2px solid black;
+        width: 100px;
+        position: relative;
+        left: 200px;
+        bottom: 70px;
+        display: none;
+    }
+
+    .hoverclass:hover #mindmaps{
+        display: block;
+    } 
+
     .view-notes-btn:hover {
         box-shadow: 3px 3px 18px #333;}
-
+        
     .slides-card {
         background: white;
         align-items: last baseline;
@@ -269,6 +290,10 @@
             <h3>Part 1</h3>
             <p>The Shape of Earth</p>
             <a href="https://drive.google.com/file/d/1tEHbJ7Z7rSe0nhxyNbrMZ-wu3WmC3jfy/view?usp=sharing" class="view-notes-btn">View Notes</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="audio-notes-btn">🔉</a>&nbsp;
+            <a href="#" class="hoverclass" class="audio-notes-btn">📖<div id="mindmaps">mindmaps</div></a>
+            
         </div>
         <div class="notes-card">
             <h3>Part 2</h3>

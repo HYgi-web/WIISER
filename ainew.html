@@ -1,224 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IISER Adda - AI Assistant</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <title>Emoji Live Wallpaper</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #000;
+    }
 
-        body {
-            background-color: #f5f5f5;
-        }
-
-        .header {
-            background-color: #fff;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .contact-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid #333;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #333;
-        }
-
-        .join-btn {
-            padding: 0.5rem 1rem;
-            background-color: #000;
-            color: #fff;
-            border-radius: 4px;
-            text-decoration: none;
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .ai-interface {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .chat-area {
-            height: 400px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            overflow-y: auto;
-        }
-
-        .input-area {
-            display: flex;
-            gap: 1rem;
-        }
-
-        #user-input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        #send-btn {
-            padding: 0.75rem 1.5rem;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        #send-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border-radius: 4px;
-        }
-
-        .user-message {
-            background-color: #e3f2fd;
-            margin-left: 20%;
-        }
-
-        .ai-message {
-            background-color: #f5f5f5;
-            margin-right: 20%;
-        }
-    </style>
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <a href="#" class="logo">IISER Adda</a>
-            <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">Notes</a>
-                <a href="#">PYQ's</a>
-                <a href="#">Assignments</a>
-                <a href="#">Lab Work</a>
-                <a href="#">References</a>
-            </div>
-            <div class="buttons">
-                <a href="#" class="contact-btn">Contact Us</a>
-                <a href="#" class="join-btn">Join us</a>
-            </div>
-        </nav>
-    </header>
+<canvas id="emojiCanvas"></canvas>
 
-    <main class="main-content">
-        <div class="ai-interface">
-            <div class="chat-area" id="chat-area">
-                <!-- Messages will appear here -->
-            </div>
-            <div class="input-area">
-                <input type="text" id="user-input" placeholder="Ask your question...">
-                <button id="send-btn">Send</button>
-            </div>
-        </div>
-    </main>
+<script>
+  const emojis = [
+    '📝','📓','🏫','⚙️','💻','✈️','🚀','🔬','🧪','📐','📏','📊','📚',
+    '🔧','🛠️','🧠','📎','📡','💡','📈','🧬','🛰️','🔭'
+  ];
 
-    <script>
-        // Add your Gemini API key and implementation here
-        const apiKey = 'YAIzaSyDjNFGqlXSrJ90XVQhqP6EwT8d3xg4AUtY'; // Replace with your actual API key
-        const chatArea = document.getElementById('chat-area');
-        const userInput = document.getElementById('user-input');
-        const sendButton = document.getElementById('send-btn');
+  const canvas = document.getElementById('emojiCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
 
-        function addMessage(content, isUser) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            messageDiv.textContent = content;
-            chatArea.appendChild(messageDiv);
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
 
-        async function sendMessage() {
-            const message = userInput.value.trim();
-            if (!message) return;
+  window.addEventListener('resize', resize);
+  resize();
 
-            addMessage(message, true);
-            userInput.value = '';
+  const particles = [];
+  const numParticles = 60; // 60% of previous 100
 
-            try {
-                // Replace with actual API call
-                const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apikey}", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`
-                    },
-                    body: JSON.stringify({
-                        // Adjust request body based on your API's expected structure
-                        prompt: message,
-                        max_tokens: 150
-                    })
-                });
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      emoji: emojis[Math.floor(Math.random() * emojis.length)],
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: (24 + Math.random() * 12) * 2  // 200% increase
+    });
+  }
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+  let mouse = { x: 0, y: 0 };
 
-                const data = await response.json();
-                const aiResponse = data.choices[0].text.trim();  // Adjust based on your API's response
-                addMessage(aiResponse, false);
-            } catch (error) {
-                console.error('Error:', error);
-                addMessage('Sorry, there was an error processing your request.', false);
-            }
-        }
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
 
-        sendButton.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-    </script>
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of particles) {
+      // Hover repel
+      let dx = p.x - mouse.x;
+      let dy = p.y - mouse.y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        let angle = Math.atan2(dy, dx);
+        p.vx += Math.cos(angle) * 0.2;
+        p.vy += Math.sin(angle) * 0.2;
+      }
+
+      // Move and bounce
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.font = `${p.size}px serif`;
+      ctx.fillStyle = "#cccccc";  // Whitish grey
+      ctx.fillText(p.emoji, p.x, p.y);
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 </body>
 </html>
