@@ -259,6 +259,72 @@
         justify-content: center;
         backdrop-filter: blur(5px);
     }
+
+    .play-button {
+        
+        width: 38px;
+        height: 38px;
+        background-color: #2196f3;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    }
+
+    .play-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .play-icon {
+        width: 0;
+        height: 0;
+        border-left: 15px solid black;
+        border-top: 8.5px solid transparent;
+        border-bottom: 8.5px solid transparent;
+        margin-left: 5px;
+    }
+    .buttons{
+        display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+    }
+    .play-button .tooltip {
+        position: absolute;
+        bottom: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+
+    .play-button .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: #333;
+    }
+
+    .play-button:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+
 </style>
 <body>
     <nav class="navbar">
@@ -289,11 +355,13 @@
         <div class="notes-card">
             <h3>Part 1</h3>
             <p>The Shape of Earth</p>
-            <a href="https://drive.google.com/file/d/1tEHbJ7Z7rSe0nhxyNbrMZ-wu3WmC3jfy/view?usp=sharing" class="view-notes-btn">View Notes</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="audio-notes-btn">🔉</a>&nbsp;
-            <a href="#" class="hoverclass" class="audio-notes-btn">📖<div id="mindmaps">mindmaps</div></a>
-            
+            <div class="buttons">
+                <a href="https://drive.google.com/file/d/1tEHbJ7Z7rSe0nhxyNbrMZ-wu3WmC3jfy/view?usp=sharing" class="view-notes-btn">View Notes</a>
+                <div class="play-button">
+                    <div class="play-icon "></div>
+                    <div class="tooltip">Play Audiobook</div>
+                </div>
+            </div>
         </div>
         <div class="notes-card">
             <h3>Part 2</h3>
@@ -310,6 +378,8 @@
             <p>Rheology</p>
             <a href="https://drive.google.com/file/d/1CfUgGQEJ0j6MpqyuxsTqbb0a0e9mghe2/view?usp=sharing" class="view-notes-btn">View Notes</a>
         </div>
+        
+        
         <div class="notes-card">
             <h3>Part 5</h3>
             <p>Plate Tectonics</p>
