@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    body{
+        background-image: url('images/bg.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+
+
+
+    }
+    header{
+        background: none;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo{
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2196f2;
+    }
+
+    .nav-links{
+        display: flex;
+        gap: 2rem;
+
+    }
+
+    .nav-links a {
+        display: block;
+        text-decoration: none;
+        color: black;
+        float:left;
+    }
+
+    .btn{
+        padding: 4px 6px;
+        border-radius: 4px;
+     
+    }
+    .primary-btn{
+        font-size: 1rem;
+        background-color: black;
+        color: white;}
+
+  
+</style>
+</head>
+<body>
+ <header>
+    <div class="logo">WIISER</div>
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">PYQ</a>
+        <a href="#">Tutorial</a>
+        <a href="#">Notes</a>
+        <a href="#">Refer</a>
+    </nav>
+    <div class="btn">
+        <button class="btn primary-btn">Contact Us</button>
+        <button class="btn primary-btn">dark</button>
+    </div>
+ </header>
+</body>
+</html>

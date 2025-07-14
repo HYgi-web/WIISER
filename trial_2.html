@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiiser+ - Career Growth Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color:#2563eb;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #f59e0b;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #f59e0b;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            display: flex;
+            background: linear-gradient(135deg,#2563eb 0%, #1d4ed8 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            align-items: center;
+            justify-content: space-between;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/bg.jpg');
+            background-size: cover;
+            opacity: 0.2;
+        }
+
+        .hero-content {
+            flex: 1;
+            margin-left: 3rem;
+        }
+        .hero-image{
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: 1rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #e69009;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color:#2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #f59e0b;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color:#2563eb;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color:#2563eb;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta {
+            background-color: #f59e0b;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .services {
+            padding: 5rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .service-content p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-block;
+            color:#2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .service-link:hover {
+            color: #1d4ed8;
+        }
+
+        .service-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+
+        .blogs {
+            padding: 5rem 0;
+        }
+
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+
+        .blog-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color:#2563eb;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .blog-meta {
+            display: flex;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .blog-meta div {
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-meta i {
+            margin-right: 0.3rem;
+        }
+
+        .blog-content p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonials {
+            padding: 5rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: #e2e8f0;
+            font-family: serif;
+            z-index: 0;
+        }
+
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-content p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+
+        .testimonial-author-info h4 {
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .testimonial-author-info p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin: 0;
+        }
+
+        .contact {
+            padding: 5rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .contact-info-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item i {
+            font-size: 1.5rem;
+            color:#2563eb;
+            margin-right: 1rem;
+        }
+
+        .contact-info-item div h4 {
+            font-size: 1rem;
+            color: #1f2937;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-info-item div p {
+            color: #64748b;
+        }
+
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color:#2563eb;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background-color:#2563eb;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #f59e0b;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #f59e0b;
+        }
+
+        .footer-col p {
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #323e52;
+            border-radius: 50%;
+            margin-right: 0.8rem;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #f59e0b;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            padding: 5rem 0;
+            background-color: #f8fafc;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-card-header {
+            padding: 1.5rem;
+            background-color:#2563eb;
+            color: white;
+        }
+
+        .dashboard-card-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-card-body {
+            padding: 1.5rem;
+        }
+
+        .dashboard-card-body ul {
+            list-style: none;
+        }
+
+        .dashboard-card-body ul li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dashboard-card-body ul li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .dashboard-card-body h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .dashboard-card-body p {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge-primary {
+            background-color:#2563eb;
+            color: white;
+        }
+
+        .badge-secondary {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .badge-success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .badge-info {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        /* Tools Section */
+        .tools {
+            padding: 5rem 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card-header {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .tool-card-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .tool-card-icon i {
+            font-size: 2.5rem;
+            color:#2563eb;
+        }
+
+        .tool-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .tool-card-header p {
+            color: #64748b;
+        }
+
+        .tool-card-body {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color:#2563eb;
+            border-radius: 10px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Senior Section */
+        .Senior {
+            padding: 5rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .Senior-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .Senior-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .Senior-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .Senior-card-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .Senior-card-content {
+            padding: 1.5rem;
+        }
+
+        .Senior-card-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .Senior-card-content p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .Senior-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .Senior-meta-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .Senior-meta-author img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        /* Testimonials animation */
+        .testimonial-card {
+            opacity: 0;
+            animation: fadeSlideUp 1s forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .testimonial-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .testimonial-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .testimonial-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /*Internship review box styling*/
+        .featured-blog {
+            width: 600px;
+            flex-direction: row;
+            display: inline-block;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px black;
+            margin-bottom: 30px;
+            margin-right: 5rem;
+            margin-top: 15px;
+        }
+        .featured-blog-image {
+            flex: 0 0 30%;
+            background-color: #e0e0e0;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+        }
+        .featured-blog-content {
+            flex: 0 0 70%;
+            padding: 30px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+             white-space: normal;
+        }
+        
+        .featured-tag {
+            background-color: #ffc107;
+            color: white;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                Wiiser<span>+</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cv-resume">CV & Resume</a></li>
+                    <!-- <li><a href="#linkedin">LinkedIn</a></li> -->
+                    <li><a href="#internships">Internships</a></li>
+                    <li><a href="#Senior">Senior</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <br>
+            <h3>Resources that take you from</h3>
+            <h1>CAMPUS TO CAREER</h1>
+            <p>Explore curated guidance for research opportunities, grad school applications, industry careers, personel insights and more- all built <b>by and for IISERites</b>.</p>
+            <div class="hero-buttons">
+                <a href="#services" ><button class="btn btn-primary">Explore Services</button></a>
+                <button class="btn btn-outline"><a href="wiiser.in">Contact Us</a></button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="images/wiiser-removebg-preview.png" alt="heroimage" width="390px">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+                <p>Comprehensive career development tools and resources</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>CV & Resume Builder</h3>
+                    <p>Create professional, ATS-friendly resumes with our support material. Choose from various example templates and get feedback from your fellow mates and seniors .</p>
+                    <a href="#cv-resume" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn Enhancement</h3>
+                    <p>Get insights to Optimize your LinkedIn profile to attract recruiters and showcase your professional brand.</p>
+                    <a href="#linkedin" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div> -->
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Internship Opportunities</h3>
+                    <p>Access a curated list of internship opportunities across various disciplines, tailored to your skills and interests.</p>
+                    <a href="#internships" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Senior Resources</h3>
+                    <p>Explore our collection of Senior blogs, academic papers, and methodologies from various aluminis to enhance your knowledge and Senior capabilities.</p>
+                    <a href="#Senior" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV & Resume Section -->
+    <section id="cv-resume" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>CV & Resume Builder</h2>
+                <p>Create standout resumes that get you noticed</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <div class="service-img">
+                        <img src="images/resumetips.jpg" width=373rem alt="Resume Builder">
+                    </div>
+                    <div class="service-content">
+                        <h3>Tips and Suggestions</h3>
+                        <p>Go through the given document and get some valueable insights on building impactful CV</p>
+                        <a href="https://drive.google.com/file/d/1FHEUYGjIYlGmymJdokc7gROzBSym5OmP/view?usp=sharing" class="service-link">Get insights <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-img">
+                        <img src="images/proftemp.jpeg" width=373rem alt="Resume Templates">
+                    </div>
+                    <div class="service-content">
+                        <h3>Professional Templates</h3>
+                        <p>Choose from our collection of ATS-friendly, professionally designed resume templates suitable for various industries.</p>
+                        <a href="resume.html" class="service-link">Browse Templates <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <div class="service-img">
+                        <img src="/api/placeholder/400/200" alt="Resume Builder">
+                    </div>
+                    <div class="service-content">
+                        <h3>Interactive Builder</h3>
+                        <p>Use our interactive resume builder to create a customized resume with drag-and-drop sections and real-time previews.</p>
+                        <a href="cvbuilder.html" class="service-link">Start Building <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LinkedIn Enhancement Section -->
+    <!-- <section id="linkedin" class="tools">
+        <div class="container">
+            <div class="section-title">
+                <h2>LinkedIn Enhancement</h2>
+                <p>Optimize your professional online presence</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card scroll-reveal">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3>Profile Optimization</h3>
+                        <p>Enhance your LinkedIn profile visibility with keyword optimization and strategic content placement.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Profile Strength</span>
+                                <span>85%</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary">Optimize Profile</a>
+                    </div>
+                </div>
+                <div class="tool-card scroll-reveal">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h3>Content Creation</h3>
+                        <p>Learn to create engaging posts that showcase your expertise and build your professional brand.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Engagement Rate</span>
+                                <span>70%</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary">Create Content</a>
+                    </div>
+                </div>
+                <div class="tool-card scroll-reveal">
+                    <div class="tool-card-header">
+                        <div class="tool-card-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>Network Building</h3>
+                        <p>Strategic approaches to expand your professional network and connect with industry leaders.</p>
+                    </div>
+                    <div class="tool-card-body">
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%;"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Network Growth</span>
+                                <span>90%</span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-primary">Grow Network</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Internship Opportunities Section -->
+    <section id="internships" class="dashboard">
+        <div class="container">
+            <div class="section-title">
+                <h2>Internship Opportunities</h2>
+                <p>Find the perfect internship to kickstart your career</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card scroll-reveal">
+                    <div class="dashboard-card-header">
+                        <h3>International Opportunities</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <ul>
+                            <li>
+                                <h4>MITACS Gloablink</h4>
+                                <p>for Senior positions in Canada</p>
+                                <span class="badge badge-primary">On-site</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="https://www.mitacs.ca/our-programs/globalink-Senior-internship-students/" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>DAAD Wise Scholarship</h4>
+                                <p>for Senior positions in Germany</p>
+                                <span class="badge badge-primary">On-site</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="https://www2.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?detail=50015295" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>ISternship Summer Student Program</h4>
+                                <p> IST Austria</p>
+                                <span class="badge badge-primary">On-site</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="https://phd.pages.ist.ac.at/isternship/" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dashboard-card scroll-reveal">
+                    <div class="dashboard-card-header">
+                        <h3>Top National Internships</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <ul>
+                            <li>
+                                <h4>SPARK</h4>
+                                <p>IIT Roorkee</p>
+                                <span class="badge badge-primary">On-site</span>
+                                <span class="badge badge-secondary">Unpaid</span>
+                                <a href="http://spark.iitr.ac.in" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>Quantitative Senior Summer Internship</h4>
+                                <p>WorldQuant India</p>
+                                <span class="badge badge-primary">Hybrid</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="https://www.worldquant.com/brain/" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>IITK SURGE Program</h4>
+                                <p>IIT Kanpur</p>
+                                <span class="badge badge-primary">Remote</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="https://www.iitk.ac.in/dord/surge" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dashboard-card scroll-reveal">
+                    <div class="dashboard-card-header">
+                        <h3>Top Opportunities for Freshers</h3>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <ul>
+                            <li>
+                                <h4>NIUS</h4>
+                                <p>Tata Institute of Fundamental Senior</p>
+                                <span class="badge badge-primary">On-site</span>
+                                <span class="badge badge-secondary">Unpaid</span>
+                                <a href="https://secure.hbcse.tifr.res.in/nius/physics/" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>Biomedical Engineer Intern</h4>
+                                <p>Johnson & Johnson - New Brunswick, NJ</p>
+                                <span class="badge badge-primary">Hybrid</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="#" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                            <li>
+                                <h4>Clinical Senior Intern</h4>
+                                <p>Pfizer - New York, NY</p>
+                                <span class="badge badge-primary">Remote</span>
+                                <span class="badge badge-secondary">Paid</span>
+                                <a href="#" class="service-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="text-align: center; margin-top: 2rem;">
+                <a href="inter.html" class="btn btn-primary">View All Opportunities</a>
+            </div>
+        </div>
+        <br><br>
+        <div class="container">
+            <div class="section-title">
+                <h2>Internship Reviews</h2>
+                <p>Internship and job experience reviews shared by students. Tips, and insights to help you make informed decisions</p>
+            </div>
+        <marquee>
+
+            <div class="featured-blog" >
+                <!-- <div class="featured-blog-image">
+                    <img src="/api/placeholder/400/320" alt="NIUS">
+                </div> -->
+                <div class="featured-blog-content">
+                    <span class="featured-tag">Positive</span>
+                    <span class="blog-category"></span>
+                    <h2 class="blog-title">National Initiative On Undergraduate Sciences</h2>
+                    <p class="blog-excerpt">Review......................................................It offers a variety of opportunities, including nurture camps and research projects, with a primary aim of fostering a deep understanding of scientific principles.</p>
+                    <br>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="images/photo.jpg" width="40px" alt="ABCD">
+                            </div>
+                            <span>ABCD</span>
+                        </div>
+                        <div class="blog-date">May,2025</div>
+                    </div> 
+                </div>
+            </div>
+            <div class="featured-blog" >
+                <!-- <div class="featured-blog-image">
+                    <img src="/api/placeholder/400/320" alt="NIUS">
+                </div> -->
+                <div class="featured-blog-content">
+                    <span class="featured-tag">Positive</span>
+                    <span class="blog-category"></span>
+                    <h2 class="blog-title">National Initiative On Undergraduate Sciences</h2>
+                    <p class="blog-excerpt">Review......................................................It offers a variety of opportunities, including nurture camps and research projects, with a primary aim of fostering a deep understanding of scientific principles.</p>
+                    <br>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <div class="author-image">
+                                <img src="images/photo.jpg" width="40px" alt="ABCD">
+                            </div>
+                            <span>ABCD</span>
+                        </div>
+                        <div class="blog-date">May,2025</div>
+                    </div> 
+                </div>
+            </div>
+        </marquee>
+        <div class="text-center" style="text-align: center; margin-top: 2rem;">
+            <a href="#" class="btn btn-primary">View All Reviews</a>
+        </div>
+    </section>
+
+    <!-- Senior Resources Section -->
+    <section id="Senior" class="Senior">
+        <div class="container">
+            <div class="section-title">
+                <h2>Senior's Resources</h2>
+                <p>Expand your knowledge with our Senior's blogs and academic resources</p>
+            </div>
+            <div class="Senior-grid">
+                <div class="Senior-card scroll-reveal">
+                    <div class="Senior-card-img">
+                        <img src="/api/placeholder/400/200" alt="Vasudha Kulkarni">
+                    </div>
+                    <div class="Senior-card-content">
+                        <h3>Vasudha Kulkarni</h3>
+                        <p>Batch:<br>Major: Biology</p>
+                        <div class="Senior-meta">
+                            <div class="Senior-meta-author">
+                                <img src="images/note&tip.jpg" alt="Author">
+                                <span>Notes and Tips</span>
+                            </div>
+                            <span></span>
+                        </div>
+                        <a href="https://vasudha-kulkarni.github.io/resources/" class="service-link" style="display: block; margin-top: 1rem;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="Senior-card scroll-reveal">
+                    <div class="Senior-card-img">
+                        <img src="/api/placeholder/400/200" alt="Anushka Doke">
+                    </div>
+                    <div class="Senior-card-content">
+                        <h3>Anushka Doke</h3>
+                        <p>Batch:<br>Major:</p>
+                        <div class="Senior-meta">
+                            <div class="Senior-meta-author">
+                                <img src="images/research.jpg" alt="Author">
+                                <span>Research,Talks & Outreach</span>
+                            </div>
+                            <span></span>
+                        </div>
+                        <a href="https://anushkadoke.github.io/" class="service-link" style="display: block; margin-top: 1rem;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="Senior-card scroll-reveal">
+                    <div class="Senior-card-img">
+                        <img src="/api/placeholder/400/200" alt="Harini Sudha">
+                    </div>
+                    <div class="Senior-card-content">
+                        <h3>Harini Sudha</h3>
+                        <p>Batch:<br>Major:</p>
+                        <div class="Senior-meta">
+                            <div class="Senior-meta-author">
+                                <img src="images/research.jpg" alt="Author">
+                                <span>Research Interns for UG's</span>
+                            </div>
+                            <span></span>
+                        </div>
+                        <a href="https://github.com/harini-sudha/Research-Internships-for-Undergraduates" class="service-link" style="display: block; margin-top: 1rem;">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center" style="text-align: center; margin-top: 2rem;">
+                <a href="research.html" class="btn btn-primary">View All Senior's work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>What our users say about their experience</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Using Wiiser+'s resume builder and LinkedIn optimization tools helped me land my dream job at a top tech company. The personalized feedback was invaluable!"</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User">
+                            </div>
+                            <div class="testimonial-author-info">
+                                <h4>Emma Johnson</h4>
+                                <p>Software Engineer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The internship opportunities section was exactly what I needed. I found a perfect match for my skills and interests, and the application process was streamlined and easy."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User">
+                            </div>
+                            <div class="testimonial-author-info">
+                                <h4>David Kim</h4>
+                                <p>Marketing Specialist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"As a Seniorer, I found the Senior blogs and resources incredibly helpful. They provided valuable insights and methodologies that significantly improved my work."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User">
+                            </div>
+                            <div class="testimonial-author-info">
+                                <h4>Dr. Rachel Adams</h4>
+                                <p>Senior Scientist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Contribute to WIISER</h2>
+            <p>If you have written an SOP built a research profile or completed any internship - 
+                share it with IISER community. Your experiences are valueable for your juniors just straightout</p>
+            <a href="https://forms.gle/YNyHaVjo1DV4t7kM9" class="btn btn-outline">Upload Now</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have questions? We're here to help</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>IISER Pune</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>wiiser0131@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form action="mailto:wiiser0131@gmail.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Wiiser+</h3>
+                    <p>Comprehensive resources for professional development, career advancement, and academic excellence.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#cv-resume">CV & Resume Builder</a></li>
+                        <li><a href="#linkedin">LinkedIn Enhancement</a></li>
+                        <li><a href="#internships">Internship Opportunities</a></li>
+                        <li><a href="#Senior">Senior's Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Career Tips</a></li>
+                        <li><a href="#">Learning Hub</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Wiiser+. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        
+        function checkScroll() {
+            scrollRevealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+        
+        // Initial check
+        checkScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkScroll);
+        
+        // Animate progress bars when in view
+        const progressBars = document.querySelectorAll('.progress-fill');
+        
+        function animateProgressBars() {
+            progressBars.forEach(bar => {
+                const elementTop = bar.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 50) {
+                    const width = bar.parentElement.previousElementSibling.textContent.split('%')[0].trim();
+                    bar.style.width = width + '%';
+                }
+            });
+        }
+        
+        // Initial animation
+        animateProgressBars();
+        
+        // Animate on scroll
+        window.addEventListener('scroll', animateProgressBars);
+    </script>
+</body>
+</html>

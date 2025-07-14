@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Navigation */
+        .navbar {
+            background-color: #4169e1;
+            padding: 15px 0;
+            color: white;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #ffa500;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+         .hero {
+            background-color: #4169e1;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+
+        .services {
+            padding: 5rem 0;
+            background-color: #f1f5f9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-img {
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+
+        .service-content p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-link {
+            display: inline-block;
+            color:#2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .service-link:hover {
+            color: #1d4ed8;
+        }
+
+        .service-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .service-link:hover i {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+     <!-- Navigation -->
+     <nav class="navbar">
+        <div class="container">
+            <div class="logo">Wiiser<span>+</span></div>
+            <ul class="nav-links">
+              <li><a href="newindex.html">Home</a></li>
+              <li><a href="newindex.html#services">Services</a></li>
+              <li><a href="index.html"><b>Back to WIISER</b></a></li>
+             
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Resume Builder</h1>
+            <p>Build professional, ATS-friendly resumes with expert templates and CV Builder.</p>
+        </div>
+    </section>
+
+        <!-- CV & Resume Section -->
+        <section id="cv-resume" class="services">
+            <div class="container">
+              
+                <div class="services-grid">
+                    <div class="service-card scroll-reveal">
+                        <div class="service-img">
+                            <img src="images/resumetips.jpg" width=373rem alt="Resume Builder">
+                        </div>
+                        <div class="service-content">
+                            <h3>Tips and Suggestions</h3>
+                            <p>Go through the given document and get some valueable insights on building impactful CV</p>
+                            <a href="cv.html" class="service-link">Get insights <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <div class="service-img">
+                            <img src="images/proftemp.jpeg" width=373rem alt="Resume Templates">
+                        </div>
+                        <div class="service-content">
+                            <h3>Professional Templates</h3>
+                            <p>Choose from our collection of ATS-friendly, professionally designed resume templates suitable for various industries.</p>
+                            <a href="resume.html" class="service-link">Browse Templates <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="service-card scroll-reveal">
+                        <div class="service-img">
+                            <img src="/api/placeholder/400/200" alt="Resume Builder">
+                        </div>
+                        <div class="service-content">
+                            <h3>Interactive Builder</h3>
+                            <p>Use our interactive resume builder to create a customized resume with drag-and-drop sections and real-time previews.</p>
+                            <a href="cvbuilder.html" class="service-link">Start Building <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</body>
+</html>
