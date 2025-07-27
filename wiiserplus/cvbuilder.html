@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional CV Builder</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         * {
             margin: 0;
@@ -134,6 +136,35 @@
         }
         
         /* CV Container */
+        #cv {
+            width: 8.27in; /* A4 size width */
+            min-height: auto;
+            padding: 1in;
+            background: white;
+            color: black;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        .cv-section {
+            margin-bottom: 1rem;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        
+            #cv {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+        
+        
         .cv-container {
             width: 700px;
             background: white;
@@ -617,16 +648,37 @@ Separate multiple experiences with double line breaks i.e. leaving one line gap.
         }
         
         function downloadCV() {
+            updateCV(); // Apply latest changes to the DOM
+        
             const element = document.getElementById('cv');
+            if (!element) {
+                alert("CV content not found!");
+                return;
+            }
+        
             const opt = {
-                margin: 0.5,
-                filename: 'professional_resume.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                margin:       [0.5, 0.5, 0.5, 0.5],  // top, left, bottom, right in inches
+                filename:     'professional_resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    scrollY: 0
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'a4',
+                    orientation: 'portrait'
+                },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
             };
-            html2pdf().set(opt).from(element).save();
+        
+            setTimeout(() => {
+                html2pdf().set(opt).from(element).save();
+            }, 300);
         }
+        
         
         // Auto-update on input change
         document.addEventListener('DOMContentLoaded', function() {
