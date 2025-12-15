@@ -1,147 +1,922 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Readable CV Export</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      margin: 0;
-      padding: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Optimization Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    #cv {
-      background: white;
-      padding: 40px;
-      width: 794px; /* A4 width at 96 DPI */
-      margin: auto;
-      color: #111;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+          /* Navigation */
+          .navbar {
+            background-color:#4169e1;
+            padding: 15px 0;
+            color: white;
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #ffa500;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    h1, h2 {
-      margin-bottom: 0.5em;
-    }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .section {
-      margin-bottom: 2em;
-    }
+        .header {
+            background: linear-gradient(135deg, #0077b5, #005885);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
 
-    .section-title {
-      font-weight: bold;
-      color: #2a55e5;
-      font-size: 1.2em;
-      border-bottom: 2px solid #2a55e5;
-      margin-bottom: 10px;
-      padding-bottom: 4px;
-    }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
 
-    textarea {
-      width: 100%;
-      height: 60px;
-      margin-bottom: 10px;
-      font-family: monospace;
-    }
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
 
-    button {
-      padding: 10px 20px;
-      background: #2a55e5;
-      color: white;
-      border: none;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
 
-    ul {
-      padding-left: 20px;
-    }
-  </style>
+        .panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 119, 181, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .panel h2 {
+            color: #0077b5;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0077b5;
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0077b5, #005885);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px auto;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            background: conic-gradient(#0077b5 var(--score-angle, 0deg), #e1e5e9 0deg);
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .score-circle span {
+            position: relative;
+            z-index: 1;
+            color: #0077b5;
+        }
+
+        .recommendations {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #0077b5;
+        }
+
+        .recommendation-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            color: #0077b5;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            height: 300px;
+            position: relative;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            border-bottom-color: #0077b5;
+            color: #0077b5;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0077b5;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+     <!-- Navigation -->
+     <nav class="navbar">
+      <div class="container">
+          <div class="logo">Wiiser<span>+</span></div>
+          <ul class="nav-links">
+              <li><a href="newindex.html"><i class="fas fa-home"></i> Home</a></li>
+              <li><a href="newindex.html#services"><i class="fas fa-cogs"></i> Services</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <li><a href="../index.html"><b>	<i class="fas fa-arrow-circle-left"></i>  Back to WIISER</b></a></li>
+          </ul>
+      </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+      <div class="container">
+          <h1>Internship Opportunities</h1>
+          <p>Find the perfect internship to jumpstart your career based on your academic year and interests</p>
+      </div>
+  </section>
 
-  <h2 style="text-align:center">Live CV Builder</h2>
+    <div class="container">
+        <div class="main-content">
+            <div class="panel">
+                <h2>Profile Analysis</h2>
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('profile')">Profile</div>
+                    <div class="tab" onclick="switchTab('content')">Content</div>
+                    <div class="tab" onclick="switchTab('network')">Network</div>
+                </div>
 
-  <div style="max-width:800px;margin:auto">
-    <textarea id="input-name" placeholder="Name">Harsh Yadav</textarea>
-    <textarea id="input-summary" placeholder="Summary">A highly motivated student passionate about tech and innovation.</textarea>
-    <textarea id="input-education" placeholder="Education (one per line)">B.Tech - IIIT Delhi - Delhi - 2025 - CGPA: 9.0</textarea>
-    <textarea id="input-skills" placeholder="Skills (comma-separated)">JavaScript, Python, HTML, CSS</textarea>
-    <textarea id="input-experience" placeholder="Experience (one per line)">Intern - ABC Corp - Remote - 2024 - Built resume tool</textarea>
+                <div id="profile-tab" class="tab-content active">
+                    <form id="profileForm">
+                        <div class="form-group">
+                            <label>LinkedIn Profile URL</label>
+                            <input type="url" id="profileUrl" placeholder="https://linkedin.com/in/yourname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Headline</label>
+                            <input type="text" id="headline" placeholder="Your current LinkedIn headline">
+                        </div>
+                        <div class="form-group">
+                            <label>About Section</label>
+                            <textarea id="about" placeholder="Your current about/summary section"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Industry</label>
+                            <select id="industry">
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="education">Education</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Analyze Profile</button>
+                    </form>
+                </div>
 
-    <button onclick="updateCV()">Update CV</button>
-    <button onclick="downloadReadablePDF()">Download as Readable PDF</button>
-  </div>
+                <div id="content-tab" class="tab-content">
+                    <form id="contentForm">
+                        <div class="form-group">
+                            <label>Content Topic</label>
+                            <input type="text" id="contentTopic" placeholder="What would you like to post about?">
+                        </div>
+                        <div class="form-group">
+                            <label>Content Type</label>
+                            <select id="contentType">
+                                <option value="post">Regular Post</option>
+                                <option value="article">Article</option>
+                                <option value="poll">Poll</option>
+                                <option value="video">Video</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Audience</label>
+                            <input type="text" id="targetAudience" placeholder="e.g., Software Engineers, Marketing Professionals">
+                        </div>
+                        <button type="submit" class="btn">Generate Content Ideas</button>
+                    </form>
+                </div>
 
-  <hr/>
+                <div id="network-tab" class="tab-content">
+                    <form id="networkForm">
+                        <div class="form-group">
+                            <label>Current Connection Count</label>
+                            <input type="number" id="connectionCount" placeholder="500">
+                        </div>
+                        <div class="form-group">
+                            <label>Target Companies</label>
+                            <input type="text" id="targetCompanies" placeholder="Google, Microsoft, Apple">
+                        </div>
+                        <div class="form-group">
+                            <label>Networking Goals</label>
+                            <select id="networkingGoals">
+                                <option value="job-seeking">Job Seeking</option>
+                                <option value="business-growth">Business Growth</option>
+                                <option value="thought-leadership">Thought Leadership</option>
+                                <option value="partnerships">Partnerships</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Get Network Strategy</button>
+                    </form>
+                </div>
 
-  <div id="cv">
-    <h1 id="name">Your Name</h1>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Analyzing your LinkedIn profile...</p>
+                </div>
+            </div>
 
-    <div class="section">
-      <div class="section-title">Summary</div>
-      <p id="summary">Summary will appear here...</p>
+            <div class="panel">
+                <h2>Optimization Score</h2>
+                <div class="score-circle" id="scoreCircle">
+                    <span id="scoreValue">--</span>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value" id="profileViews">0</div>
+                        <div class="metric-label">Profile Views</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="searchAppearances">0</div>
+                        <div class="metric-label">Search Appearances</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="postImpressions">0</div>
+                        <div class="metric-label">Post Impressions</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value" id="engagementRate">0%</div>
+                        <div class="metric-label">Engagement Rate</div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="analyticsChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>AI Recommendations</h2>
+                <div class="recommendations" id="recommendations">
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">💡</div>
+                        <div>
+                            <strong>Complete your profile analysis</strong><br>
+                            Fill out the form on the left to get personalized recommendations for optimizing your LinkedIn profile.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Content Calendar</h2>
+                <div id="contentCalendar">
+                    <div class="form-group">
+                        <label>Posting Frequency</label>
+                        <select id="postingFrequency">
+                            <option value="daily">Daily</option>
+                            <option value="3-times-week">3 times per week</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="bi-weekly">Bi-weekly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Best Posting Times</label>
+                        <div id="bestTimes">
+                            <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin-top: 10px;">
+                                <strong>Recommended posting times:</strong><br>
+                                • Tuesday-Thursday: 9:00 AM - 11:00 AM<br>
+                                • Wednesday: 3:00 PM - 4:00 PM<br>
+                                • Sunday: 10:00 AM - 12:00 PM
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="generateContentCalendar()">Generate 30-Day Calendar</button>
+                </div>
+                <div id="calendarResults" style="margin-top: 20px;"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="section">
-      <div class="section-title">Education</div>
-      <ul id="education"></ul>
-    </div>
+    <script>
+        // Simulated backend data and API calls
+        class LinkedInOptimizer {
+            constructor() {
+                this.userData = {};
+                this.analytics = this.generateMockAnalytics();
+                this.initializeCharts();
+            }
 
-    <div class="section">
-      <div class="section-title">Experience</div>
-      <ul id="experience"></ul>
-    </div>
+            generateMockAnalytics() {
+                return {
+                    profileViews: Math.floor(Math.random() * 500) + 100,
+                    searchAppearances: Math.floor(Math.random() * 200) + 50,
+                    postImpressions: Math.floor(Math.random() * 2000) + 500,
+                    engagementRate: Math.floor(Math.random() * 8) + 2,
+                    weeklyData: Array.from({length: 7}, () => Math.floor(Math.random() * 100) + 20)
+                };
+            }
 
-    <div class="section">
-      <div class="section-title">Skills</div>
-      <ul id="skills"></ul>
-    </div>
-  </div>
+            async analyzeProfile(data) {
+                this.showLoading(true);
+                
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                this.userData = data;
+                const score = this.calculateOptimizationScore(data);
+                
+                this.updateScore(score);
+                this.updateAnalytics();
+                this.generateRecommendations(data, score);
+                
+                this.showLoading(false);
+                this.showSuccessMessage('Profile analysis completed successfully!');
+            }
 
-  <script>
-    function updateCV() {
-      document.getElementById('name').innerText = document.getElementById('input-name').value || "Your Name";
-      document.getElementById('summary').innerText = document.getElementById('input-summary').value || "Your summary";
+            calculateOptimizationScore(data) {
+                let score = 0;
+                
+                // Profile URL check
+                if (data.profileUrl) score += 10;
+                
+                // Headline optimization
+                if (data.headline) {
+                    score += 15;
+                    if (data.headline.length > 50) score += 10;
+                    if (data.headline.includes('|') || data.headline.includes('•')) score += 5;
+                }
+                
+                // About section
+                if (data.about) {
+                    score += 20;
+                    if (data.about.length > 200) score += 10;
+                    if (data.about.length > 500) score += 10;
+                }
+                
+                // Industry selection
+                if (data.industry) score += 10;
+                
+                // Random factors for realism
+                score += Math.floor(Math.random() * 20);
+                
+                return Math.min(score, 100);
+            }
 
-      const educationLines = document.getElementById('input-education').value.split('\n');
-      document.getElementById('education').innerHTML = educationLines.map(line => `<li>${line}</li>`).join('');
+            updateScore(score) {
+                const scoreElement = document.getElementById('scoreValue');
+                const circleElement = document.getElementById('scoreCircle');
+                
+                scoreElement.textContent = score;
+                circleElement.style.setProperty('--score-angle', `${(score / 100) * 360}deg`);
+                
+                // Color coding
+                if (score >= 80) {
+                    circleElement.style.background = `conic-gradient(#28a745 ${(score / 100) * 360}deg, #e1e5e9 0deg)`;
+                } else if (score >= 60) {
+                    circleElement.style.background = `conic-gradient(#ffc107 ${(score / 100) * 360}deg, #e1e5e9 0deg)`;
+                } else {
+                    circleElement.style.background = `conic-gradient(#dc3545 ${(score / 100) * 360}deg, #e1e5e9 0deg)`;
+                }
+            }
 
-      const experienceLines = document.getElementById('input-experience').value.split('\n');
-      document.getElementById('experience').innerHTML = experienceLines.map(line => `<li>${line}</li>`).join('');
+            updateAnalytics() {
+                document.getElementById('profileViews').textContent = this.analytics.profileViews;
+                document.getElementById('searchAppearances').textContent = this.analytics.searchAppearances;
+                document.getElementById('postImpressions').textContent = this.analytics.postImpressions;
+                document.getElementById('engagementRate').textContent = this.analytics.engagementRate + '%';
+            }
 
-      const skills = document.getElementById('input-skills').value.split(',').map(s => s.trim());
-      document.getElementById('skills').innerHTML = skills.map(skill => `<li>${skill}</li>`).join('');
-    }
+            generateRecommendations(data, score) {
+                const recommendations = [];
+                
+                if (!data.headline || data.headline.length < 50) {
+                    recommendations.push({
+                        icon: '✏️',
+                        title: 'Optimize your headline',
+                        description: 'Your headline should be 50+ characters and include keywords relevant to your industry.'
+                    });
+                }
+                
+                if (!data.about || data.about.length < 200) {
+                    recommendations.push({
+                        icon: '📝',
+                        title: 'Expand your about section',
+                        description: 'Write a compelling 200-500 word summary that tells your professional story.'
+                    });
+                }
+                
+                if (score < 80) {
+                    recommendations.push({
+                        icon: '📸',
+                        title: 'Professional headshot',
+                        description: 'Profiles with professional photos get 14x more profile views.'
+                    });
+                }
+                
+                recommendations.push({
+                    icon: '🎯',
+                    title: 'Industry keywords',
+                    description: `Include relevant ${data.industry || 'industry'} keywords throughout your profile to improve searchability.`
+                });
+                
+                recommendations.push({
+                    icon: '🤝',
+                    title: 'Network expansion',
+                    description: 'Connect with 5-10 new people weekly in your industry or target companies.'
+                });
+                
+                this.displayRecommendations(recommendations);
+            }
 
-    async function downloadReadablePDF() {
-      updateCV(); // ensure latest content
+            displayRecommendations(recommendations) {
+                const container = document.getElementById('recommendations');
+                container.innerHTML = recommendations.map(rec => `
+                    <div class="recommendation-item">
+                        <div class="recommendation-icon">${rec.icon}</div>
+                        <div>
+                            <strong>${rec.title}</strong><br>
+                            ${rec.description}
+                        </div>
+                    </div>
+                `).join('');
+            }
 
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({
-        unit: 'pt',
-        format: 'a4',
-        orientation: 'portrait',
-      });
+            initializeCharts() {
+                const ctx = document.getElementById('analyticsChart').getContext('2d');
+                
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Profile Views',
+                            data: this.analytics.weeklyData,
+                            borderColor: '#0077b5',
+                            backgroundColor: 'rgba(0, 119, 181, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
 
-      const cvElement = document.getElementById('cv');
+            async generateContentIdeas(data) {
+                this.showLoading(true);
+                
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                const ideas = this.getContentIdeas(data);
+                this.displayContentIdeas(ideas);
+                
+                this.showLoading(false);
+            }
 
-      await doc.html(cvElement, {
-        x: 20,
-        y: 20,
-        html2canvas: {
-          scale: 1,
-          useCORS: true,
-        },
-        callback: function (doc) {
-          doc.save("professional_resume.pdf");
+            getContentIdeas(data) {
+                const topics = {
+                    technology: [
+                        'Share insights about emerging tech trends',
+                        'Post about a coding challenge you solved',
+                        'Discuss the future of AI in your field',
+                        'Share a tool or resource that increased your productivity'
+                    ],
+                    finance: [
+                        'Analyze current market trends',
+                        'Share financial planning tips',
+                        'Discuss regulatory changes in your sector',
+                        'Post about sustainable investing strategies'
+                    ],
+                    marketing: [
+                        'Share a successful campaign case study',
+                        'Discuss new social media trends',
+                        'Post about customer persona development',
+                        'Share insights from recent marketing data'
+                    ]
+                };
+                
+                const industryIdeas = topics[data.industry] || topics.technology;
+                return industryIdeas.slice(0, 3);
+            }
+
+            displayContentIdeas(ideas) {
+                const recommendations = ideas.map((idea, index) => ({
+                    icon: ['💡', '🚀', '📊'][index] || '✨',
+                    title: `Content Idea ${index + 1}`,
+                    description: idea
+                }));
+                
+                this.displayRecommendations(recommendations);
+                this.showSuccessMessage('Content ideas generated successfully!');
+            }
+
+            showLoading(show) {
+                document.getElementById('loading').style.display = show ? 'block' : 'none';
+            }
+
+            showSuccessMessage(message) {
+                const existingMsg = document.querySelector('.success-message');
+                if (existingMsg) existingMsg.remove();
+                
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'success-message';
+                msgDiv.textContent = message;
+                
+                document.querySelector('.panel').appendChild(msgDiv);
+                
+                setTimeout(() => msgDiv.remove(), 3000);
+            }
         }
-      });
-    }
 
-    // Auto update initially
-    document.addEventListener('DOMContentLoaded', updateCV);
-  </script>
+        // Initialize the optimizer
+        const optimizer = new LinkedInOptimizer();
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+
+        // Form submissions
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                profileUrl: document.getElementById('profileUrl').value,
+                headline: document.getElementById('headline').value,
+                about: document.getElementById('about').value,
+                industry: document.getElementById('industry').value
+            };
+            
+            await optimizer.analyzeProfile(formData);
+        });
+
+        document.getElementById('contentForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                topic: document.getElementById('contentTopic').value,
+                type: document.getElementById('contentType').value,
+                audience: document.getElementById('targetAudience').value,
+                industry: optimizer.userData.industry || 'technology'
+            };
+            
+            await optimizer.generateContentIdeas(formData);
+        });
+
+        document.getElementById('networkForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            optimizer.showLoading(true);
+            
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const networkRecommendations = [
+                {
+                    icon: '🎯',
+                    title: 'Target Decision Makers',
+                    description: 'Focus on connecting with hiring managers and senior professionals in your target companies.'
+                },
+                {
+                    icon: '💬',
+                    title: 'Personalized Connection Requests',
+                    description: 'Always include a personalized message when sending connection requests.'
+                },
+                {
+                    icon: '📅',
+                    title: 'Consistent Engagement',
+                    description: 'Spend 15-20 minutes daily engaging with your network\'s content.'
+                }
+            ];
+            
+            optimizer.displayRecommendations(networkRecommendations);
+            optimizer.showLoading(false);
+            optimizer.showSuccessMessage('Network strategy generated successfully!');
+        });
+
+        // Content calendar generation
+        function generateContentCalendar() {
+            const frequency = document.getElementById('postingFrequency').value;
+            const calendarDiv = document.getElementById('calendarResults');
+            
+            const contentTypes = ['Industry Insight', 'Personal Experience', 'Company Update', 'Thought Leadership', 'Behind the Scenes'];
+            const calendar = [];
+            
+            for (let i = 0; i < 30; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() + i);
+                
+                let shouldPost = false;
+                switch(frequency) {
+                    case 'daily':
+                        shouldPost = true;
+                        break;
+                    case '3-times-week':
+                        shouldPost = i % 2 === 0 || i % 3 === 0;
+                        break;
+                    case 'weekly':
+                        shouldPost = i % 7 === 0;
+                        break;
+                    case 'bi-weekly':
+                        shouldPost = i % 14 === 0;
+                        break;
+                }
+                
+                if (shouldPost) {
+                    calendar.push({
+                        date: date.toDateString(),
+                        content: contentTypes[Math.floor(Math.random() * contentTypes.length)]
+                    });
+                }
+            }
+            
+            calendarDiv.innerHTML = `
+                <h3>Your 30-Day Content Calendar</h3>
+                <div style="max-height: 300px; overflow-y: auto; margin-top: 15px;">
+                    ${calendar.map(item => `
+                        <div style="padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+                            <span><strong>${item.date}</strong></span>
+                            <span style="color: #0077b5;">${item.content}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize with some demo data
+        setTimeout(() => {
+            optimizer.updateAnalytics();
+        }, 1000);
+    </script>
 </body>
 </html>

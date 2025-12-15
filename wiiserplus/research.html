@@ -1,547 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiiser+ Research Blogs</title>
+    <title>Research Blogs | Wiiser+</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
+            --accent: #4169e1;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-blur: blur(12px);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+        }
+
         body {
-            background-color: #f5f7fa;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background: #f0f2f5;
+            min-height: 100vh;
         }
-        .navbar {
-            background-color: #4169e1;
-            padding: 15px 0;
-            color: white;
-        }
-        .container {
-            width: 85%;
-            margin: 0 auto;
-        }
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-        .logo span {
-            color: #ffc107;
-        }
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .header {
-            background: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
-            text-align: center;
-            padding: 50px 0 30px;
-        }
-        .header h1 {
-            font-size: 42px;
-            color: white;
-            margin-bottom: 15px;
-        }
-        .header p {
-            font-size: 18px;
-            color: white;
-            margin-bottom: 20px;
-        }
-        .divider {
-            width: 100px;
-            height: 4px;
-            background-color: #ffc107;
-            margin: 0 auto;
-            margin-bottom: 40px;
-        }
-        .filter-bar {
-            background-color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .filter-options {
-            display: flex;
-            gap: 15px;
-        }
-        .filter-dropdown {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            font-size: 14px;
-        }
-        .search-box {
-            display: flex;
-            align-items: center;
-        }
-        .search-input {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
-            width: 200px;
-        }
-        .search-button {
-            padding: 8px 15px;
-            background-color: #3f51b5;
-            color: white;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-        .blogs-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-        .blog-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-5px);
-        }
-        .blog-image {
-            height: 200px;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .blog-content {
-            padding: 20px;
-        }
-        .blog-category {
-            background-color: #e3f2fd;
-            color: #3f51b5;
-            font-size: 12px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .blog-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .blog-excerpt {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            font-size: 13px;
-            color: #888;
-        }
-        .blog-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .author-image {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .featured-blog {
-            grid-column: span 2;
-            display: flex;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        .featured-blog-image {
-            flex: 0 0 40%;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .featured-blog-content {
-            flex: 0 0 60%;
-            padding: 30px;
-        }
-        .featured-tag {
-            background-color: #ffc107;
-            color: white;
-            font-size: 12px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 50px;
-        }
-        .page-link {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: #3f51b5;
-            text-decoration: none;
-            font-size: 14px;
-        }
-        .page-link.active {
-            background-color: #3f51b5;
-            color: white;
-            border-color: #3f51b5;
-        }
-        .newsletter {
-            background-color: #3f51b5;
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-        }
-        .newsletter h2 {
-            margin-bottom: 15px;
-            font-size: 28px;
-        }
-        .newsletter p {
-            margin-bottom: 25px;
-            font-size: 16px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .newsletter-input {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
-        }
-        .newsletter-button {
-            padding: 12px 25px;
-            background-color: #ffc107;
-            color: #333;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .footer {
-            background-color: #263238;
-            color: white;
-            padding: 50px 0 20px;
-        }
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .footer-section h3:after {
-            content: '';
-            position: absolute;
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
             left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background-color: #ffc107;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
         }
-        .footer-links {
-            list-style: none;
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 260px;
+            height: calc(100vh - 40px);
+            background: rgba(65, 105, 225, 0.05);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            z-index: 1000;
+            transition: transform 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
-        .footer-links li {
+
+        .sidebar-header {
+            padding: 30px;
+            background: var(--primary-gradient);
+        }
+
+        .sidebar-logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-nav {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: white;
+            color: var(--accent);
+            transform: translateX(4px);
+        }
+
+        .back-link {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            padding: 20px 40px 20px 0;
+        }
+
+        .mobile-nav {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-120%);
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 280px;
+                border-radius: 0;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 40px;
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 32px;
+            border: 1px solid white;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
         }
-        .footer-links a:hover {
-            color: #ffc107;
+
+        .blog-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid white;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #455a64;
-            font-size: 14px;
-            color: #b0bec5;
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            background: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
         }
-        .read-more {
-            color: #3f51b5;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            display: inline-flex;
+
+        .blog-image {
+            height: 220px;
+            background: linear-gradient(45deg, #eef2ff, #e0e7ff);
+            display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+        }
+
+        .blog-content {
+            padding: 25px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+
+        .read-btn {
+            align-self: flex-start;
+            padding: 10px 20px;
+            border-radius: 20px;
+            background: var(--text-primary);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .read-btn:hover {
+            background: var(--accent);
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="newindex.html" class="logo">Wiiser<span>+</span></a>
-            <div class="nav-links">
-                <a href="newindex.html"><i class="fas fa-home"></i> Home</a>
-                <a href="newindex.html#services"><i class="fas fa-cogs"></i> Services</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="../index.html"><b><i class="fas fa-arrow-circle-left"></i>  Back to WIISER</b></a>
-            </div>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo"><i class="fas fa-rocket"></i> Wiiser+</div>
+        </div>
+        <div class="sidebar-nav">
+            <a href="newindex.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="resumepage.html" class="nav-item"><i class="fas fa-file-invoice"></i> CV & Resume</a>
+            <a href="linkedin-optimizer.html" class="nav-item"><i class="fab fa-linkedin"></i> LinkedIn Tool</a>
+            <a href="inter.html" class="nav-item"><i class="fas fa-briefcase"></i> Internships</a>
+            <a href="research.html" class="nav-item active"><i class="fas fa-graduation-cap"></i> Senior Guide</a>
+            <a href="../index.html" class="nav-item back-link"><i class="fas fa-arrow-left"></i> Back to Wiiser</a>
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <h1>Research Blogs</h1>
-            <p>In-depth articles, insights, and latest developments across multiple disciplines</p>
-            <div class="divider"></div>
+    <div class="main-content">
+        <header class="mobile-nav">
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">Wiiser+</div>
+            <button class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i
+                    class="fas fa-bars"></i></button>
+        </header>
+
+        <section class="hero">
+            <h1>Senior's Guidance</h1>
+            <p>In-depth articles and tips from alumni who have been there.</p>
+        </section>
+
+        <div class="blog-grid">
+
+            <!-- Blog 1 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-dna" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category">Biology • PhD Prep</span>
+                    <h3 class="blog-title">Getting into US Grad Schools</h3>
+                    <p class="blog-excerpt">Vasudha Kulkarni shares her journey from IISER to a top-tier biology PhD
+                        program, including managing applications and interviews.</p>
+                    <a href="https://vasudha-kulkarni.github.io/resources/" class="read-btn">Read Article</a>
+                </div>
+            </div>
+
+            <!-- Blog 2 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-atom" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category">Physics • Research</span>
+                    <h3 class="blog-title">Navigating Summer Projects</h3>
+                    <p class="blog-excerpt">How to email professors, what to write in your cover letter, and how to
+                        secure a funding grant for your summer research.</p>
+                    <a href="#" class="read-btn">Read Article</a>
+                </div>
+            </div>
+
+            <!-- Blog 3 -->
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-chart-line" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="category">Industry • Mathematics</span>
+                    <h3 class="blog-title">Transitioning to Data Science</h3>
+                    <p class="blog-excerpt">A guide for math and physics majors looking to enter the corporate data
+                        science world after graduation.</p>
+                    <a href="#" class="read-btn">Read Article</a>
+                </div>
+            </div>
+
         </div>
-    </header>
-    <br><br>
+    </div>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Filter Bar -->
-        <div class="filter-bar">
-            <div class="filter-options">
-                <select class="filter-dropdown">
-                    <option>All Categories</option>
-                    <option>AI Research</option>
-                    <option>Sustainable Energy</option>
-                    <option>Medical Research</option>
-                    <option>Social Sciences</option>
-                    <option>Technology</option>
-                </select>
-                <select class="filter-dropdown">
-                    <option>Most Recent</option>
-                    <option>Most Popular</option>
-                    <option>Trending</option>
-                </select>
-            </div>
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search blogs...">
-                <button class="search-button">Search</button>
-            </div>
-        </div>
-
-        <!-- Featured Blog -->
-        <div class="featured-blog">
-            <div class="featured-blog-image">
-                <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-            </div>
-            <div class="featured-blog-content">
-                <span class="featured-tag">Recent</span>
-                <span class="blog-category">Notes & Tips</span>
-                <h2 class="blog-title">Vasudha Kulkarni</h2>
-                <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                <div class="blog-meta">
-                    <div class="blog-author">
-                        <div class="author-image">
-                            <img src="/api/placeholder/30/30" alt="">
-                        </div>
-                        <span></span>
-                    </div>
-                    <div class="blog-date"></div>
-                </div>
-                <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-            </div>
-        </div>
-
-         <!-- Blog Card 2 -->
-        <div class="featured-blog">
-            <div class="featured-blog-image">
-                <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-            </div>
-            <div class="featured-blog-content">
-                <span class="featured-tag">Recent</span>
-                <span class="blog-category">Notes & Tips</span>
-                <h2 class="blog-title">Vasudha Kulkarni</h2>
-                <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                <div class="blog-meta">
-                    <div class="blog-author">
-                        <div class="author-image">
-                            <img src="/api/placeholder/30/30" alt="">
-                        </div>
-                        <span></span>
-                    </div>
-                    <div class="blog-date"></div>
-                </div>
-                <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-            </div>
-        </div>
-
-            <!-- Blog Card 3 -->
-            <div class="featured-blog">
-            <div class="featured-blog-image">
-                <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-            </div>
-            <div class="featured-blog-content">
-                <span class="featured-tag">Recent</span>
-                <span class="blog-category">Notes & Tips</span>
-                <h2 class="blog-title">Vasudha Kulkarni</h2>
-                <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                <div class="blog-meta">
-                    <div class="blog-author">
-                        <div class="author-image">
-                            <img src="/api/placeholder/30/30" alt="">
-                        </div>
-                        <span></span>
-                    </div>
-                    <div class="blog-date"></div>
-                </div>
-                <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-            </div>
-        </div>
-
-            <!-- Blog Card 4 -->
-            <div class="featured-blog">
-                <div class="featured-blog-image">
-                    <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-                </div>
-                <div class="featured-blog-content">
-                    <span class="featured-tag">Recent</span>
-                    <span class="blog-category">Notes & Tips</span>
-                    <h2 class="blog-title">Vasudha Kulkarni</h2>
-                    <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <div class="author-image">
-                                <img src="/api/placeholder/30/30" alt="">
-                            </div>
-                            <span></span>
-                        </div>
-                        <div class="blog-date"></div>
-                    </div>
-                    <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-                </div>
-            </div>
-
-            <!-- Blog Card 5 -->
-            <div class="featured-blog">
-                <div class="featured-blog-image">
-                    <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-                </div>
-                <div class="featured-blog-content">
-                    <span class="featured-tag">Recent</span>
-                    <span class="blog-category">Notes & Tips</span>
-                    <h2 class="blog-title">Vasudha Kulkarni</h2>
-                    <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <div class="author-image">
-                                <img src="/api/placeholder/30/30" alt="">
-                            </div>
-                            <span></span>
-                        </div>
-                        <div class="blog-date"></div>
-                    </div>
-                    <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-                </div>
-            </div>
-            <!-- Blog Card 6 -->
-            <div class="featured-blog">
-                <div class="featured-blog-image">
-                    <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-                </div>
-                <div class="featured-blog-content">
-                    <span class="featured-tag">Recent</span>
-                    <span class="blog-category">Notes & Tips</span>
-                    <h2 class="blog-title">Vasudha Kulkarni</h2>
-                    <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <div class="author-image">
-                                <img src="/api/placeholder/30/30" alt="">
-                            </div>
-                            <span></span>
-                        </div>
-                        <div class="blog-date"></div>
-                    </div>
-                    <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-                </div>
-            </div>
-            <!-- Blog Card 7 -->
-            <div class="featured-blog">
-                <div class="featured-blog-image">
-                    <img src="/api/placeholder/400/320" alt="Vasudha Kulkarni">
-                </div>
-                <div class="featured-blog-content">
-                    <span class="featured-tag">Recent</span>
-                    <span class="blog-category">Notes & Tips</span>
-                    <h2 class="blog-title">Vasudha Kulkarni</h2>
-                    <p class="blog-excerpt">Batch:<br>Major: Biology</p>
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <div class="author-image">
-                                <img src="/api/placeholder/30/30" alt="">
-                            </div>
-                            <span></span>
-                        </div>
-                        <div class="blog-date"></div>
-                    </div>
-                    <a href="https://vasudha-kulkarni.github.io/resources/" class="read-more">Read Full Article →</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="pagination">
-            <a href="#" class="page-link active">1</a>
-            <a href="#" class="page-link">2</a>
-            <a href="#" class="page-link">3</a>
-            <a href="#" class="page-link">4</a>
-            <a href="#" class="page-link">5</a>
-            <a href="#" class="page-link">Next →</a>
-        </div>
-    </main>
-
-   
+    <!-- Particle Script -->
+    <script>
+        const canvas = document.getElementById('bg-canvas'), ctx = canvas.getContext('2d'); let w, h, particles = []; const count = 50, connDist = 150, mouseDist = 200; let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y }); window.addEventListener('resize', init);
+        class Particle { constructor() { this.x = Math.random() * w; this.y = Math.random() * h; this.vx = (Math.random() - .5) * .8; this.vy = (Math.random() - .5) * .8; this.size = Math.random() * 2 + 1; this.color = Math.random() > .5 ? 'rgba(65, 105, 225,' : 'rgba(118, 75, 162,' } update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > w) this.vx *= -1; if (this.y < 0 || this.y > h) this.vy *= -1; let dx = mouse.x - this.x, dy = mouse.y - this.y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < mouseDist) { let f = (mouseDist - dist) / mouseDist; this.x -= dx / dist * f * 2; this.y -= dy / dist * f * 2 } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.color + '0.5)'; ctx.fill() } }
+        function init() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; particles = []; for (let i = 0; i < count; i++)particles.push(new Particle()) }
+        function animate() { requestAnimationFrame(animate); ctx.clearRect(0, 0, w, h); for (let i = 0; i < particles.length; i++) { particles[i].update(); particles[i].draw(); for (let j = i; j < particles.length; j++) { let dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < connDist) { ctx.beginPath(); ctx.strokeStyle = 'rgba(65, 105, 225,' + (1 - dist / connDist) * .2 + ')'; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke() } } } }
+        init(); animate();
+    </script>
 </body>
+
 </html>

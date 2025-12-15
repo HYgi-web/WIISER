@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Optimizer | Wiiser+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --primary-color: #4169e1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --bg-page: #f8fafc;
+            --bg-panel: #ffffff;
+            --text-heading: #1e293b;
+            --text-body: #475569;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 50;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Main Layout */
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 70px);
+        }
+
+        /* Left Panel - Input */
+        .input-panel {
+            width: 45%;
+            background: white;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            flex-shrink: 0;
+            padding: 2rem;
+        }
+
+        .input-panel h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            margin-bottom: 2rem;
+            color: var(--text-body);
+            font-size: 0.95rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section label {
+            display: block;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-section label i {
+            margin-right: 6px;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+            background: #f8fafc;
+            color: var(--text-heading);
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(65, 105, 225, 0.1);
+        }
+
+        .btn-analyze {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .btn-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(65, 105, 225, 0.4);
+        }
+
+        /* Right Panel - Results */
+        .results-panel {
+            flex: 1;
+            background: var(--bg-page);
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .score-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--border);
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, #e2e8f0 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-value {
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-heading);
+        }
+
+        .score-text {
+            flex: 1;
+            margin-left: 2rem;
+        }
+
+        .score-text h2 {
+            font-size: 1.5rem;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-good {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .badge-avg {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        .badge-bad {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .analysis-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .analysis-section h3 {
+            font-size: 1.25rem;
+            color: var(--text-heading);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feedback-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feedback-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .status-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .status-warning {
+            background: #fef3c7;
+            color: var(--warning);
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+
+        .feedback-content h4 {
+            color: var(--text-heading);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .feedback-content p {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 1.5;
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .input-panel,
+            .results-panel {
+                width: 100%;
+                overflow: visible;
+                height: auto;
+            }
+
+            .score-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            .score-text {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            Wiiser<span>+</span>
+        </div>
+        <a href="newindex.html" class="nav-link"><i class="fas fa-arrow-left"></i> Home</a>
+    </nav>
+
+    <div class="app-container">
+        <!-- Input Side -->
+        <div class="input-panel">
+            <h1>LinkedIn Optimizer</h1>
+            <p class="subtitle">Paste your profile content below to detect missing keywords, formatting issues, and
+                engagement blockers.</p>
+
+            <div class="form-section">
+                <label><i class="fas fa-heading"></i> Headline</label>
+                <textarea id="input-headline" class="form-control" rows="3"
+                    placeholder="e.g. Software Engineer | React & Node.js Expert | Building Scalable Web Apps"></textarea>
+            </div>
+
+            <div class="form-section">
+                <label><i class="fas fa-align-left"></i> About / Summary</label>
+                <textarea id="input-about" class="form-control" rows="8"
+                    placeholder="Paste your About section here..."></textarea>
+            </div>
+
+            <div class="form-section">
+                <label><i class="fas fa-briefcase"></i> Experience (Recent Role)</label>
+                <textarea id="input-experience" class="form-control" rows="6"
+                    placeholder="Paste your most recent experience description..."></textarea>
+            </div>
+
+            <button class="btn-analyze" onclick="analyzeProfile()">
+                <i class="fas fa-magic"></i> Analyze Profile
+            </button>
+        </div>
+
+        <!-- Output Side -->
+        <div class="results-panel" id="results" style="opacity: 0.5; pointer-events: none;">
+
+            <!-- Score Card -->
+            <div class="score-card">
+                <div class="score-circle" id="score-circle">
+                    <div class="score-value" id="score-display">0</div>
+                </div>
+                <div class="score-text">
+                    <h2 id="score-title">Ready to Analyze</h2>
+                    <span class="score-badge badge-avg" id="score-badge">Waiting...</span>
+                    <p style="margin-top: 0.5rem; color: #64748b;">Fill in your details and click button to get your
+                        profile optimization score.</p>
+                </div>
+            </div>
+
+            <!-- Analysis -->
+            <div class="analysis-section">
+                <h3><i class="fas fa-clipboard-check"></i> Actionable Feedback</h3>
+                <div id="feedback-list">
+                    <!-- Feedback items will appear here -->
+                    <div style="text-align: center; color: #94a3b8; padding: 2rem;">
+                        <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>No analysis yet.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function analyzeProfile() {
+            // Activate results
+            document.getElementById('results').style.opacity = '1';
+            document.getElementById('results').style.pointerEvents = 'all';
+
+            const headline = document.getElementById('input-headline').value || "";
+            const about = document.getElementById('input-about').value || "";
+            const experience = document.getElementById('input-experience').value || "";
+
+            let score = 0;
+            let checks = 0;
+            let feedback = [];
+
+            // --- 1. Headline Analysis ---
+            const headlineLength = headline.length;
+            checks += 20;
+
+            if (headlineLength > 40 && headlineLength < 220) {
+                score += 20;
+                feedback.push({
+                    status: 'success',
+                    title: 'Headline Length',
+                    msg: `Great length (${headlineLength} chars). This fully utilizes the available space.`
+                });
+            } else if (headlineLength < 10) {
+                feedback.push({
+                    status: 'error',
+                    title: 'Headline Length',
+                    msg: 'Your headline is too short. Use this space to pitch your value proposition.'
+                });
+            } else {
+                score += 10;
+                feedback.push({
+                    status: 'warning',
+                    title: 'Headline Optimization',
+                    msg: `Your headline is ${headlineLength} chars. Aim for at least 40+ characters to include more keywords.`
+                });
+            }
+
+            // Separators Check
+            if (headline.includes('|') || headline.includes('•') || headline.includes('-')) {
+                score += 10;
+                feedback.push({ status: 'success', title: 'Formatting', msg: "Good use of separators to organize your skills." });
+            } else if (headlineLength > 10) {
+                feedback.push({ status: 'warning', title: 'Formatting', msg: "Consider using separators (| or •) to make your headline easier to verify." });
+            }
+            checks += 10;
+
+
+            // --- 2. About Analysis ---
+            const wordCount = about.split(/\s+/).length;
+            checks += 30;
+
+            if (wordCount > 50) {
+                score += 30;
+                feedback.push({
+                    status: 'success',
+                    title: 'About Section Depth',
+                    msg: `Solid description (${wordCount} words). This helps with SEO rank.`
+                });
+            } else if (wordCount === 0) { // empty
+                feedback.push({
+                    status: 'error',
+                    title: 'Missing About Section',
+                    msg: 'You have no About section. This is critical for storytelling.'
+                });
+            } else {
+                score += 15;
+                feedback.push({
+                    status: 'warning',
+                    title: 'About Section Depth',
+                    msg: `Your summary is a bit short (${wordCount} words). Aim for 100+ words to tell your career story.`
+                });
+            }
+
+            // Contact Info check
+            const hasEmail = about.includes('@') || headline.includes('@');
+            checks += 10;
+            if (hasEmail) {
+                score += 10;
+                feedback.push({ status: 'success', title: 'Contact Accessibility', msg: "Good job including your email for easy outreach." });
+            } else {
+                feedback.push({ status: 'warning', title: 'Contact Accessibility', msg: "Consider adding your email in your About section so recruiters can reach you easily." });
+            }
+
+
+            // --- 3. Experience Analysis ---
+            checks += 30;
+            const expLen = experience.length;
+            if (expLen > 100) {
+                score += 30;
+                feedback.push({ status: 'success', title: 'Experience Detail', msg: "Your experience description looks detailed." });
+            } else if (expLen === 0) {
+                feedback.push({ status: 'error', title: 'Experience Missing', msg: "Add detailed experience to get a better score." });
+            } else {
+                score += 15;
+                feedback.push({ status: 'warning', title: 'Experience Detail', msg: "Your experience description is brief. Use bullet points and metrics." });
+            }
+
+            // Normalize Score to 100
+            if (checks === 0) checks = 1;
+            const finalScore = Math.round(score);
+
+            // --- Render ---
+            animateScore(finalScore);
+            renderFeedback(feedback);
+        }
+
+        function animateScore(target) {
+            const display = document.getElementById('score-display');
+            const circle = document.getElementById('score-circle');
+            const title = document.getElementById('score-title');
+            const badge = document.getElementById('score-badge');
+
+            let current = 0;
+            const timer = setInterval(() => {
+                current += 1;
+                display.innerText = current;
+
+                // Update Badge
+                if (current < 50) {
+                    badge.className = 'score-badge badge-bad';
+                    badge.innerText = 'Needs Work';
+                    title.innerText = "Profile Needs Improvement";
+                } else if (current < 80) {
+                    badge.className = 'score-badge badge-avg';
+                    badge.innerText = 'Good Start';
+                    title.innerText = "Getting There!";
+                } else {
+                    badge.className = 'score-badge badge-good';
+                    badge.innerText = 'Excellent';
+                    title.innerText = "Rockstar Profile!";
+                }
+
+                // Update Circle Gradient
+                circle.style.background = `conic-gradient(var(--primary-color) ${current * 3.6}deg, #e2e8f0 0deg)`;
+
+                if (current >= target) clearInterval(timer);
+            }, 10);
+        }
+
+        function renderFeedback(items) {
+            const container = document.getElementById('feedback-list');
+            let html = '';
+
+            items.forEach(item => {
+                let icon = '';
+                let statusClass = '';
+
+                if (item.status === 'success') {
+                    icon = '<i class="fas fa-check"></i>';
+                    statusClass = 'status-success';
+                } else if (item.status === 'warning') {
+                    icon = '<i class="fas fa-exclamation"></i>';
+                    statusClass = 'status-warning';
+                } else {
+                    icon = '<i class="fas fa-times"></i>';
+                    statusClass = 'status-error';
+                }
+
+                html += `
+                    <div class="feedback-item">
+                        <div class="status-icon ${statusClass}">
+                            ${icon}
+                        </div>
+                        <div class="feedback-content">
+                            <h4>${item.title}</h4>
+                            <p>${item.msg}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

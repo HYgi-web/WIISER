@@ -1,223 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <title>Resume & CV Resources | Wiiser+</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        /* Navigation */
-        .navbar {
-            background-color: #4169e1;
-            padding: 15px 0;
-            color: white;
-        }
-        
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-        
-        .logo span {
-            color: #ffa500;
         }
 
-        .logo a {
-            color: white;
-            text-decoration: none;
+        :root {
+            /* Preserved Color Palette */
+            --primary-gradient: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: #4169e1;
+
+            /* Modern UI Tokens */
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-blur: blur(12px);
+            --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
         }
-        .logo span a {
-            color: #ffa500;
-            text-decoration: none;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: #f0f2f5;
+            min-height: 100vh;
         }
-        
-        .nav-links {
+
+        /* Live Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+        }
+
+        /* Side Navigation - Glassmorphism (Consistent with newindex.html) */
+        .sidebar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 260px;
+            height: calc(100vh - 40px);
+            background: rgba(65, 105, 225, 0.05);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-soft);
             display: flex;
-            list-style: none;
+            flex-direction: column;
+            overflow: hidden;
         }
-        
-        .nav-links li {
-            margin-left: 20px;
+
+        .sidebar-header {
+            padding: 30px;
+            background: var(--primary-gradient);
+            position: relative;
         }
-        
-        .nav-links a {
+
+        .sidebar-logo {
             color: white;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-nav {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--text-secondary);
             text-decoration: none;
+            border-radius: 12px;
             font-weight: 500;
+            transition: all 0.2s;
         }
-         .hero {
-            background: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 0;
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: white;
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateX(4px);
+        }
+
+        .nav-item i {
+            width: 20px;
             text-align: center;
         }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+
+        .back-link {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-primary);
         }
-        
+
+        /* Mobile Adjustments */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-120%);
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 280px;
+                border-radius: 0;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 300px;
+            padding: 20px 40px 20px 0;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+
+        .mobile-nav {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        @media (max-width: 1024px) {
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 40px;
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 32px;
+            border: 1px solid white;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
         .hero p {
             font-size: 1.1rem;
-            max-width: 800px;
+            color: var(--text-secondary);
+            max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
-
-        .services {
-            padding: 5rem 0;
-            background-color: #f1f5f9;
-        }
-
+        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
         .service-card {
-            background-color: white;
-            border-radius: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid white;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: white;
         }
 
         .service-img {
             height: 200px;
-            background-color: #e2e8f0;
+            overflow: hidden;
+            background: #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+        }
+
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover .service-img img {
+            transform: scale(1.05);
         }
 
         .service-content {
-            padding: 1.5rem;
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
         .service-content p {
-            color: #64748b;
-            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex: 1;
         }
 
-        .service-link {
-            display: inline-block;
-            color:#2563eb;
+        .btn-card {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            background: white;
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             font-weight: 600;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
-        .service-link:hover {
-            color: #1d4ed8;
+        .btn-card:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(65, 105, 225, 0.3);
         }
 
-        .service-link i {
-            margin-left: 0.5rem;
-            transition: transform 0.3s;
-        }
-
-        .service-link:hover i {
-            transform: translateX(5px);
+        .btn-card i {
+            margin-left: 8px;
         }
     </style>
 </head>
+
 <body>
-     <!-- Navigation -->
-     <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="newindex.html"> Wiiser<span> +</span></a>
+
+    <!-- Live Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fas fa-rocket"></i> Wiiser+
             </div>
-            <ul class="nav-links">
-                <li><a href="newindex.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="newindex.html#services"><i class="fas fa-cogs"></i> Services</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li><a href="../index.html"><b>	<i class="fas fa-arrow-circle-left"></i>  Back to WIISER</b></a></li>
-             
+        </div>
+        <div class="sidebar-nav">
+            <a href="newindex.html" class="nav-item">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="resumepage.html" class="nav-item active">
+                <i class="fas fa-file-invoice"></i> CV & Resume
+            </a>
+            <a href="linkedin-optimizer.html" class="nav-item">
+                <i class="fab fa-linkedin"></i> LinkedIn Tool
+            </a>
+            <a href="inter.html" class="nav-item">
+                <i class="fas fa-briefcase"></i> Internships
+            </a>
+            <a href="research.html" class="nav-item">
+                <i class="fas fa-graduation-cap"></i> Senior Guide
+            </a>
+            <a href="../index.html" class="nav-item back-link">
+                <i class="fas fa-arrow-left"></i> Back to Wiiser
+            </a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Resume Builder</h1>
-            <p>Build professional, ATS-friendly resumes with expert templates and CV Builder.</p>
-        </div>
-    </section>
+    <div class="main-content">
+        <!-- Mobile Header -->
+        <header class="mobile-nav">
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">Wiiser+</div>
+            <button class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        </header>
 
-        <!-- CV & Resume Section -->
-        <section id="cv-resume" class="services">
-            <div class="container">
-              
-                <div class="services-grid">
-                    <div class="service-card scroll-reveal">
-                        <div class="service-img">
-                            <img src="../images/tips.jpeg" width=373rem alt="Resume Builder">
-                        </div>
-                        <div class="service-content">
-                            <h3>Tips and Suggestions</h3>
-                            <p>Go through the given document and get some valueable insights on building impactful CV</p>
-                            <a href="cv.html" class="service-link">Get insights <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="service-card scroll-reveal">
-                        <div class="service-img">
-                            <img src="images/proftemp.jpeg" width=373rem alt="Resume Templates">
-                        </div>
-                        <div class="service-content">
-                            <h3>Professional Templates</h3>
-                            <p>Choose from our collection of ATS-friendly, professionally designed resume templates suitable for various industries.</p>
-                            <a href="resume.html" class="service-link">Browse Templates <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="service-card scroll-reveal">
-                        <div class="service-img">
-                            <img src="../images/cvbuilder.png" alt="Resume Builder">
-                        </div>
-                        <div class="service-content">
-                            <h3>Interactive Builder</h3>
-                            <p>Use our interactive resume builder to create a customized resume with drag-and-drop sections and real-time previews.</p>
-                            <a href="cvbuilder.html" class="service-link">Start Building <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Resume & CV Suite</h1>
+            <p>Everything you need to showcase your profile professionally. From tips to templates to our advanced
+                builder.</p>
+        </section>
+
+        <!-- Cards -->
+        <div class="services-grid">
+
+            <!-- Card 1 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="../images/tips.jpeg" alt="Tips">
+                </div>
+                <div class="service-content">
+                    <h3>Tips & Best Practices</h3>
+                    <p>Get valuable insights on how to structure your CV, what keywords to use, and how to pass ATS
+                        systems.</p>
+                    <a href="cv.html" class="btn-card">Read Guide <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-        </section>
+
+            <!-- Card 2 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="images/proftemp.jpeg" alt="Templates">
+                </div>
+                <div class="service-content">
+                    <h3>Professional Templates</h3>
+                    <p>Browse our collection of clean, modern, and ATS-friendly templates suitable for academia and
+                        industry.</p>
+                    <a href="resume.html" class="btn-card">View Templates <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="../images/cvbuilder.png" alt="Builder">
+                </div>
+                <div class="service-content">
+                    <h3>Interactive Builder</h3>
+                    <p>The crown jewel: A drag-and-drop builder with real-time preview. Enter your data and export a
+                        perfect PDF.</p>
+                    <a href="cvbuilder.html" class="btn-card">Open Builder <i class="fas fa-magic"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // --- Particle Network Animation (Shared Logic) ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        // Configuration
+        const particleCount = 50;
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+
+        // Mouse State
+        let mouse = { x: null, y: null };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('resize', init);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.size = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? 'rgba(65, 105, 225,' : 'rgba(118, 75, 162,';
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouseDistance) {
+                    const forceDirectionX = dx / distance;
+                    const forceDirectionY = dy / distance;
+                    const force = (mouseDistance - distance) / mouseDistance;
+                    const directionX = forceDirectionX * force * 2;
+                    const directionY = forceDirectionY * force * 2;
+                    this.x -= directionX;
+                    this.y -= directionY;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + '0.5)';
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        let opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = 'rgba(65, 105, 225, ' + (opacity * 0.2) + ')';
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        init();
+        animate();
+    </script>
 </body>
+
 </html>

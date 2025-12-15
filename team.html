@@ -23,6 +23,7 @@
                 max-width: 1200px;
                 margin: 0 auto;
                 text-align: center;
+                margin-bottom: 55px;
             }
     
             .team-title {
@@ -146,6 +147,111 @@
                     padding: 30px 25px;
                 }
             }
+
+            .contributors-section {
+                max-width: 1200px;
+                margin: 0 auto;
+                text-align: center;
+            }
+    
+            .contributors-section h2 {
+                color: #2196f3;
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                font-weight: 700;
+            }
+    
+            .description {
+                color: black;
+                font-size: 1.2rem;
+                margin-bottom: 50px;
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                line-height: 1.6;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            }
+    
+            .contributors-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 30px;
+                margin-top: 40px;
+            }
+    
+            .contributor-card {
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 20px;
+                padding: 30px;
+                text-align: center;
+                transition: all 0.3s ease;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+    
+            .contributor-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+                background: rgba(255, 255, 255, 0.25);
+            }
+    
+            .contributor-photo {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+                border: 4px solid rgba(255, 255, 255, 0.3);
+                overflow: hidden;
+                transition: all 0.3s ease;
+                background: linear-gradient(45deg, #1fa6c7, #235fc8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 3rem;
+                color: white;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+    
+            .contributor-card:hover .contributor-photo {
+                border-color: rgba(255, 255, 255, 0.6);
+                transform: scale(1.05);
+            }
+    
+            .contributor-name {
+                color: #2196f3;
+                font-size: 0.8rem;
+                font-weight: 600;
+                margin-bottom: 10px;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            }
+    
+            .contributor-roll {
+                color: #888;
+                font-size: 0.5rem;
+                font-weight: 500;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 8px 16px;
+                border-radius: 20px;
+                display: inline-block;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+    
+            @media (max-width: 768px) {
+                .contributors-section h2 {
+                    font-size: 2rem;
+                }
+                
+                .description {
+                    font-size: 1rem;
+                }
+                
+                .contributors-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -209,6 +315,86 @@
                             </svg>
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="contributors-section">
+            <h2>Contributors</h2>
+            <p class="description">
+                We thank all our contributors for supporting us and making us strong
+            </p>
+            
+            <div class="contributors-grid">
+                <div class="contributor-card">
+                    <div class="contributor-photo">A</div>
+                    <div class="contributor-name">Alex Johnson</div>
+                    <div class="contributor-roll">Roll No: 2023001</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">S</div>
+                    <div class="contributor-name">Sarah Chen</div>
+                    <div class="contributor-roll">Roll No: 2023002</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">M</div>
+                    <div class="contributor-name">Michael Rodriguez</div>
+                    <div class="contributor-roll">Roll No: 2023003</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">E</div>
+                    <div class="contributor-name">Emily Davis</div>
+                    <div class="contributor-roll">Roll No: 2023004</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">R</div>
+                    <div class="contributor-name">Ryan Patel</div>
+                    <div class="contributor-roll">Roll No: 2023005</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">L</div>
+                    <div class="contributor-name">Lisa Thompson</div>
+                    <div class="contributor-roll">Roll No: 2023006</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">D</div>
+                    <div class="contributor-name">David Kim</div>
+                    <div class="contributor-roll">Roll No: 2023007</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">J</div>
+                    <div class="contributor-name">Jessica Wang</div>
+                    <div class="contributor-roll">Roll No: 2023008</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">C</div>
+                    <div class="contributor-name">Chris Brown</div>
+                    <div class="contributor-roll">Roll No: 2023009</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">N</div>
+                    <div class="contributor-name">Nina Singh</div>
+                    <div class="contributor-roll">Roll No: 2023010</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">T</div>
+                    <div class="contributor-name">Tom Wilson</div>
+                    <div class="contributor-roll">Roll No: 2023011</div>
+                </div>
+                
+                <div class="contributor-card">
+                    <div class="contributor-photo">K</div>
+                    <div class="contributor-name">Katie Lee</div>
+                    <div class="contributor-roll">Roll No: 2023012</div>
                 </div>
             </div>
         </div>
