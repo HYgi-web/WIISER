@@ -494,6 +494,13 @@
                 <button class="btn-add" onclick="addExperience()"><i class="fas fa-plus"></i> Add Experience</button>
             </div>
 
+            <!-- Extracurricular Activities -->
+            <div class="editor-section">
+                <h2><i class="fas fa-running"></i> Extracurricular Activities</h2>
+                <div id="extra-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addExtracurricular()"><i class="fas fa-plus"></i> Add Activity</button>
+            </div>
+
             <!-- Projects -->
             <div class="editor-section">
                 <h2><i class="fas fa-code-branch"></i> Projects</h2>
@@ -531,48 +538,61 @@
         let state = {
             personal: {
                 name: "RAM KUMAR",
-                title: "Senior Product Designer",
+                title: "Student | IISER Pune",
                 email: "ramkumar@gmail.com",
                 phone: "(+91)9999955555 ",
                 location: "Pune, India",
-                summary: "Creative and detail-oriented Product Designer with over 5 years of experience in building user-centric digital products. Proficient in UI/UX design, prototyping, and design systems. Passionate about solving complex problems through elegant design solutions."
+                summary: "I am Ram Kumar, a sophomore at IISER Pune pursuing a B.S.- M.S. with a strong foundation and a deep intrest in interaction of biology mathematics and computer science.My curioosity is fueled by a passion for understading complex sysytems."
             },
             education: [
                 {
-                    degree: "Bachelor of Science in Computer Science",
-                    school: "University of Technology",
+                    degree: "B.S.- M.S. Dual Degree Program",
+                    school: "Indian Institute of Science Education and Research, Pune",
                     location: "Boston, MA",
-                    year: "2015 - 2019",
-                    details: "Graduated with Honors, GPA 3.8/4.0."
+                    year: "2024 - 2029",
+                    details: "CGPA 8.5."
+                },
+                {
+                    degree: "Class: XII (Science Stream)",
+                    school: "Pune High School",
+                    location: "Pune",
+                    year: "2023 - 2024",
+                    details: "Percentage: 97%"
                 }
             ],
             experience: [
                 {
                     role: "Senior UX Designer",
                     company: "TechFlow Solutions",
-                    location: "San Francisco, CA",
                     duration: "2021 - Present",
-                    description: "Leading the design of the core platform products.\\nMentoring junior designers and establishing a unified design system.\\nIncreased user engagement by 30% through improved UX flows."
+                    description: "Leading the design of the core platform products.\\nMentoring junior designers and establishing a unified design system."
                 },
                 {
                     role: "Product Designer",
                     company: "Creative Studio Inc.",
-                    location: "Austin, TX",
                     duration: "2019 - 2021",
-                    description: "Collaborated with cross-functional teams to ship web and mobile apps.\\nConducted user research and usability testing to validate design decisions."
+                    description: "Collaborated with cross-functional teams to ship web and mobile apps."
                 }
             ],
             projects: [
                 {
-                    name: "E-Commerce Replatform",
-                    role: "Lead Designer",
-                    duration: "2022",
-                    description: "Redesigned the checkout flow reducing cart abandonment by 15%."
+                    name: "WIISER",
+                    role: "Programmer",
+                    duration: "2024",
+                    description: "WIISER is a student driven academic platform build to foster academic collaboration at IISER Pune."
+                }
+            ],
+            extracurricular: [
+                {
+                    name: "E-Cell IISER Pune",
+                    role: "CTO",
+                    duration: "2025 - 2026",
+                    description: "Organized several competitions and hackathons."
                 }
             ],
             skills: {
-                technical: "Figma, Sketch, Adobe XD, HTML/CSS, JavaScript, Prototyping, Wireframing",
-                soft: "Design Thinking, Team Leadership, User Research, Problem Solving"
+                technical: "Figma, , HTML/CSS, JavaScript, NumPy, Pandas, Astropy, Matplotlib",
+                soft: "Communication, Team Leadership, Presentation, Problem Solving"
             }
         };
 
@@ -593,6 +613,7 @@
             // Dynamic Lists
             renderEducationInputs();
             renderExperienceInputs();
+            renderExtracurricularInputs();
             renderProjectInputs();
 
             // Initial Render
@@ -652,15 +673,9 @@
                         <label>Company</label>
                         <input type="text" class="form-control" value="${exp.company}" oninput="updateExperience(${index}, 'company', this.value)">
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <div class="form-group" style="flex: 1;">
-                            <label>Duration</label>
-                            <input type="text" class="form-control" value="${exp.duration}" oninput="updateExperience(${index}, 'duration', this.value)">
-                        </div>
-                        <div class="form-group" style="flex: 1;">
-                            <label>Location</label>
-                            <input type="text" class="form-control" value="${exp.location}" oninput="updateExperience(${index}, 'location', this.value)">
-                        </div>
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" class="form-control" value="${exp.duration}" oninput="updateExperience(${index}, 'duration', this.value)">
                     </div>
                     <div class="form-group">
                         <label>Description (Bullet points)</label>
@@ -694,6 +709,35 @@
                     <div class="form-group">
                         <label>Description</label>
                         <textarea class="form-control" rows="3" oninput="updateProject(${index}, 'description', this.value)">${proj.description}</textarea>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderExtracurricularInputs() {
+            const container = document.getElementById('extra-list');
+            container.innerHTML = '';
+            state.extracurricular.forEach((extra, index) => {
+                const div = document.createElement('div');
+                div.className = 'dynamic-item';
+                div.innerHTML = `
+                    <button class="btn-remove" onclick="removeExtracurricular(${index})"><i class="fas fa-trash"></i></button>
+                    <div class="form-group">
+                        <label>Activity Name</label>
+                        <input type="text" class="form-control" value="${extra.name}" oninput="updateExtracurricular(${index}, 'name', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" class="form-control" value="${extra.role}" oninput="updateExtracurricular(${index}, 'role', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" class="form-control" value="${extra.duration}" oninput="updateExtracurricular(${index}, 'duration', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="3" oninput="updateExtracurricular(${index}, 'description', this.value)">${extra.description}</textarea>
                     </div>
                 `;
                 container.appendChild(div);
@@ -741,7 +785,7 @@
         }
 
         window.addExperience = function () {
-            state.experience.push({ role: '', company: '', location: '', duration: '', description: '' });
+            state.experience.push({ role: '', company: '', duration: '', description: '' });
             renderExperienceInputs();
             renderPreview();
         }
@@ -766,6 +810,23 @@
         window.removeProject = function (index) {
             state.projects.splice(index, 1);
             renderProjectInputs();
+            renderPreview();
+        }
+
+        window.updateExtracurricular = function (index, field, value) {
+            state.extracurricular[index][field] = value;
+            renderPreview();
+        }
+
+        window.addExtracurricular = function () {
+            state.extracurricular.push({ name: '', role: '', duration: '', description: '' });
+            renderExtracurricularInputs();
+            renderPreview();
+        }
+
+        window.removeExtracurricular = function (index) {
+            state.extracurricular.splice(index, 1);
+            renderExtracurricularInputs();
             renderPreview();
         }
 
@@ -802,19 +863,45 @@
                     <p style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;">${p.summary}</p>
                 ` : ''}
 
+                ${state.education.length > 0 ? `
+                    <div class="cv-section-title">Education</div>
+                    ${state.education.map(edu => `
+                        <div class="cv-item">
+                            <div class="cv-item-header">
+                                <div class="cv-item-title">${edu.school}</div>
+                                <div class="cv-item-meta">${edu.year}</div>
+                            </div>
+                            <div class="cv-item-subtitle">${edu.degree} ${edu.location ? `| ${edu.location}` : ''}</div>
+                            ${edu.details ? `<div style="font-size: 13px; color: #555; margin-top: 4px;">${edu.details}</div>` : ''}
+                        </div>
+                    `).join('')}
+                ` : ''}
+
                 ${state.experience.length > 0 ? `
                     <div class="cv-section-title">Professional Experience</div>
                     ${state.experience.map(exp => `
                         <div class="cv-item">
                             <div class="cv-item-header">
-                                <div class="cv-item-title">${exp.role}</div>
+                                <div class="cv-item-title">${exp.role} | ${exp.company}</div>
                                 <div class="cv-item-meta">${exp.duration}</div>
-                            </div>
-                            <div class="cv-item-header" style="margin-bottom: 6px;">
-                                <div class="cv-item-subtitle">${exp.company} ${exp.location ? `| ${exp.location}` : ''}</div>
                             </div>
                             <ul class="cv-list">
                                 ${formatList(exp.description)}
+                            </ul>
+                        </div>
+                    `).join('')}
+                ` : ''}
+
+                ${state.extracurricular && state.extracurricular.length > 0 ? `
+                    <div class="cv-section-title">Extracurricular Activities</div>
+                    ${state.extracurricular.map(extra => `
+                        <div class="cv-item">
+                            <div class="cv-item-header">
+                                <div class="cv-item-title">${extra.role} | ${extra.name}</div>
+                                <div class="cv-item-meta">${extra.duration}</div>
+                            </div>
+                            <ul class="cv-list">
+                                ${formatList(extra.description)}
                             </ul>
                         </div>
                     `).join('')}
@@ -832,20 +919,6 @@
                             <ul class="cv-list">
                                 ${formatList(proj.description)}
                             </ul>
-                        </div>
-                    `).join('')}
-                ` : ''}
-
-                ${state.education.length > 0 ? `
-                    <div class="cv-section-title">Education</div>
-                    ${state.education.map(edu => `
-                        <div class="cv-item">
-                            <div class="cv-item-header">
-                                <div class="cv-item-title">${edu.school}</div>
-                                <div class="cv-item-meta">${edu.year}</div>
-                            </div>
-                            <div class="cv-item-subtitle">${edu.degree} ${edu.location ? `| ${edu.location}` : ''}</div>
-                            ${edu.details ? `<div style="font-size: 13px; color: #555; margin-top: 4px;">${edu.details}</div>` : ''}
                         </div>
                     `).join('')}
                 ` : ''}
