@@ -925,11 +925,36 @@
         transform: translateX(-100%);
       }
     }
+
+
+    .btn-wiiserplus {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: 10px;
+    }
+
+    .btn-wiiserplus:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+      color: white;
+      text-decoration: none;
+    }
   </style>
   <link rel="stylesheet" href="dark.css" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="dark.css">
   </noscript>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -944,9 +969,6 @@
       <a href="refer.html">References</a>
     </div>
     <div class="auth-buttons">
-      <a href="wiiserplus/login.html" class="btn btn-primary"
-        style="background: linear-gradient(135deg, #10b981, #059669); border: 2px solid #fff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);">Switch
-        to WIISER Plus</a>
       <a href="mailto:wiiser0131@gmail.com"><button class="btn btn-primary">Contact us </button></a>
       <button id="dark-mode-toggle" class="btn btn-outline">🌙</button>
     </div>
@@ -976,9 +998,11 @@
       <br>
       <p> A place where all of you can access standard books, well written notes, Assignments, Previous year papers, Lab
         work and various reference links to increase your understanding .</p>
-      <div class="reg-buttons">
-        <button class="btn btn-outline">Register with Google</button>
-        <a href="#"> <button class="btn btn-primary">Register with Email</button> </a>
+      <div class="reg-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="wiiserplus/login.html" class="btn-wiiserplus"
+          style="padding: 0.8rem 2rem; font-size: 1.1rem; width: 100%; justify-content: center; max-width: 400px;">
+          <i class="fas fa-rocket"></i> Switch to WIISER Plus
+        </a>
       </div>
     </div>
     <div class="hero-image">
