@@ -178,9 +178,11 @@
 
         /* Blog Grid */
         .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .blog-card {
@@ -191,67 +193,150 @@
             border: 1px solid white;
             transition: all 0.3s;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: stretch;
+            /* Ensure equal height */
         }
 
         .blog-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             background: white;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
         }
 
-        .blog-image {
-            height: 220px;
-            background: linear-gradient(45deg, #eef2ff, #e0e7ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         .blog-content {
-            padding: 25px;
+            padding: 35px;
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+        }
+
+        .blog-author-side {
+            width: 280px;
+            min-width: 280px;
+            background: rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .author-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: #94a3b8;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .author-year {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            background: rgba(65, 105, 225, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
         }
 
         .category {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
-            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
 
         .blog-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.4;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.3;
             color: var(--text-primary);
         }
 
         .blog-excerpt {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.6;
-            margin-bottom: 20px;
-            flex: 1;
+            margin-bottom: 25px;
         }
 
         .read-btn {
             align-self: flex-start;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 12px 24px;
+            border-radius: 12px;
             background: var(--text-primary);
             color: white;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.2);
         }
 
         .read-btn:hover {
             background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(65, 105, 225, 0.3);
+        }
+
+        @media (max-width: 850px) {
+            .blog-card {
+                flex-direction: column-reverse;
+            }
+
+            .blog-author-side {
+                width: 100%;
+                min-width: unset;
+                flex-direction: row;
+                justify-content: flex-start;
+                text-align: left;
+                padding: 20px 30px;
+                border-left: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+                background: rgba(255, 255, 255, 0.3);
+            }
+
+            .author-img {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+                margin-right: 15px;
+                font-size: 24px;
+            }
+
+            .author-info-text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -290,23 +375,25 @@
 
             <!-- Blog 1 -->
             <div class="blog-card">
-                <div class="blog-image">
-                    <i class="fas fa-dna" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
-                </div>
                 <div class="blog-content">
                     <span class="category">Biology • PhD Prep</span>
                     <h3 class="blog-title">Getting into US Grad Schools</h3>
-                    <p class="blog-excerpt">Vasudha Kulkarni shares her journey from IISER to a top-tier biology PhD
-                        program, including managing applications and interviews.</p>
+                    <p class="blog-excerpt">Vasudha shares her journey from IISER to a top-tier biology PhD program,
+                        including managing applications and interviews.</p>
                     <a href="https://vasudha-kulkarni.github.io/resources/" class="read-btn">Read Article</a>
+                </div>
+                <div class="blog-author-side">
+                    <div class="author-img">
+                        <!-- Placeholder or use icon -->
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="author-name">Vasudha Kulkarni</div>
+                    <div class="author-year">Batch of 2021</div>
                 </div>
             </div>
 
             <!-- Blog 2 -->
             <div class="blog-card">
-                <div class="blog-image">
-                    <i class="fas fa-atom" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
-                </div>
                 <div class="blog-content">
                     <span class="category">Physics • Research</span>
                     <h3 class="blog-title">Navigating Summer Projects</h3>
@@ -314,19 +401,30 @@
                         secure a funding grant for your summer research.</p>
                     <a href="#" class="read-btn">Read Article</a>
                 </div>
+                <div class="blog-author-side">
+                    <div class="author-img">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <div class="author-name">Aditya Verma</div>
+                    <div class="author-year">Batch of 2022</div>
+                </div>
             </div>
 
             <!-- Blog 3 -->
             <div class="blog-card">
-                <div class="blog-image">
-                    <i class="fas fa-chart-line" style="font-size: 60px; color: var(--accent); opacity: 0.5;"></i>
-                </div>
                 <div class="blog-content">
                     <span class="category">Industry • Mathematics</span>
                     <h3 class="blog-title">Transitioning to Data Science</h3>
-                    <p class="blog-excerpt">A guide for math and physics majors looking to enter the corporate data
-                        science world after graduation.</p>
+                    <p class="blog-excerpt">A comprehensive guide for math and physics majors looking to enter the
+                        corporate data science world after graduation.</p>
                     <a href="#" class="read-btn">Read Article</a>
+                </div>
+                <div class="blog-author-side">
+                    <div class="author-img">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="author-name">Riya Sharma</div>
+                    <div class="author-year">Batch of 2020</div>
                 </div>
             </div>
 
