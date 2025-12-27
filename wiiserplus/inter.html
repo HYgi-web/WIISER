@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Internship Opportunities | Wiiser+</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -172,6 +173,7 @@
             font-weight: 800;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
@@ -337,6 +339,21 @@
             opacity: 0.8;
         }
 
+        .apply-now:hover {
+            opacity: 0.8;
+        }
+
+        .tags-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .tag-eligibility {
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
         .hidden {
             display: none !important;
         }
@@ -352,30 +369,26 @@
 </head>
 
 <body>
-
     <canvas id="bg-canvas"></canvas>
-
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo"><i class="fas fa-rocket"></i> Wiiser+</div>
         </div>
         <div class="sidebar-nav">
-            <a href="newindex.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
-            <a href="resumepage.html" class="nav-item"><i class="fas fa-file-invoice"></i> CV & Resume</a>
-            <a href="linkedin-optimizer.html" class="nav-item "><i class="fab fa-linkedin"></i> LinkedIn Tool</a>
-            <a href="inter.html" class="nav-item active"><i class="fas fa-briefcase"></i> Internships</a>
-            <a href="research.html" class="nav-item"><i class="fas fa-graduation-cap"></i> Senior Guide</a>
-            <a href="../index.html" class="nav-item back-link"><i class="fas fa-arrow-left"></i> Back to Wiiser</a>
+            <a class="nav-item" href="newindex.html"><i class="fas fa-home"></i> Home</a>
+            <a class="nav-item" href="resumepage.html"><i class="fas fa-file-invoice"></i> CV &amp; Resume</a>
+            <a class="nav-item" href="linkedin-optimizer.html"><i class="fab fa-linkedin"></i> LinkedIn Tool</a>
+            <a class="nav-item active" href="inter.html"><i class="fas fa-briefcase"></i> Internships</a>
+            <a class="nav-item" href="research.html"><i class="fas fa-graduation-cap"></i> Senior Guide</a>
+            <a class="nav-item back-link" href="../index.html"><i class="fas fa-arrow-left"></i> Back to Wiiser</a>
         </div>
     </nav>
-
     <div class="main-content">
         <header class="mobile-nav">
             <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">Wiiser+</div>
             <button class="menu-btn" onclick="document.querySelector('.sidebar').classList.toggle('open')"><i
                     class="fas fa-bars"></i></button>
         </header>
-
         <section class="hero">
             <h1>Internship Opportunities</h1>
             <p>This section provides a curated list of research internships and academic programs, particularly suited
@@ -383,124 +396,2234 @@
                 theoretical studies, making it easier to explore internships at institutes, universities, and research
                 organizations.</p>
         </section>
-
         <!-- Filters -->
         <div class="filters-panel">
             <div class="filters-grid">
                 <div class="filter-group">
-                    <label>Location</label>
-                    <select class="filter-select" id="filter-location">
-                        <option value="all">Any Location</option>
-                        <option value="remote">Remote</option>
-                        <option value="on-site">On-site</option>
+                    <label>Eligibility</label>
+                    <select class="filter-select" id="filter-year" onchange="applyFilters()">
+                        <option value="all">All Years</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label>Type</label>
-                    <select class="filter-select" id="filter-type">
+                    <select class="filter-select" id="filter-type" onchange="applyFilters()">
                         <option value="all">All Types</option>
-                        <option value="research">Research</option>
-                        <option value="industry">Industry</option>
+                        <option value="national">National</option>
+                        <option value="international">International</option>
                     </select>
                 </div>
                 <div class="filter-group">
                     <label>Search</label>
                     <input type="text" class="search-input" id="filter-search" placeholder="Company, Role..."
-                        onkeypress="handleEnter(event)">
+                        oninput="applyFilters()">
                 </div>
             </div>
-            <button class="apply-btn" onclick="applyFilters()">Apply Filters</button>
+            <!-- Apply button removed as filtering is now automatic -->
         </div>
-
         <!-- Tabs -->
         <div class="year-tabs">
             <div class="year-tab active" onclick="switchCategory('biology')">Biology</div>
             <div class="year-tab" onclick="switchCategory('chemistry')">Chemistry</div>
             <div class="year-tab" onclick="switchCategory('physics')">Physics</div>
             <div class="year-tab" onclick="switchCategory('mathematics')">Mathematics</div>
+            <div class="year-tab" onclick="switchCategory('ees')">EES</div>
         </div>
-
         <!-- Content Area -->
-        <div id="biology" class="year-content">
+        <div class="year-content" id="biology">
             <h2 style="margin-bottom: 20px;">Biology Opportunities</h2>
             <div class="opportunities-grid">
-                <!-- Card: IAS (General/Bio) -->
-                <div class="opportunity-card" data-location="on-site" data-type="research"
-                    data-search="summer research fellow indian academy of sciences ias biology">
+                <div class="opportunity-card" data-search="imsc chennai biology summer research" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-calculator"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Biology Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IMSc, Chennai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb (Last
+                        Week)</div>
+                    <a class="apply-now" href="https://www.imsc.res.in/biology_summer_research_programme"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="mitacs globalink research internship canada"
+                    data-type="international" data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fab fa-canadian-maple-leaf"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Globalink Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Mitacs, Canada</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now"
+                        href="https://www.mitacs.ca/en/programs/globalink/globalink-research-internship5"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="kupcinet getz international science school weizmann institute israel"
+                    data-type="international" data-years="2,3,4">
                     <div class="card-header">
                         <div class="company-logo"><i class="fas fa-flask"></i></div>
-                        <span class="tag tag-onsite">On-site</span>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
                     </div>
-                    <h3 class="role-title">Summer Research Fellow</h3>
-                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Indian Academy of Sciences</p>
-                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025</div>
-                    <a href="#" class="apply-now">Apply Now</a>
+                    <h3 class="role-title">International Science School</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Weizmann Institute, Israel</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Announced on
+                        Website</div>
+                    <a class="apply-now"
+                        href="http://www.weizmann.org.uk/the-kupcinet-getz-international-summer-school/"
+                        target="_blank">Apply Now</a>
                 </div>
-            </div>
-        </div>
-
-        <div id="chemistry" class="year-content hidden">
-            <h2 style="margin-bottom: 20px;">Chemistry Opportunities</h2>
-            <div class="opportunities-grid">
-                <!-- Placeholder for Chemistry -->
-                <div class="no-results">
-                    <i class="fas fa-flask" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i>
-                    <p>No specific chemistry opportunities listed yet.</p>
+                <div class="opportunity-card" data-search="nnmcb national network mathematical computational biology"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-network-wired"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Internship Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">National Network for Math &amp;
+                        Comp
+                        Bio</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Oct (Last
+                        Week)</div>
+                    <a class="apply-now" href="#">Apply Now</a>
                 </div>
-            </div>
-        </div>
-
-        <div id="physics" class="year-content hidden">
-            <h2 style="margin-bottom: 20px;">Physics Opportunities</h2>
-            <div class="opportunities-grid">
-                <!-- Card: NIUS Physics -->
-                <div class="opportunity-card" data-location="on-site" data-type="research"
-                    data-search="nius physics camp hbcse tifr mumbai">
+                <div class="opportunity-card" data-search="isternship institute of science and technology austria"
+                    data-type="international" data-years="2,3,4">
                     <div class="card-header">
                         <div class="company-logo"><i class="fas fa-atom"></i></div>
-                        <span class="tag tag-onsite">On-site</span>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">ISTERNship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IST Austria</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb (2nd
+                        Week)</div>
+                    <a class="apply-now" href="https://ist.ac.at/research/internships/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="nigintern national institute of genetics japan"
+                    data-type="international" data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-dna"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">NIGINTERN</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">National Institute of Genetics,
+                        Japan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb (Last
+                        Week)</div>
+                    <a class="apply-now" href="https://www.nig.ac.jp/jimu/soken/intern/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="nius programme hbcse tifr biology" data-type="national"
+                    data-years="1">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">NIUS Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">HBCSE (TIFR)</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Only</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Announced on
+                        Website</div>
+                    <a class="apply-now" href="http://nius.hbcse.tifr.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="pobe jncasr project oriented biological education"
+                    data-type="national" data-years="1">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-dna"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Project Oriented Biological Education (POBE)</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Only</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Announced on
+                        Website</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/pobe.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iisc bangalore internship biology" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISc, Bangalore</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iisc.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="industrial technology research institute itri taiwan"
+                    data-type="international" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-industry"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">ITRI, Taiwan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb (Last
+                        Week)</div>
+                    <a class="apply-now"
+                        href="https://www.itri.org.tw/eng/Content/Messagess/List.aspx?MmmID=617731531432246346&amp;SiteID=1"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="charpak research internship program france campus france"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Internship Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Charpak (France)</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                        (1st Week)</div>
+                    <a class="apply-now"
+                        href="http://www.inde.campusfrance.org/en/page/charpak-research-internship-program"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="summer research fellow indian academy of sciences ias biology" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellow</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Academy of Sciences</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Announced on
+                        Website</div>
+                    <a class="apply-now" href="http://web-japps.ias.ac.in:8080/fellowship2016/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="jncasr srfp summer research fellowship" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-dna"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship (SRFP)</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov (2nd
+                        Week)</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/srfp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="sn bose national centre basic sciences" data-type="national"
+                    data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-star"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Project</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">SN Bose National Centre</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Only</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb-Mar
+                        (1st Week)</div>
+                    <a class="apply-now" href="http://newweb.bose.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="saha institute sinp summer students" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Students Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Saha Institute of Nuclear Physics
+                    </p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: April
+                        (1st Week)</div>
+                    <a class="apply-now" href="http://www.saha.ac.in/web/education/summer-students"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="caltech surf summer undergraduate research fellowship usa"
+                    data-type="international" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Undergraduate Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">CalTech, USA</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Feb (3rd
+                        Week)</div>
+                    <a class="apply-now" href="http://sfp.caltech.edu/programs/surf/program_description"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="saha institute sinp undergraduate associateship"
+                    data-type="national" data-years="1">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Undergraduate Associateship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Saha Institute of Nuclear Physics
+                    </p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Only</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Announced on
+                        Website</div>
+                    <a class="apply-now"
+                        href="http://www.saha.ac.in/web/education/course-programmes-undergraduate-associateship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="utrip university of tokyo research internship program japan"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">UTRIP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">University of Tokyo, Japan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Jan (Last
+                        Week)</div>
+                    <a class="apply-now" href="http://www.s.u-tokyo.ac.jp/en/utrip/apply-now/#check1"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="tifr tata institute fundamental research"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Visiting Students Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">TIFR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.tifr.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="wise daad working internships in science and engineering germany"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">WISE Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">DAAD, Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Oct (Last
+                        Week)</div>
+                    <a class="apply-now"
+                        href="https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?status=1&amp;origin=4&amp;subjectGrps=&amp;daad=1&amp;q=wise&amp;page=1&amp;detail=50015295"
+                        target="_blank">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="year-content hidden" id="chemistry">
+            <h2 style="margin-bottom: 20px;">Chemistry Opportunities</h2>
+            <div class="opportunities-grid">
+                <div class="opportunity-card" data-search="mitacs globalink research internship canada chemistry"
+                    data-type="international" data-years="3">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fab fa-canadian-maple-leaf"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Globalink Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Mitacs, Canada</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year (Pre-final)</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: July
+                    </div>
+                    <a class="apply-now"
+                        href="https://www.mitacs.ca/en/programs/globalink/globalink-research-internship5"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="kupcinet getz international science school weizmann institute israel chemistry"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">International Science School</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Weizmann Institute, Israel</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov-Dec
+                    </div>
+                    <a class="apply-now"
+                        href="http://www.weizmann.org.uk/the-kupcinet-getz-international-summer-school/"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iacs kolkata chemistry" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IACS Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://iacs.res.in/research/chemical-sciences.html" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="industrial technology research institute itri taiwan chemistry"
+                    data-type="international" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-industry"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">ITRI, Taiwan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now"
+                        href="https://www.itri.org.tw/eng/Content/Messagess/List.aspx?MmmID=617731531432246346&amp;SiteID=1"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit gandhinagar chemistry srip" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SRIP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Gandhinagar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://sites.iitgn.ac.in/srip/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="barc mumbai chemistry" data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Student Project</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">BARC Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: mid-March
+                    </div>
+                    <a class="apply-now" href="http://www.barc.gov.in/student/student_sp.html" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit madras chemistry" data-type="national" data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Madras</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: January
+                    </div>
+                    <a class="apply-now" href="https://sfp.iitm.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iisc bangalore chemistry" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISc Bangalore</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iisc.ac.in/academics/divisions/division-of-chemical-sciences/"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit ropar chemistry internship" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Ropar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://www.iitrpr.ac.in/summer-internship" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit bhubaneswar chemistry" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Bhubaneswar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://webapps.iitbbs.ac.in/internship-application/"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="sn bose national cbs chemistry" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-star"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">SN Bose National CBS</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://newweb.bose.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="university of hyderabad chemistry" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Projects</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">University of Hyderabad</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: mid-March
+                    </div>
+                    <a class="apply-now" href="http://chemistry.uohyd.ac.in/~nrc/summer-projects.html"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser mohali chemistry" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Mohali</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iisermohali.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser kolkata chemistry" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://www.iiserkol.ac.in/~summer.research/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="indian academy of sciences ias chemistry"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Academy of Sciences</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov 30th
+                    </div>
+                    <a class="apply-now" href="http://web-japps.ias.ac.in:8080/fellowship2017/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="jncasr chemistry summer research fellowship"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov (1st
+                        Week)</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/srfp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="cebs mumbai chemistry" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">CEBS Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: January
+                    </div>
+                    <a class="apply-now" href="https://www.cbs.ac.in/academics/summer-research-program"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="uq summer research program university of queensland australia chemistry"
+                    data-type="international" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Univ. of Queensland, Australia</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: July
+                    </div>
+                    <a class="apply-now" href="https://employability.uq.edu.au/summer-winter-research"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser pune chemistry" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Student Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Pune</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iiserpune.ac.in/~sspc/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="national chemical laboratory ncl chemistry"
+                    data-type="national" data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Training</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">National Chemical Laboratory</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://academic.ncl.res.in/summer_training" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser tiruvanthapuram chemistry" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Visiting Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Tiruvanthapuram</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iisertvm.ac.in/pages/svp.phpx" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit kanpur chemistry surge" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SURGE</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Kanpur</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iitk.ac.in/dord/surge" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="central drug research institute cdri chemistry"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-capsules"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Training Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">CDRI, Lucknow</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.cdri.res.in/Training_Advance.aspx" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit jodhpur chemistry ugri" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">UGRI</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Jodhpur</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="www.oa.iitj.ac.in/UGRI" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="utrip university of tokyo research internship program japan chemistry"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">UTRIP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">University of Tokyo, Japan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Jan-Feb
+                    </div>
+                    <a class="apply-now" href="http://www.s.u-tokyo.ac.jp/en/utrip/apply-now/#check1"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="tifr mumbai chemistry vsrp" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">VSRP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">TIFR Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.math.tifr.res.in/vsrp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="wise daad working internships in science and engineering germany chemistry"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">WISE Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">DAAD, Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: November
+                    </div>
+                    <a class="apply-now"
+                        href="https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?status=1&amp;origin=4&amp;subjectGrps=&amp;daad=1&amp;q=wise&amp;page=1&amp;detail=50015295"
+                        target="_blank">Apply Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="year-content hidden" id="physics">
+            <h2 style="margin-bottom: 20px;">Physics Opportunities</h2>
+            <div class="opportunities-grid">
+                <div class="opportunity-card" data-search="mitacs globalink canada physics" data-type="international"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fab fa-canadian-maple-leaf"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Globalink Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Mitacs, Canada</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: September
+                    </div>
+                    <a class="apply-now"
+                        href="https://www.mitacs.ca/en/programs/globalink/globalink-research-internship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="kupcinet getz weizmann israel physics"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-dna"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Kupcinet-Getz Summer School</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Weizmann Institute, Israel</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: November
+                    </div>
+                    <a class="apply-now"
+                        href="https://www.weizmann.ac.il/feinberg/admissions/kupcinet-getz-international-summer-school/about-program-0"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="nius physics camp hbcse tifr mumbai" data-type="national"
+                    data-years="1">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year Only</span>
+                        </div>
                     </div>
                     <h3 class="role-title">NIUS Physics Camp</h3>
                     <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">HBCSE (TIFR), Mumbai</p>
                     <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (4
                         weeks)</div>
-                    <a href="#" class="apply-now">Apply Now</a>
+                    <a class="apply-now" href="#">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit guwahati physics training program" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Physics Training Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Guwahati</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://iitg.ac.in/phy/training%20Program" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="ist austria internship physics" data-type="international"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Scientific Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IST Austria</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Mid-Feb
+                    </div>
+                    <a class="apply-now" href="https://ist.ac.at/research/internships/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="jncasr physics srfp" data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SRFP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/srfp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser pune physics sspc" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SSPC</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Pune</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iiserpune.ac.in/~sspc/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="institute of physics bhubaneswar iopb summer student visiting program"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SSVP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IOP Bhubaneswar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iopb.res.in/ssvp2015/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit madras physics summer fellowship" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Madras</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://sfp.iitm.ac.in" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit ropar physics summer internship" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Ropar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iitrpr.ac.in/summer-internship" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="physical research lab prl physics summer internship"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-satellite"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Physical Research Lab</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.prl.res.in/prl-eng/summer_internship" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser bhopal physics summer internship" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Bhopal</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now"
+                        href="https://iiserb.ac.in/old/ALL-UPLOAD/ACADEMICS/OTHER/form_summer_iiserb.pdf"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser tirupati physics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Tirupati</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iisertirupati.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iisc bangalore physics summer program" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISc Bangalore</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.cense.iisc.ac.in/content/summer-program" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="indian institute of astrophysics iia physics"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-star"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIA Bengaluru</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.iiap.res.in/degree" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="hri allahabad physics" data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">HRI Allahabad</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.hri.res.in/academics/physics/phy-vsp/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="aries nainital physics summer project" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-mountain"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Project Student</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">ARIES Nainital</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://210.212.91.99/~vspa/index.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser kolkata physics summer research" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iiserkol.ac.in/~summer.research/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser mohali physics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Mohali</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iisermohali.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="indian academy of sciences ias physics fellowship"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-book-open"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Academy of Sciences</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://web-japps.ias.ac.in:8080/fellowship2016/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="sn bose national centre physics summer research"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">SN Bose Centre</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://newweb.bose.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="desy summer student program germany physics"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Student Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">DESY Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: January
+                    </div>
+                    <a class="apply-now" href="http://summerstudents.desy.de/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="imsc chennai physics summer student program"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Student Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IMSc Chennai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.imsc.res.in/imsc_summer_student_program_2017"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="caltech surf usa physics" data-type="international"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SURF</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Caltech, USA</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://sfp.caltech.edu/programs/surf/program_description"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="saha institute of nuclear physics sinp undergraduate associateship"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Undergraduate Associateship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">SINP Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now"
+                        href="http://www.saha.ac.in/web/education/course-programmes-undergraduate-associateship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser tvm tiruvanthapuram physics svp" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Visiting Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER TVM</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iisertvm.ac.in/pages/svp.phpx" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iucaa pune physics visiting student program"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-star"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Visiting Student Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IUCAA Pune</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iucaa.ernet.in/Stu-Prog-VSP.html" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="raman research institute rri physics visiting students"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Visiting Students Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">RRI Bengaluru</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.rri.res.in/visitingstudents.html" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="tifr physics vsrp" data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">VSRP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">TIFR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.tifr.res.in/~vsrp/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit bhubaneswar physics internship" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Winter/Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Bhubaneswar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://webapps.iitbbs.ac.in/internship-application/"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="daad wise germany physics" data-type="international"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">WISE Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">DAAD Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline:
+                        November 1st</div>
+                    <a class="apply-now"
+                        href="https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?status=1&amp;origin=4&amp;subjectGrps=&amp;daad=1&amp;q=wise&amp;page=1&amp;detail=50015295"
+                        target="_blank">Apply Now</a>
                 </div>
             </div>
         </div>
-
-        <div id="mathematics" class="year-content hidden">
-            <h2 style="margin-bottom: 20px;">Mathematics & Computing Opportunities</h2>
+        <div class="year-content hidden" id="mathematics">
+            <h2 style="margin-bottom: 20px;">Mathematics &amp; Computing Opportunities</h2>
             <div class="opportunities-grid">
-                <!-- Card: Microsoft -->
-                <div class="opportunity-card" data-location="on-site" data-type="industry"
-                    data-search="freshman tech program microsoft redmond math operating systems">
+                <div class="opportunity-card"
+                    data-search="freshman tech program microsoft redmond math operating systems"
+                    data-type="international" data-years="1,2,3,4">
                     <div class="card-header">
                         <div class="company-logo"><i class="fab fa-microsoft"></i></div>
-                        <span class="tag tag-onsite">On-site</span>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
                     </div>
                     <h3 class="role-title">Freshman Tech Program</h3>
                     <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Microsoft, Redmond</p>
                     <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (10
                         weeks)</div>
-                    <a href="#" class="apply-now">Apply Now</a>
+                    <a class="apply-now" href="#">Apply Now</a>
                 </div>
-
-                <!-- Card: Google -->
-                <div class="opportunity-card" data-location="remote" data-type="industry"
-                    data-search="step intern google bangalore remote math algorithms">
+                <div class="opportunity-card" data-search="nnmcb mathematics" data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-calculator"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">NNMCB</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: October
+                    </div>
+                    <a class="apply-now" href="http://www.iiserpune.ac.in/~mbio/?q=nnmcb/internship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="mtts mathematics training and talent search"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-calculator"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">MTTS</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">MTTS Programme</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://mtts.org.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="ntu india connect singapore mathematics"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">NTU-India Connect</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">NTU Singapore</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: December
+                    </div>
+                    <a class="apply-now" href="http://global.ntu.edu.sg/GMP/ic/Pages/default.aspx" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="ist austria internship mathematics" data-type="international"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Scientific Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IST Austria</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Anytime
+                    </div>
+                    <a class="apply-now" href="https://ist.ac.at/research/internships/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit gandhinagar mathematics srip" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SRIP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Gandhinagar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://sites.iitgn.ac.in/srip/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="step intern google bangalore remote math algorithms"
+                    data-type="national" data-years="1,2">
                     <div class="card-header">
                         <div class="company-logo"><i class="fab fa-google"></i></div>
-                        <span class="tag tag-remote">Remote</span>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st/2nd Year</span>
+                        </div>
                     </div>
                     <h3 class="role-title">STEP Intern</h3>
                     <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Google, Bangalore</p>
                     <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025</div>
-                    <a href="#" class="apply-now">Apply Now</a>
+                    <a class="apply-now" href="#">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit madras mathematics" data-type="national" data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Madras</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: January
+                    </div>
+                    <a class="apply-now" href="https://sfp.iitm.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="tifr cam bangalore mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">TIFR CAM Bangalore</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Mid-Feb
+                    </div>
+                    <a class="apply-now" href="https://www.math.tifrbng.res.in/academic/internships"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="isi kolkata mathematics" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-chart-line"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">ISI Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://www.isical.ac.in/~rcbose/internship/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit ropar mathematics internship" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Ropar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://www.iitrpr.ac.in/summer-internship" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit bhubaneswar mathematics" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Bhubaneswar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://webapps.iitbbs.ac.in/internship-application/"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="hri allahabad mathematics" data-type="national"
+                    data-years="4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">4th Year Only</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">HRI Allahabad</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        4th Year Only</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.hri.res.in/~spim/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="sn bose national cbs mathematics" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-star"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">SN Bose National CBS</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://newweb.bose.res.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser mohali mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Mohali</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iisermohali.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser kolkata mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Kolkata</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="http://www.iiserkol.ac.in/~summer.research/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="indian academy of sciences ias mathematics"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-calculator"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Academy of Sciences</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov 30th
+                    </div>
+                    <a class="apply-now" href="http://web-japps.ias.ac.in:8080/fellowship2017/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="jncasr mathematics summer research fellowship"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: Nov (1st
+                        Week)</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/srfp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="cebs mumbai mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">CEBS Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: January
+                    </div>
+                    <a class="apply-now" href="https://www.cbs.ac.in/academics/summer-research-program"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="imsc chennai mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Student Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IMSc Chennai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="https://www.imsc.res.in/visiting_summer_student_program"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser pune mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Student Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Pune</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iiserpune.ac.in/~sspc/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iiser tiruvanthapuram mathematics" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">1st Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Visiting Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IISER Tiruvanthapuram</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        1st Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iisertvm.ac.in/pages/svp.phpx" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit kanpur mathematics surge" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">SURGE</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Kanpur</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.iitk.ac.in/dord/surge" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="niser bhubaneswar tpm mathematics" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Training Programme in Math (TPM)</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">NISER Bhubaneswar</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://cfs.niser.ac.in/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit jodhpur mathematics ugri" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">UGRI</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Jodhpur</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: March
+                    </div>
+                    <a class="apply-now" href="www.oa.iitj.ac.in/UGRI" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="tifr mumbai mathematics vsrp" data-type="national"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">VSRP</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">TIFR Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline: February
+                    </div>
+                    <a class="apply-now" href="http://www.math.tifr.res.in/vsrp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="daad wise germany mathematics" data-type="international"
+                    data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">WISE Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">DAAD Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        3rd Year Onwards</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Deadline:
+                        November 1st</div>
+                    <a class="apply-now"
+                        href="https://www.daad.de/deutschland/stipendium/datenbank/en/21148-scholarship-database/?status=1&amp;origin=4&amp;subjectGrps=&amp;daad=1&amp;q=wise&amp;page=1&amp;detail=50015295"
+                        target="_blank">Apply Now</a>
                 </div>
             </div>
         </div>
-
+        <div class="year-content hidden" id="ees">
+            <h2 style="margin-bottom: 20px;">Earth &amp; Environmental Sciences</h2>
+            <div class="opportunities-grid">
+                <div class="opportunity-card" data-search="caltech surf summer undergraduate research fellowship usa"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-rocket"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Caltech SURF</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Caltech, USA</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Continuing UG, GPA 2.5/4.0+</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://sfp.caltech.edu/undergraduate-research/programs/surf"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit delhi indian institute of technology"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Centre for Atmospheric Sciences</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Delhi</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://cas.iitd.ac.in/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="charpak research internship program france"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-europe"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Charpak Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">France</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        No CGPA / percentage cut-off</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.inde.campusfrance.org/charpak-lab-scholarship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit bombay indian institute of technology"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Dept of Earth Sciences</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Bombay</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.geos.iitb.ac.in/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="iit kharagpur indian institute of technology"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Dept of Geology &amp; Geophysics</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Kharagpur</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.iitkgp.ac.in/department/GG" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="national institute of oceanography nio" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-water"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Internship Programme</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">National Institute of Oceanography
+                    </p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.nio.org/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="isternship institute of science and technology austria"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">ISTernship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IST Austria</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Completed at least 4th sem</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://ist.ac.at/en/education/internships/" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="mitacs globalink research internship canada"
+                    data-type="international" data-years="3">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-globe-americas"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Mitacs Globalink Research Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Canada</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Grade - 8/10+; Min 1 max 3 sem remaining</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now"
+                        href="https://www.mitacs.ca/en/programs/globalink/globalink-research-internship"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="nansen environmental research centre nerci"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-leaf"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Centre</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Nansen Environmental Research
+                        Centre</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.nerci.in/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="university of tokyo research internship program japan"
+                    data-type="international" data-years="2,3">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-torii-gate"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Internship Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">University of Tokyo, Japan</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong> 1
+                        yr completed; Priority to 3rd yrs</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.s.u-tokyo.ac.jp/en/utrip/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="national institute of hydrology nih roorkee"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-water"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Opportunities</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">National Institute of Hydrology
+                    </p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://nihroorkee.gov.in/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card" data-search="indian institute of science iisc bangalore ees"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Research Programs</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Institute of Science</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <div style="display: flex; gap: 5px;">
+                        <a class="apply-now" href="http://www.ceas.iisc.ernet.in/" style="flex: 1; font-size: 0.8rem;"
+                            target="_blank">CEAS Website</a>
+                        <a class="apply-now" href="http://caos.iisc.ernet.in/" style="flex: 1; font-size: 0.8rem;"
+                            target="_blank">CAOS Website</a>
+                    </div>
+                </div>
+                <div class="opportunity-card" data-search="cochin university of science and technology cusat"
+                    data-type="national" data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">School of Environmental Studies</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Cochin University (CUSAT)</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://cusat.ac.in/dept.php?deptcode=ses" target="_blank">Visit
+                        Website</a>
+                </div>
+                <div class="opportunity-card" data-search="physical research laboratory prl ahmedabad gujarat"
+                    data-type="national" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-satellite"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">PRL, Ahmedabad</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Min 60%; Pre-final year students</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.prl.res.in/prl-eng/summer_internship" target="_blank">Apply
+                        Now</a>
+                </div>
+                <div class="opportunity-card" data-search="indian academy of sciences ias bengaluru"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellow</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Indian Academy of Sciences,
+                        Bengaluru</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        BS/MS (II, III, IV years)</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.ias.ac.in/internships/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="jncasr jawaharlal nehru centre for advanced scientific research bengaluru"
+                    data-type="national" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-microscope"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Summer Research Fellowship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">JNCASR, Bengaluru</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        2nd-4th year (Phy/Eng/Atmos/Mat)</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.jncasr.ac.in/fe/srfp.php" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="gauhati university" data-type="national"
+                    data-years="1,2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">All Years</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">University Opportunities</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Gauhati University</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Check Website</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="http://www.gauhati.ac.in/" target="_blank">Visit Website</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="uq summer research program university of queensland australia"
+                    data-type="international" data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">UQ Summer Research Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">University of Queensland,
+                        Australia</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        UG (inc. honours), at least 1 year study</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://employability.uq.edu.au/summer-winter-research"
+                        target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card" data-search="iit bhubaneswar internship odisha" data-type="national"
+                    data-years="2,3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-university"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-onsite">National</span>
+                            <span class="tag tag-eligibility">2nd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">Winter/Summer Internship</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">IIT Bhubaneswar, Odisha</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        Registered in govt funded tech inst.</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now" href="https://www.iitbbs.ac.in/internship/" target="_blank">Apply Now</a>
+                </div>
+                <div class="opportunity-card"
+                    data-search="wise daad working internships in science and engineering germany"
+                    data-type="international" data-years="3,4">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-flask"></i></div>
+                        <div class="tags-wrapper">
+                            <span class="tag tag-remote">International</span>
+                            <span class="tag tag-eligibility">3rd Year+</span>
+                        </div>
+                    </div>
+                    <h3 class="role-title">WISE (DAAD)</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 5px;">Germany</p>
+                    <div style="font-size: 0.85rem; color: #475569; margin-bottom: 5px;"><strong>Eligibility:</strong>
+                        5th-8th sem, CGPA 8.5/10+</div>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Check Website</div>
+                    <a class="apply-now"
+                        href="https://www.daad.in/en/study-research-in-germany/studying-in-germany/internships/wise-working-internships-in-science-and-engineering/"
+                        target="_blank">Apply Now</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -522,22 +2645,22 @@
         }
 
         function applyFilters() {
-            const loc = document.getElementById('filter-location').value;
+            const year = document.getElementById('filter-year').value;
             const type = document.getElementById('filter-type').value;
             const search = document.getElementById('filter-search').value.toLowerCase();
 
             const allCards = document.querySelectorAll('.opportunity-card');
 
             allCards.forEach(card => {
-                const cLoc = card.getAttribute('data-location');
+                const cYears = card.getAttribute('data-years') ? card.getAttribute('data-years').split(',') : [];
                 const cType = card.getAttribute('data-type');
                 const cSearch = card.getAttribute('data-search');
 
-                let matchesLoc = (loc === 'all') || (loc === cLoc);
+                let matchesYear = (year === 'all') || (cYears.includes(year));
                 let matchesType = (type === 'all') || (type === cType);
                 let matchesSearch = (search === '') || (cSearch && cSearch.includes(search));
 
-                if (matchesLoc && matchesType && matchesSearch) {
+                if (matchesYear && matchesType && matchesSearch) {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
