@@ -360,7 +360,6 @@
             <div class="sidebar-logo"><i class="fas fa-rocket"></i> Wiiser+</div>
         </div>
         <div class="sidebar-nav">
-            <a href="dashboard.html" class="nav-item"><i class="fas fa-chart-pie"></i> Dashboard</a>
             <a href="newindex.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
             <a href="resumepage.html" class="nav-item"><i class="fas fa-file-invoice"></i> CV & Resume</a>
             <a href="linkedin-optimizer.html" class="nav-item "><i class="fab fa-linkedin"></i> LinkedIn Tool</a>
@@ -415,68 +414,19 @@
 
         <!-- Tabs -->
         <div class="year-tabs">
-            <div class="year-tab active" onclick="switchYear('first')">First Year</div>
-            <div class="year-tab" onclick="switchYear('second')">Second Year</div>
-            <div class="year-tab" onclick="switchYear('third')">Third Year</div>
+            <div class="year-tab active" onclick="switchCategory('biology')">Biology</div>
+            <div class="year-tab" onclick="switchCategory('chemistry')">Chemistry</div>
+            <div class="year-tab" onclick="switchCategory('physics')">Physics</div>
+            <div class="year-tab" onclick="switchCategory('mathematics')">Mathematics</div>
         </div>
 
         <!-- Content Area -->
-        <div id="first" class="year-content">
-            <h2 style="margin-bottom: 20px;">First Year Opportunities</h2>
+        <div id="biology" class="year-content">
+            <h2 style="margin-bottom: 20px;">Biology Opportunities</h2>
             <div class="opportunities-grid">
-                <!-- Card 1 -->
+                <!-- Card: IAS (General/Bio) -->
                 <div class="opportunity-card" data-location="on-site" data-type="research"
-                    data-search="nius physics camp hbcse tifr mumbai">
-                    <div class="card-header">
-                        <div class="company-logo"><i class="fas fa-atom"></i></div>
-                        <span class="tag tag-onsite">On-site</span>
-                    </div>
-                    <h3 class="role-title">NIUS Physics Camp</h3>
-                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">HBCSE (TIFR), Mumbai</p>
-                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (4
-                        weeks)</div>
-                    <a href="#" class="apply-now">Apply Now</a>
-                </div>
-                <!-- Card 2 -->
-                <div class="opportunity-card" data-location="on-site" data-type="industry"
-                    data-search="freshman tech program microsoft redmond">
-                    <div class="card-header">
-                        <div class="company-logo"><i class="fab fa-microsoft"></i></div>
-                        <span class="tag tag-onsite">On-site</span>
-                    </div>
-                    <h3 class="role-title">Freshman Tech Program</h3>
-                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Microsoft, Redmond</p>
-                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (10
-                        weeks)</div>
-                    <a href="#" class="apply-now">Apply Now</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="second" class="year-content hidden">
-            <h2 style="margin-bottom: 20px;">Second Year Opportunities</h2>
-            <div class="opportunities-grid">
-                <!-- Card 2 -->
-                <div class="opportunity-card" data-location="remote" data-type="industry"
-                    data-search="step intern google bangalore remote">
-                    <div class="card-header">
-                        <div class="company-logo"><i class="fab fa-google"></i></div>
-                        <span class="tag tag-remote">Remote</span>
-                    </div>
-                    <h3 class="role-title">STEP Intern</h3>
-                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Google, Bangalore</p>
-                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025</div>
-                    <a href="#" class="apply-now">Apply Now</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="third" class="year-content hidden">
-            <h2 style="margin-bottom: 20px;">Third Year Opportunities</h2>
-            <div class="opportunities-grid">
-                <!-- Card 3 -->
-                <div class="opportunity-card" data-location="on-site" data-type="research"
-                    data-search="summer research fellow indian academy of sciences ias">
+                    data-search="summer research fellow indian academy of sciences ias biology">
                     <div class="card-header">
                         <div class="company-logo"><i class="fas fa-flask"></i></div>
                         <span class="tag tag-onsite">On-site</span>
@@ -489,11 +439,73 @@
             </div>
         </div>
 
+        <div id="chemistry" class="year-content hidden">
+            <h2 style="margin-bottom: 20px;">Chemistry Opportunities</h2>
+            <div class="opportunities-grid">
+                <!-- Placeholder for Chemistry -->
+                <div class="no-results">
+                    <i class="fas fa-flask" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.5;"></i>
+                    <p>No specific chemistry opportunities listed yet.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="physics" class="year-content hidden">
+            <h2 style="margin-bottom: 20px;">Physics Opportunities</h2>
+            <div class="opportunities-grid">
+                <!-- Card: NIUS Physics -->
+                <div class="opportunity-card" data-location="on-site" data-type="research"
+                    data-search="nius physics camp hbcse tifr mumbai">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fas fa-atom"></i></div>
+                        <span class="tag tag-onsite">On-site</span>
+                    </div>
+                    <h3 class="role-title">NIUS Physics Camp</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">HBCSE (TIFR), Mumbai</p>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (4
+                        weeks)</div>
+                    <a href="#" class="apply-now">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="mathematics" class="year-content hidden">
+            <h2 style="margin-bottom: 20px;">Mathematics & Computing Opportunities</h2>
+            <div class="opportunities-grid">
+                <!-- Card: Microsoft -->
+                <div class="opportunity-card" data-location="on-site" data-type="industry"
+                    data-search="freshman tech program microsoft redmond math operating systems">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fab fa-microsoft"></i></div>
+                        <span class="tag tag-onsite">On-site</span>
+                    </div>
+                    <h3 class="role-title">Freshman Tech Program</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Microsoft, Redmond</p>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025 (10
+                        weeks)</div>
+                    <a href="#" class="apply-now">Apply Now</a>
+                </div>
+
+                <!-- Card: Google -->
+                <div class="opportunity-card" data-location="remote" data-type="industry"
+                    data-search="step intern google bangalore remote math algorithms">
+                    <div class="card-header">
+                        <div class="company-logo"><i class="fab fa-google"></i></div>
+                        <span class="tag tag-remote">Remote</span>
+                    </div>
+                    <h3 class="role-title">STEP Intern</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 10px;">Google, Bangalore</p>
+                    <div style="font-size: 0.85rem; color: #94a3b8;"><i class="far fa-calendar"></i> Summer 2025</div>
+                    <a href="#" class="apply-now">Apply Now</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
         // Tab Logic
-        function switchYear(id) {
+        function switchCategory(id) {
             document.querySelectorAll('.year-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(id).classList.remove('hidden');
 

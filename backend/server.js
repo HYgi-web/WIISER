@@ -231,7 +231,10 @@ app.post('/api/upload-cv', verifyToken, upload.single('cv'), (req, res) => {
         res.json({ message: 'CV Uploaded', path: filePath });
     });
 });
-
+app.get('/', (req, res) => {
+    res.send('Backend is running fine');
+  });
+  
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
