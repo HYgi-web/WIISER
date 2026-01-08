@@ -21,6 +21,13 @@
             --border: #e5e7eb;
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            /* CV Theme Variables (Defaults) */
+            --cv-name-color: #1e3a8a;
+            --cv-title-color: #4338ca;
+            --cv-accent-color: #2563eb;
+            --cv-chip-bg: #eff6ff;
+            --cv-chip-text: #1e40af;
         }
 
         * {
@@ -248,7 +255,7 @@
         }
 
         .cv-header-section {
-            border-bottom: 2px solid #2563eb;
+            border-bottom: 2px solid var(--cv-accent-color);
             padding-bottom: 20px;
             margin-bottom: 25px;
         }
@@ -257,7 +264,7 @@
             font-size: 32px;
             font-weight: 800;
             text-transform: uppercase;
-            color: #1e3a8a;
+            color: var(--cv-name-color);
             /* Dark Blue */
             letter-spacing: -0.5px;
             line-height: 1.2;
@@ -282,7 +289,7 @@
             font-size: 16px;
             font-weight: 700;
             text-transform: uppercase;
-            color: #2563eb;
+            color: var(--cv-accent-color);
             border-bottom: 1px solid #e5e7eb;
             padding-bottom: 6px;
             margin-bottom: 12px;
@@ -338,7 +345,7 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #2563eb;
+            color: var(--cv-accent-color);
             font-weight: bold;
         }
 
@@ -350,8 +357,8 @@
         }
 
         .cv-chip {
-            background: #eff6ff;
-            color: #1e40af;
+            background: var(--cv-chip-bg);
+            color: var(--cv-chip-text);
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 13px;
@@ -562,17 +569,12 @@
             ],
             experience: [
                 {
-                    role: "Senior UX Designer",
-                    company: "TechFlow Solutions",
-                    duration: "2021 - Present",
-                    description: "Leading the design of the core platform products.\\nMentoring junior designers and establishing a unified design system."
+                    role: "Research Intern",
+                    company: "DRDO",
+                    duration: "May'25 - July'25",
+                    description: "researched about how thw use of semiconductors could be increased in energy generation."
                 },
-                {
-                    role: "Product Designer",
-                    company: "Creative Studio Inc.",
-                    duration: "2019 - 2021",
-                    description: "Collaborated with cross-functional teams to ship web and mobile apps."
-                }
+
             ],
             projects: [
                 {
@@ -595,6 +597,61 @@
                 soft: "Communication, Team Leadership, Presentation, Problem Solving"
             }
         };
+
+        // Theme Management
+        let currentTheme = {
+            nameColor: '#1e3a8a',
+            titleColor: '#4338ca',
+            accentColor: '#2563eb', // Headers, bullets
+            chipBg: '#eff6ff',
+            chipText: '#1e40af'
+        };
+
+        function applyTemplateFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const template = params.get('template');
+            const root = document.documentElement;
+
+            // Default Blue Theme
+            let theme = {
+                nameColor: '#1e3a8a',
+                titleColor: '#4338ca',
+                accentColor: '#2563eb',
+                chipBg: '#eff6ff',
+                chipText: '#1e40af'
+            };
+
+            if (template === 'creative') {
+                theme = {
+                    nameColor: '#831843', // Pink-900
+                    titleColor: '#db2777', // Pink-600
+                    accentColor: '#ec4899', // Pink-500
+                    chipBg: '#fdf2f8', // Pink-50
+                    chipText: '#be185d' // Pink-700
+                };
+            } else if (template === 'executive') {
+                theme = {
+                    nameColor: '#0f172a', // Slate-900
+                    titleColor: '#334155', // Slate-700
+                    accentColor: '#475569', // Slate-600
+                    chipBg: '#f1f5f9', // Slate-100
+                    chipText: '#1e293b' // Slate-800
+                };
+            }
+
+            // Apply Variables
+            root.style.setProperty('--cv-name-color', theme.nameColor);
+            root.style.setProperty('--cv-title-color', theme.titleColor);
+            root.style.setProperty('--cv-accent-color', theme.accentColor);
+            root.style.setProperty('--cv-chip-bg', theme.chipBg);
+            root.style.setProperty('--cv-chip-text', theme.chipText);
+
+            // Update state for inline usage if needed
+            currentTheme = theme;
+        }
+
+
+        applyTemplateFromUrl();
 
         // Initialize Form with default data
         function initForm() {
