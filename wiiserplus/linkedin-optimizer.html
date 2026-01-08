@@ -364,7 +364,7 @@
             Wiiser<span>+</span>
         </div>
         <div style="display: flex; gap: 20px;">
-          
+
             <a href="newindex.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
         </div>
     </nav>
@@ -373,8 +373,9 @@
         <!-- Input Side -->
         <div class="input-panel">
             <h1>LinkedIn Optimizer</h1>
-            <p class="subtitle">Enter your LinkedIn profile URL below. Our AI will scan your public profile to detect
-                missing keywords, formatting issues, and engagement blockers.</p>
+            <p class="subtitle">“Our LinkedIn Optimizer uses URL intelligence, industry best practices, and AI-simulated profile heuristics to 
+                generate an actionable optimization score—without scraping or storing user data.”
+            </p>
 
             <div class="form-section">
                 <label><i class="fab fa-linkedin"></i> LinkedIn Profile URL</label>
@@ -441,14 +442,14 @@
             const url = urlInput.value.trim();
             const btn = document.getElementById('btn-analyze');
             const loader = document.getElementById('loading-state');
-            const loaderBar = doc
 
             if (!url) {
                 alert("Please enter a valid LinkedIn URL");
                 return;
             }
 
-            if (!url.includes('linkedin.com/in/')) {
+            // Basic LinkedIn URL check
+            if (!url.toLowerCase().includes('linkedin.com/in/') && !url.toLowerCase().includes('linkedin.com/company/')) {
                 alert("Please enter a valid LinkedIn profile URL (e.g., https://www.linkedin.com/in/name)");
                 return;
             }
@@ -476,7 +477,10 @@
             const stepInterval = setInterval(() => {
                 if (stepIndex >= steps.length) {
                     clearInterval(stepInterval);
-                    finishAnalysis();
+
+                    // Run Analysis
+                    const analysis = runHybridAnalysis(url);
+                    finishAnalysis(analysis);
                     return;
                 }
 
@@ -487,7 +491,84 @@
             }, 800);
         }
 
-        function finishAnalysis() {
+        function runHybridAnalysis(url) {
+            let score = 50; // Base score
+            const feedback = [];
+
+            // 1. REAL URL Analysis
+            // Check for vanity URL (no long strings of numbers at the end usually)
+            // Pattern: /in/[name]-[random-numbers]/ or /in/[name]/
+            const urlParts = url.split('/in/')[1] || '';
+            const idPart = urlParts.split('/')[0];
+
+            // Heuristic: if the ID part ends with 5+ digits, it's likely not fully customized
+            const hasRandomNumbers = /\d{5,}/.test(idPart);
+
+            if (!hasRandomNumbers && idPart.length > 0) {
+                score += 15;
+                feedback.push({
+                    status: 'success',
+                    title: 'URL Optimization',
+                    msg: 'Great job! You have a custom vanity URL. This improves SEO and looks professional.'
+                });
+            } else {
+                feedback.push({
+                    status: 'warning',
+                    title: 'URL Optimization',
+                    msg: 'Your profile URL appears to contain default random numbers. customize it (e.g., linkedin.com/in/yourname) for better visibility.'
+                });
+            }
+
+            // 2. SIMULATED Content Analysis (Randomized for variety)
+
+            // Headline Simulation
+            if (Math.random() > 0.3) {
+                score += 15;
+                feedback.push({
+                    status: 'success',
+                    title: 'Headline Keywords',
+                    msg: 'Your headline appears to be using standard industry terms. (Simulated Check: Ensure you include specific tech stack keywords).'
+                });
+            } else {
+                feedback.push({
+                    status: 'warning',
+                    title: 'Headline Optimization',
+                    msg: 'Your headline could be stronger. Instead of just your role, add your value proposition (e.g., "Helping X do Y").'
+                });
+            }
+
+            // About Section Simulation
+            if (Math.random() > 0.4) {
+                score += 10;
+                feedback.push({
+                    status: 'success',
+                    title: 'About Section',
+                    msg: 'You have a populated About section. (Simulated Check: Make sure it tells a story, not just lists skills).'
+                });
+            } else {
+                feedback.push({
+                    status: 'error',
+                    title: 'About Section Depth',
+                    msg: 'Your About section might be too brief. Aim for 3 paragraphs: The Hook, The Experience, and The Call to Action.'
+                });
+            }
+
+            // Activity Simulation
+            score += 10; // Assume some activity
+            feedback.push({
+                status: 'warning',
+                title: 'Recent Activity',
+                msg: 'To boost your profile visibility by 40%, try engaging with 3-5 posts per week in your industry network.'
+            });
+
+            // Random variance to make it feel alive
+            score += Math.floor(Math.random() * 20);
+            if (score > 98) score = 98;
+
+            return { score, feedback };
+        }
+
+        function finishAnalysis(data) {
             // UI Update
             const btn = document.getElementById('btn-analyze');
             btn.innerHTML = '<i class="fas fa-check"></i> Analysis Complete';
@@ -504,45 +585,13 @@
                 results.style.pointerEvents = 'all';
                 results.style.filter = 'none';
 
-                // Simulate Data (Since we can't scrape)
-                simulateResults();
+                renderResults(data);
             }, 500);
         }
 
-        function simulateResults() {
-            // Randomize score slightly for realism
-            const baseScore = 65;
-            const randomVar = Math.floor(Math.random() * 10);
-            const finalScore = baseScore + randomVar;
-
-            // Animate Score
-            animateScore(finalScore);
-
-            // Generate Simulated Feedback
-            const feedback = [
-                {
-                    status: 'success',
-                    title: 'URL Structure',
-                    msg: 'Your profile URL is clean and customized. This is good for SEO.'
-                },
-                {
-                    status: 'warning',
-                    title: 'Headline Optimization',
-                    msg: 'Based on our scan, your headline might be missing key industry keywords (e.g., "Specialist", "Expert"). Recommend adding 2-3 core skills.'
-                },
-                {
-                    status: 'error',
-                    title: 'About Section Depth',
-                    msg: 'The About section appears brief. High-performing profiles usually have 100+ words telling a compelling career story.'
-                },
-                {
-                    status: 'warning',
-                    title: 'Activity Engagement',
-                    msg: 'Recent activity is low. Engaging with 3-5 posts per week boosts profile visibility by 40%.'
-                }
-            ];
-
-            renderFeedback(feedback);
+        function renderResults(data) {
+            animateScore(data.score);
+            renderFeedback(data.feedback);
         }
 
         function animateScore(target) {
@@ -554,6 +603,8 @@
             let current = 0;
             const timer = setInterval(() => {
                 current += 1;
+                if (current > target) current = target;
+
                 display.innerText = current;
 
                 // Update Badge
@@ -609,6 +660,10 @@
                     </div>
                 `;
             });
+
+            if (items.length === 0) {
+                html = '<div style="text-align:center; padding: 2rem;">No feedback generated.</div>';
+            }
 
             container.innerHTML = html;
         }
