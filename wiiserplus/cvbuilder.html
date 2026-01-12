@@ -28,23 +28,128 @@
             --cv-accent-color: #2563eb;
             --cv-chip-bg: #eff6ff;
             --cv-chip-text: #1e40af;
+
+            /* Scaling Variable */
+            --scale: 1;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+        /* ... (rest of CSS) */
+
+        /* CV Styles (The content itself) */
+        .cv-grid {
+            /* Basic layout inside CV */
+            color: #1a1a1a;
         }
 
-        body {
-            background-color: var(--bg-page);
-            color: var(--text-body);
-            height: 100vh;
+        .cv-header-section {
+            border-bottom: 2px solid var(--cv-accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .cv-name {
+            font-size: calc(32px * var(--scale));
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--cv-name-color);
+            /* Dark Blue */
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .cv-contact {
+            margin-top: 10px;
             display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            /* App-like feel */
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: calc(14px * var(--scale));
+            color: #4b5563;
+        }
+
+        .cv-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cv-section-title {
+            font-size: calc(16px * var(--scale));
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--cv-accent-color);
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .cv-item {
+            margin-bottom: 12px;
+        }
+
+        .cv-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .cv-item-title {
+            font-weight: 700;
+            font-size: calc(15px * var(--scale));
+            color: #111827;
+        }
+
+        .cv-item-subtitle {
+            font-weight: 500;
+            color: #374151;
+            font-size: calc(14px * var(--scale));
+        }
+
+        .cv-item-meta {
+            font-size: calc(13px * var(--scale));
+            color: #6b7280;
+            font-style: italic;
+            text-align: right;
+        }
+
+        .cv-list {
+            list-style: none;
+            /* Custom bullets */
+        }
+
+        .cv-list li {
+            position: relative;
+            padding-left: 12px;
+            margin-bottom: 3px;
+            font-size: calc(14px * var(--scale));
+            line-height: 1.5;
+            color: #374151;
+        }
+
+        .cv-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--cv-accent-color);
+            font-weight: bold;
+        }
+
+        /* Chips for skills */
+        .cv-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .cv-chip {
+            background: var(--cv-chip-bg);
+            color: var(--cv-chip-text);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: calc(13px * var(--scale));
+            font-weight: 500;
         }
 
         /* Navigation */
@@ -616,6 +721,11 @@
             chipBg: '#eff6ff',
             chipText: '#1e40af'
         };
+
+        function updateScale(value) {
+            document.getElementById('scale-val').textContent = value;
+            document.getElementById('cv-preview').style.setProperty('--scale', value);
+        }
 
         function applyTemplateFromUrl() {
             const params = new URLSearchParams(window.location.search);
