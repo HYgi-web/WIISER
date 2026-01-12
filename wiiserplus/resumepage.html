@@ -215,9 +215,12 @@
         /* Services Grid */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
             margin-bottom: 60px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .service-card {
@@ -229,16 +232,23 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            box-shadow: var(--shadow-soft);
+            max-width: 500px;
+            /* Prevent overly wide cards on single rows */
+            width: 100%;
+            margin: 0 auto;
+            /* Center if max-width applies */
         }
 
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             background: white;
         }
 
         .service-img {
-            height: 200px;
+            height: 240px;
+            /* Increased height for better aspect ratio */
             overflow: hidden;
             background: #e2e8f0;
             display: flex;
@@ -377,18 +387,18 @@
             <!-- Card 2 -->
             <div class="service-card">
                 <div class="service-img">
-                    <img src="images/proftemp.jpeg" alt="Templates">
+                    <img src="../images/cvbuilder.png" alt="Builder">
                 </div>
                 <div class="service-content">
-                    <h3>Professional Templates</h3>
-                    <p>A collection of clean and simple CV templates suitable for academic and research profiles,
-                        focusing on clarity and readability rather than heavy design..</p>
-                    <a href="resume.html" class="btn-card">View Templates <i class="fas fa-arrow-right"></i></a>
+                    <h3>Interactive Builder</h3>
+                    <p>An easy-to-use CV builder that allows students to enter their academic details, preview the CV in
+                        real time, and export it as a polished PDF for applications.</p>
+                    <a href="resume.html" class="btn-card">Open Builder <i class="fas fa-magic"></i></a>
                 </div>
             </div>
 
             <!-- Card 3 -->
-            <div class="service-card">
+            <!-- <div class="service-card">
                 <div class="service-img">
                     <img src="../images/cvbuilder.png" alt="Builder">
                 </div>
@@ -398,7 +408,7 @@
                         real time, and export it as a polished PDF for applications.</p>
                     <a href="cvbuilder.html" class="btn-card">Open Builder <i class="fas fa-magic"></i></a>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

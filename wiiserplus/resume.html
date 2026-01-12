@@ -399,59 +399,253 @@
         </header>
 
         <section class="hero">
-            <h1>Professional Templates</h1>
-            <p>Our collection of ATS-friendly, professionally designed resume templates suitable for various industries.
-            </p>
+            <h1>Resume & CV Center</h1>
+            <p>Tools and guidance to help you craft the perfect professional profile.</p>
         </section>
 
-        <div class="mark">
-            <i class="fas fa-info-circle"></i> Please make a copy of the template on your system and then edit it.
+        <div class="dashboard-grid">
+            <!-- Tips Card
+            <div class="main-card tips-card">
+                <div class="card-header">
+                    <div class="icon-box"><i class="fas fa-lightbulb"></i></div>
+                    <h2>Resume Tips</h2>
+                </div>
+                <div class="card-content">
+                    <ul class="tips-list">
+                        <li><i class="fas fa-check-circle"></i> Keep it concise and relevant to the job.</li>
+                        <li><i class="fas fa-check-circle"></i> Use keywords from the job description.</li>
+                        <li><i class="fas fa-check-circle"></i> Highlight your achievements, not just duties.</li>
+                        <li><i class="fas fa-check-circle"></i> Proofread for zero errors.</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline"
+                        style="margin-top: 20px; width: 100%; justify-content: center;">View All Tips</a>
+                </div>
+            </div> -->
+
+            <!-- CV Builder Container -->
+            <div class="main-card builder-container">
+                <div class="card-header">
+                    <div class="icon-box" style="background: linear-gradient(135deg, #10b981, #059669);"><i
+                            class="fas fa-tools"></i></div>
+                    <h2>CV Builder</h2>
+                </div>
+                <div class="card-content">
+                    <p class="section-desc">Choose a template to start building your professional CV.</p>
+
+                    <div class="nested-grid">
+                        <!-- Template 1 -->
+                        <div class="nested-card">
+                            <div class="nested-icon"><i class="fas fa-file-alt"></i></div>
+                            <h3>Template 1</h3>
+                            <p>Classic professional layout suitable for most industries.</p>
+                            <a href="cvbuilder.html" class="btn btn-primary"
+                                style="width: 100%; justify-content: center;">Use Template 1</a>
+                        </div>
+
+                        <!-- Template 2 -->
+                        <div class="nested-card">
+                            <div class="nested-icon"><i class="fas fa-file-invoice"></i></div>
+                            <h3>Template 2</h3>
+                            <p>Modern design with a focus on skills and projects.</p>
+                            <a href="cvbuilder-2.html" class="btn btn-outline"
+                                style="width: 100%; justify-content: center;">Use
+                                Template 2</a>
+                        </div>
+
+                        <!-- AI Resume Review -->
+                        <div class="nested-card ai-card">
+                            <div class="nested-icon ai-icon"><i class="fas fa-robot"></i></div>
+                            <h3>AI Resume Review</h3>
+                            <p>Get instant AI feedback on your existing resume.</p>
+                            <button class="btn btn-ai" style="width: 100%; justify-content: center;" disabled>Coming
+                                Soon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="templates-grid">
-            <!-- Template 1 -->
-            <div class="template-card">
-                <div class="template-preview"><i class="fas fa-file-alt"></i></div>
-                <div class="template-info">
-                    <h3 class="template-title">Modern Minimalist</h3>
-                    <div class="btn-group">
-                        <button class="btn btn-outline" onclick="openModal('images/preview-modern.png')"><i
-                                class="fas fa-eye"></i> Preview</button>
-                        <a href="cvbuilder.html?template=modern" class="btn btn-primary"><i class="fas fa-edit"></i> Use
-                            Template</a>
-                    </div>
-                </div>
-            </div>
+        <style>
+            .dashboard-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-top: 30px;
+                max-width: 1000px;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-            <!-- Template 2 -->
-            <div class="template-card">
-                <div class="template-preview"><i class="fas fa-file-invoice"></i></div>
-                <div class="template-info">
-                    <h3 class="template-title">Creative Professional</h3>
-                    <div class="btn-group">
-                        <button class="btn btn-outline" onclick="openModal('images/preview-creative.png')"><i
-                                class="fas fa-eye"></i> Preview</button>
-                        <a href="cvbuilder.html?template=creative" class="btn btn-primary"><i class="fas fa-edit"></i>
-                            Use Template</a>
-                    </div>
-                </div>
-            </div>
+            @media (max-width: 900px) {
+                .dashboard-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
 
-            <!-- Template 3 -->
-            <div class="template-card">
-                <div class="template-preview"><i class="fas fa-file-signature"></i></div>
-                <div class="template-info">
-                    <h3 class="template-title">Executive Standard</h3>
-                    <div class="btn-group">
-                        <button class="btn btn-outline" onclick="openModal('images/preview-executive.png')"><i
-                                class="fas fa-eye"></i> Preview</button>
-                        <a href="cvbuilder.html?template=executive" class="btn btn-primary"><i class="fas fa-edit"></i>
-                            Use Template</a>
-                    </div>
-                </div>
-            </div>
+            .main-card {
+                background: white;
+                border-radius: 24px;
+                padding: 30px;
+                box-shadow: var(--shadow-soft);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+            }
 
-        </div>
+            .card-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 25px;
+            }
+
+            .icon-box {
+                width: 50px;
+                height: 50px;
+                border-radius: 14px;
+                background: var(--primary-gradient);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem;
+                box-shadow: 0 4px 12px rgba(65, 105, 225, 0.2);
+            }
+
+            .card-header h2 {
+                font-size: 1.5rem;
+                color: var(--text-primary);
+                font-weight: 700;
+            }
+
+            /* Tips Styles */
+            .tips-list {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .tips-list li {
+                display: flex;
+                gap: 12px;
+                font-size: 0.95rem;
+                color: var(--text-secondary);
+                line-height: 1.5;
+            }
+
+            .tips-list li i {
+                color: #10b981;
+                margin-top: 4px;
+                flex-shrink: 0;
+            }
+
+            /* Nested Grid for Builder */
+            .nested-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            @media (max-width: 600px) {
+                .nested-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .nested-card {
+                background: #f8fafc;
+                border-radius: 16px;
+                padding: 30px;
+                border: 1px solid #e2e8f0;
+                transition: all 0.3s;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .nested-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--accent);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+                background: white;
+            }
+
+            .nested-icon {
+                width: 70px;
+                height: 70px;
+                background: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.8rem;
+                color: var(--accent);
+                margin-bottom: 5px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            }
+
+            .nested-card h3 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: var(--text-primary);
+            }
+
+            .nested-card p {
+                font-size: 0.95rem;
+                color: var(--text-secondary);
+                margin-bottom: 15px;
+                line-height: 1.5;
+            }
+
+            /* AI Card Specific Styles */
+            .nested-card.ai-card {
+                background: linear-gradient(135deg, #1e293b, #0f172a);
+                border: 1px solid #334155;
+            }
+
+            .nested-card.ai-card:hover {
+                border-color: #60a5fa;
+                box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            }
+
+            .nested-card.ai-card h3 {
+                color: white;
+            }
+
+            .nested-card.ai-card p {
+                color: #94a3b8;
+            }
+
+            .nested-icon.ai-icon {
+                background: rgba(255, 255, 255, 0.1);
+                color: #60a5fa;
+                box-shadow: none;
+                backdrop-filter: blur(5px);
+            }
+
+            .btn-ai {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 10px;
+                padding: 10px 18px;
+                font-weight: 600;
+                cursor: not-allowed;
+                transition: all 0.3s;
+            }
+
+            .btn-ai:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .section-desc {
+                margin-bottom: 20px;
+                color: var(--text-secondary);
+                font-size: 1.05rem;
+            }
+        </style>
 
         <!-- Modal for Preview -->
         <div id="previewModal" class="modal" onclick="closeModal(event)">

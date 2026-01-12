@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Builder - Minimalist Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font for the resume -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --bg-page: #f3f4f6;
+            --text-heading: #1f2937;
+            --text-body: #4b5563;
+            --border: #e5e7eb;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-body);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 50;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-body);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-page);
+            color: var(--text-heading);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Main App Container */
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            height: calc(100vh - 64px);
+        }
+
+        /* Left Panel - Editor */
+        .editor-panel {
+            width: 450px;
+            background: white;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-section {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .editor-section h2 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+            color: var(--text-body);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.625rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .dynamic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .dynamic-item {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .btn-remove {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            color: #ef4444;
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        .btn-remove:hover {
+            opacity: 1;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px dashed var(--border);
+            background: transparent;
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-add:hover {
+            border-color: var(--primary);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        /* Right Panel - Preview Area */
+        .preview-panel {
+            flex: 1;
+            background: #e5e7eb;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* --- Minimalist Template CSS --- */
+        #cv-preview {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: var(--shadow-lg);
+            padding: 40px;
+            position: relative;
+            transform-origin: top center;
+            font-family: 'Roboto', sans-serif;
+            color: #000;
+            line-height: 1.4;
+        }
+
+        .cv-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cv-name {
+            font-size: 28px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .cv-contact {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .cv-contact span {
+            margin: 0 5px;
+        }
+
+        .cv-links a {
+            color: #000;
+            text-decoration: underline;
+            font-size: 14px;
+        }
+
+        hr.cv-divider {
+            border: 0;
+            border-top: 1px solid #000;
+            margin: 10px 0 20px 0;
+        }
+
+        .cv-section {
+            margin-bottom: 20px;
+        }
+
+        .cv-section h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .cv-entry {
+            margin-bottom: 12px;
+        }
+
+        .cv-entry-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .cv-entry-title {
+            font-weight: 500;
+            /* As per simpler designs */
+        }
+
+        /* Specific adjustments for Education and Experience based on screenshot */
+        .cv-institution {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .cv-degree {
+            font-size: 14px;
+        }
+
+        .cv-date {
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .cv-list {
+            list-style: disc;
+            /* Standard bullets */
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        .cv-list li {
+            font-size: 13px;
+            margin-bottom: 3px;
+            line-height: 1.4;
+        }
+
+        .cv-paragraph {
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .editor-panel {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .preview-panel {
+                padding: 1rem;
+            }
+
+            #cv-preview {
+                width: 100%;
+                max-width: 800px;
+                height: auto;
+            }
+
+            body {
+                height: auto;
+                overflow: auto;
+            }
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #cv-preview,
+            #cv-preview * {
+                visibility: visible;
+            }
+
+            #cv-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                /* Adjust for print margins if needed */
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-file-invoice"></i> Wiiser<span>+</span>
+        </div>
+        <div class="nav-actions">
+            <a href="resume.html" class="btn btn-ghost"> Back to Templates</a>
+            <button class="btn btn-primary" onclick="downloadPDF()">
+                <i class="fas fa-download"></i> Download PDF
+            </button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Editor Sidebar -->
+        <aside class="editor-panel">
+
+            <!-- Personal Info -->
+            <div class="editor-section">
+                <h2><i class="fas fa-user-circle"></i> Personal Title</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" id="p-name" placeholder="ANANYA JAIN" oninput="updateCV()">
+                </div>
+                <div class="form-group">
+                    <label>Location & Phone (Line 1)</label>
+                    <input type="text" class="form-control" id="p-contact1"
+                        placeholder="Kashipur, Uttarakhand | +91-8273322962" oninput="updateCV()">
+                </div>
+                <div class="form-group">
+                    <label>Email & Link (Line 2)</label>
+                    <input type="text" class="form-control" id="p-contact2" placeholder="email@example.com | WIISER"
+                        oninput="updateCV()">
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="editor-section">
+                <h2><i class="fas fa-align-left"></i> Summary</h2>
+                <div class="form-group">
+                    <textarea class="form-control" id="p-summary" placeholder="Research student at..."
+                        oninput="updateCV()"></textarea>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="editor-section">
+                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                <div id="edu-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addEducation()"><i class="fas fa-plus"></i> Add Education</button>
+            </div>
+
+            <!-- Experience -->
+            <div class="editor-section">
+                <h2><i class="fas fa-briefcase"></i> Experience</h2>
+                <div id="exp-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addExperience()"><i class="fas fa-plus"></i> Add Experience</button>
+            </div>
+
+            <!-- Other Projects -->
+            <div class="editor-section">
+                <h2><i class="fas fa-project-diagram"></i> Other Projects</h2>
+                <div id="proj-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addProject()"><i class="fas fa-plus"></i> Add Project</button>
+            </div>
+
+            <!-- Skills -->
+            <div class="editor-section">
+                <h2><i class="fas fa-tools"></i> Skills (Bulleted)</h2>
+                <div id="skill-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addSkill()"><i class="fas fa-plus"></i> Add Skill Category</button>
+            </div>
+
+            <!-- Extracurricular -->
+            <div class="editor-section">
+                <h2><i class="fas fa-running"></i> Leadership & Extracurricular</h2>
+                <div id="extra-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addExtracurricular()"><i class="fas fa-plus"></i> Add Activity</button>
+            </div>
+
+            <!-- Achievements -->
+            <div class="editor-section">
+                <h2><i class="fas fa-trophy"></i> Achievements</h2>
+                <div id="achieve-list" class="dynamic-list"></div>
+                <button class="btn-add" onclick="addAchievement()"><i class="fas fa-plus"></i> Add Achievement</button>
+            </div>
+
+        </aside>
+
+        <!-- Preview Area -->
+        <main class="preview-panel">
+            <div id="cv-preview">
+                <!-- Javascript will inject content here -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- State Management ---
+        let state = {
+            personal: {
+                name: "ANANYA JAIN",
+                contact1: "Kashipur, Uttarakhand | +91-8273322962",
+                contact2: "ananya.jain@students.iiserpune.ac.in| WIISER",
+                summary: "Research student at IISER Pune (2024–2029) with a strong interdisciplinary interest and a motivation to study complex systems through quantitative and computational approaches. My academic journey so far has been shaped by diverse interests spanning astrophysics, mathematics, and biology, but I am equally motivated to apply quantitative and computational approaches to problems in life sciences.\\nBeyond academics, I enjoy reading, playing badminton, swimming, and dancing, which help me maintain balance and creativity in my work."
+            },
+            education: [
+                {
+                    school: "Indian Institute of Science Education and Research, Pune",
+                    degree: "BS-MS Dual Degree Program, CGPA - 8.5.",
+                    year: "Aug 2024 - Present"
+                },
+                {
+                    school: "Dayawati Modi Academy, Rampur, Uttar Pradesh",
+                    degree: "12th standard (Science), 96%",
+                    year: "2021 - 2023"
+                },
+                {
+                    school: "St. Mary's Convent Sr. Sec. Schoool, Dhampur, Uttar Pradesh",
+                    degree: "10th standard, 99.4%",
+                    year: "2019 - 2021"
+                }
+            ],
+            experience: [
+                {
+                    title: "Winter School in Astronomical Calculations (Dec 2024)",
+                    details: "Organised by Wilson College in Collaboration with IAPT, Mumbai and Astronomy Club, IITB. Worked on celestial calculations, astronomical data analysis and retrieval and model building to extract meaningful insights. Received an A grade."
+                },
+                {
+                    title: "Life in Space Workshop by IARC",
+                    details: "Speaker : Dr. Pushkar Ganesh Vaidya, Head Scientist, Indian Astrobiology Research Center. Explored concepts of astrobiology, extraterrestrial life, and space exploration. gained insights into scientific research on life beyond Earth and its implications."
+                },
+                {
+                    title: "Summer Research Project - Knot Tabulation in Computer Programming",
+                    details: "Under Prof. Rama Mishra, IISER-Pune (June 2025 - Aug 2025). Designing and implementing algorithms to classify and tabulate mathematical knots using Python. Gaining experience in bridging abstract mathematical concepts with concrete computational tools."
+                },
+                {
+                    title: "OFCM 2025",
+                    details: "Participated and completed OFCM 2025 organized under the aegis of MTTS Trust funded by National Board for Higher Mathematics (Monsoon 2025)"
+                }
+            ],
+            projects: [ // "OTHER PROJECTS"
+                {
+                    name: "WIISER",
+                    description: "is a student-driven academic platform built to foster collaborative learning at IISER Pune. It provides a curated repository of lecture notes, practice problems, previous year papers, and reference materials."
+                }
+            ],
+            skills: [
+                { category: "Programming and Tools", list: "Python, HTML, CSS, JavaScript" },
+                { category: "Data Analysis & Visualization", list: "Experience with NumPy, Pandas, Matplotlib, Astropy, Sunpy, SDSS, Exoplanets and Cepheid variables data analysis for handling scientific data." },
+                { category: "Problem-Solving", list: "Presentation Skills, Team Presentation, Public Speaking" }
+            ],
+            extracurricular: [
+                "Genral Coordinator, Aakashganga IISER Pune Astro Club",
+                "Public Relations Head, Entrepreneurship and Innovation Cell (E-Cell), IISER Pune",
+                "Head Girl, Dayawati Modi Academy, Rampur, Uttar Pradesh",
+                "Won several badminton championships and art competitions at school level.",
+                "Participated in Basketball Zonal championship.",
+                "Languages - English, Hindi"
+            ],
+            achievements: [
+                "Secured 97.3 percentile in JEE Mains 2024",
+                "Qualified JEE-Advanced 2024",
+                "\"Naaz Hai Betiyon Pe\" Award (2024) – Honored by Dainik Jagran in the field of education.",
+                "Secured 1st and 3rd position in District level olympiad for 2 consecutive years.",
+                "Secured good ranks in NSTSE and SOF olympiads"
+            ]
+        };
+
+        // --- Init & Render Logic ---
+
+        function initForm() {
+            // Personal
+            document.getElementById('p-name').value = state.personal.name;
+            document.getElementById('p-contact1').value = state.personal.contact1;
+            document.getElementById('p-contact2').value = state.personal.contact2;
+            document.getElementById('p-summary').value = state.personal.summary;
+
+            renderEducationInputs();
+            renderExperienceInputs();
+            renderProjectInputs();
+            renderSkillInputs();
+            renderExtracurricularInputs();
+            renderAchievementInputs();
+            renderPreview();
+        }
+
+        // --- Core Render Preview ---
+        function renderPreview() {
+            const p = state.personal;
+
+            // Helpers
+            const formatBullets = (items) => {
+                if (!items || items.length === 0) return '';
+                return `<ul class="cv-list">${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+            };
+
+            let html = `
+                <div class="cv-header">
+                    <div class="cv-name">${p.name}</div>
+                    <div class="cv-contact">${p.contact1}</div>
+                    <div class="cv-contact">${p.contact2}</div>
+                </div>
+                
+                <hr class="cv-divider">
+                
+                ${p.summary ? `
+                <div class="cv-section">
+                    <h3>SUMMARY</h3>
+                    ${p.summary.split('\\n').map(para => `<div class="cv-paragraph">${para}</div>`).join('')}
+                </div>` : ''}
+                
+                ${state.education.length > 0 ? `
+                <div class="cv-section">
+                    <h3>EDUCATION</h3>
+                    ${state.education.map(edu => `
+                        <div class="cv-entry">
+                            <div class="cv-entry-header">
+                                <span class="cv-institution">${edu.school}</span>
+                            </div>
+                            <div class="cv-entry-header">
+                                <span class="cv-degree">${edu.degree}</span>
+                                <span class="cv-date">${edu.year}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>` : ''}
+                
+                ${state.experience.length > 0 ? `
+                <div class="cv-section">
+                    <h3>EXPERIENCE</h3>
+                    ${state.experience.map(exp => `
+                         <div class="cv-entry">
+                            <div class="cv-entry-header" style="justify-content: flex-start; margin-bottom: 2px;">
+                                <span class="cv-entry-title">${exp.title}</span>
+                            </div>
+                            <ul class="cv-list">
+                                <li>${exp.details}</li>
+                            </ul>
+                        </div>
+                    `).join('')}
+                </div>` : ''}
+                
+                 ${state.projects.length > 0 ? `
+                <div class="cv-section">
+                    <h3>OTHER PROJECTS</h3>
+                    ${state.projects.map(proj => `
+                         <div class="cv-entry">
+                            <div style="font-size: 13px; text-align: justify;">
+                                <span style="font-weight: 600; text-decoration: underline;">${proj.name}</span>
+                                ${proj.description}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>` : ''}
+                
+                 ${state.skills.length > 0 ? `
+                <div class="cv-section">
+                    <h3>SKILLS</h3>
+                    <ul class="cv-list">
+                    ${state.skills.map(skill => `
+                         <li><span style="font-weight: 500;">${skill.category} :</span> ${skill.list}</li>
+                    `).join('')}
+                    </ul>
+                </div>` : ''}
+                
+                ${state.extracurricular.length > 0 ? `
+                <div class="cv-section">
+                    <h3>LEADERSHIP AND EXTRACURRICULAR ACTIVITIES</h3>
+                    ${formatBullets(state.extracurricular)}
+                </div>` : ''}
+                
+                 ${state.achievements.length > 0 ? `
+                <div class="cv-section">
+                    <h3>ACHIEVEMENTS</h3>
+                    ${formatBullets(state.achievements)}
+                </div>` : ''}
+             `;
+
+            document.getElementById('cv-preview').innerHTML = html;
+        }
+
+        // --- Updater Functions (Boilerplate) ---
+
+        window.updateCV = function () {
+            state.personal.name = document.getElementById('p-name').value;
+            state.personal.contact1 = document.getElementById('p-contact1').value;
+            state.personal.contact2 = document.getElementById('p-contact2').value;
+            state.personal.summary = document.getElementById('p-summary').value;
+            renderPreview();
+        }
+
+        // Education
+        window.renderEducationInputs = function () {
+            const list = document.getElementById('edu-list');
+            list.innerHTML = '';
+            state.education.forEach((edu, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item">
+                        <button class="btn-remove" onclick="removeEdu(${i})"><i class="fas fa-trash"></i></button>
+                        <input class="form-control mb-1" placeholder="School" value="${edu.school}" oninput="state.education[${i}].school = this.value; renderPreview()">
+                        <input class="form-control mb-1" placeholder="Degree / Grade" value="${edu.degree}" oninput="state.education[${i}].degree = this.value; renderPreview()" style="margin-top:5px;">
+                        <input class="form-control" placeholder="Year" value="${edu.year}" oninput="state.education[${i}].year = this.value; renderPreview()" style="margin-top:5px;">
+                    </div>
+                `;
+            });
+        }
+        window.addEducation = function () { state.education.push({ school: '', degree: '', year: '' }); renderEducationInputs(); renderPreview(); }
+        window.removeEdu = function (i) { state.education.splice(i, 1); renderEducationInputs(); renderPreview(); }
+
+        // Experience
+        window.renderExperienceInputs = function () {
+            const list = document.getElementById('exp-list');
+            list.innerHTML = '';
+            state.experience.forEach((exp, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item">
+                        <button class="btn-remove" onclick="removeExp(${i})"><i class="fas fa-trash"></i></button>
+                        <input class="form-control" placeholder="Title / Role" value="${exp.title}" oninput="state.experience[${i}].title = this.value; renderPreview()">
+                         <textarea class="form-control" placeholder="Details" style="margin-top:5px;" oninput="state.experience[${i}].details = this.value; renderPreview()">${exp.details}</textarea>
+                    </div>
+                `;
+            });
+        }
+        window.addExperience = function () { state.experience.push({ title: '', details: '' }); renderExperienceInputs(); renderPreview(); }
+        window.removeExp = function (i) { state.experience.splice(i, 1); renderExperienceInputs(); renderPreview(); }
+
+        // Projects
+        window.renderProjectInputs = function () {
+            const list = document.getElementById('proj-list');
+            list.innerHTML = '';
+            state.projects.forEach((proj, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item">
+                        <button class="btn-remove" onclick="removeProj(${i})"><i class="fas fa-trash"></i></button>
+                        <input class="form-control" placeholder="Project Name" value="${proj.name}" oninput="state.projects[${i}].name = this.value; renderPreview()">
+                         <textarea class="form-control mb-1" placeholder="Description" style="margin-top:5px;" oninput="state.projects[${i}].description = this.value; renderPreview()">${proj.description}</textarea>
+                    </div>
+                `;
+            });
+        }
+        window.addProject = function () { state.projects.push({ name: '', description: '' }); renderProjectInputs(); renderPreview(); }
+        window.removeProj = function (i) { state.projects.splice(i, 1); renderProjectInputs(); renderPreview(); }
+
+        // Skills
+        window.renderSkillInputs = function () {
+            const list = document.getElementById('skill-list');
+            list.innerHTML = '';
+            state.skills.forEach((skill, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item">
+                        <button class="btn-remove" onclick="removeSkill(${i})"><i class="fas fa-trash"></i></button>
+                        <input class="form-control" placeholder="Category (e.g. Programming)" value="${skill.category}" oninput="state.skills[${i}].category = this.value; renderPreview()">
+                         <textarea class="form-control mb-1" placeholder="List (e.g. Python, Java)" style="margin-top:5px;" oninput="state.skills[${i}].list = this.value; renderPreview()">${skill.list}</textarea>
+                    </div>
+                `;
+            });
+        }
+        window.addSkill = function () { state.skills.push({ category: '', list: '' }); renderSkillInputs(); renderPreview(); }
+        window.removeSkill = function (i) { state.skills.splice(i, 1); renderSkillInputs(); renderPreview(); }
+
+        // Extracurricular
+        window.renderExtracurricularInputs = function () {
+            const list = document.getElementById('extra-list');
+            list.innerHTML = '';
+            state.extracurricular.forEach((item, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item" style="padding-right: 2rem;">
+                        <button class="btn-remove" onclick="removeExtra(${i})"><i class="fas fa-trash"></i></button>
+                         <textarea class="form-control" oninput="state.extracurricular[${i}] = this.value; renderPreview()">${item}</textarea>
+                    </div>
+                `;
+            });
+        }
+        window.addExtracurricular = function () { state.extracurricular.push(''); renderExtracurricularInputs(); renderPreview(); }
+        window.removeExtra = function (i) { state.extracurricular.splice(i, 1); renderExtracurricularInputs(); renderPreview(); }
+
+        // Achievements
+        window.renderAchievementInputs = function () {
+            const list = document.getElementById('achieve-list');
+            list.innerHTML = '';
+            state.achievements.forEach((item, i) => {
+                list.innerHTML += `
+                    <div class="dynamic-item" style="padding-right: 2rem;">
+                        <button class="btn-remove" onclick="removeAchieve(${i})"><i class="fas fa-trash"></i></button>
+                         <textarea class="form-control" oninput="state.achievements[${i}] = this.value; renderPreview()">${item}</textarea>
+                    </div>
+                `;
+            });
+        }
+        window.addAchievement = function () { state.achievements.push(''); renderAchievementInputs(); renderPreview(); }
+        window.removeAchieve = function (i) { state.achievements.splice(i, 1); renderAchievementInputs(); renderPreview(); }
+
+
+        // HTML2PDF
+        function downloadPDF() {
+            const element = document.getElementById('cv-preview');
+            const opt = {
+                margin: 0,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            const btn = document.querySelector('.btn-primary');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+            });
+        }
+
+        // Init
+        initForm();
+
+    </script>
+</body>
+
+</html>
