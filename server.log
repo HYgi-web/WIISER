@@ -140,3 +140,5 @@
 ::1 - - [03/Feb/2026 00:34:32] "GET /images/full_logo.png HTTP/1.1" 404 -
 ::1 - - [03/Feb/2026 00:34:32] code 404, message File not found
 ::1 - - [03/Feb/2026 00:34:32] "GET /images/favicon_io/site.webmanifest HTTP/1.1" 404 -
+::1 - - [03/Feb/2026 00:35:49] code 404, message File not found
+::1 - - [03/Feb/2026 00:35:49] "GET /images/favicon_io/apple-touch-icon.png HTTP/1.1" 404 -
