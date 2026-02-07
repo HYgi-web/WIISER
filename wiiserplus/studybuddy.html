@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy | Wiiser+</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4169e1 0%, #764ba2 100%);
+            --accent: #4169e1;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --glass-blur: blur(12px);
+            --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: #f0f2f5;
+            min-height: 100vh;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom right, #f8fafc, #eef2ff);
+        }
+
+        /* Sidebar (Shared) */
+        .sidebar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 260px;
+            height: calc(100vh - 40px);
+            background: rgba(65, 105, 225, 0.05);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 30px;
+            background: var(--primary-gradient);
+        }
+
+        .sidebar-logo {
+            color: white;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-nav {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: white;
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateX(4px);
+        }
+
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 300px;
+            padding: 20px 40px 20px 0;
+            min-height: 100vh;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-120%);
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 280px;
+                border-radius: 0;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            padding: 40px;
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 32px;
+            border: 1px solid white;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: var(--primary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Coming Soon Section */
+        .coming-soon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
+            text-align: center;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 32px;
+            border: 1px solid white;
+            box-shadow: var(--shadow-soft);
+            padding: 40px;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            color: #cbd5e1;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .coming-soon-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .coming-soon-sub {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo"><i class="fas fa-rocket"></i> Wiiser+</div>
+        </div>
+        <div class="sidebar-nav">
+            <a href="newindex.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="resumepage.html" class="nav-item"><i class="fas fa-file-invoice"></i> CV & Resume</a>
+            <a href="linkedin-optimizer.html" class="nav-item"><i class="fab fa-linkedin"></i> LinkedIn Tool</a>
+            <a href="inter.html" class="nav-item"><i class="fas fa-briefcase"></i> Internships</a>
+            <a href="research.html" class="nav-item"><i class="fas fa-graduation-cap"></i> Senior Guide</a>
+            <a href="studybuddy.html" class="nav-item active"><i class="fas fa-user-friends"></i> Study Buddy</a>
+            <a href="newindex.html#contact" class="nav-item"><i class="fas fa-paper-plane"></i> Contact</a>
+            <a href="../index.html" class="nav-item back-link"><i class="fas fa-arrow-left"></i> Back to Wiiser</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <header class="mobile-nav">
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--accent);">Wiiser+</div>
+            <button class="menu-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        </header>
+
+        <section class="hero">
+            <h1>Study Buddy</h1>
+            <p>A partner while you are studying</p>
+        </section>
+
+        <div class="coming-soon-container">
+            <div class="coming-soon-icon"><i class="fas fa-clock"></i></div>
+            <div class="coming-soon-text">Coming Soon</div>
+            <div class="coming-soon-sub">We are working hard to bring you this feature. Stay tuned!</div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+        // --- Particle Script (Compressed) ---
+        const canvas = document.getElementById('bg-canvas'), ctx = canvas.getContext('2d'); let w, h, particles = []; const
+            count = 50, connDist = 150, mouseDist = 200; let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y }); window.addEventListener('resize',
+            init);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w; this.y = Math.random() * h; this.vx = (Math.random() -
+                    .5) * .8; this.vy = (Math.random() - .5) * .8; this.size = Math.random() * 2 + 1; this.color = Math.random() > .5 ?
+                        'rgba(65, 105, 225,' : 'rgba(118, 75, 162,'
+            } update() {
+                this.x += this.vx; this.y += this.vy; if (this.x < 0 ||
+                    this.x > w) this.vx *= -1; if (this.y < 0 || this.y > h) this.vy *= -1; let dx = mouse.x - this.x, dy = mouse.y -
+                        this.y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < mouseDist) {
+                            let f = (mouseDist - dist) / mouseDist;
+                            this.x -= dx / dist * f * 2; this.y -= dy / dist * f * 2
+                        }
+            } draw() {
+                ctx.beginPath(); ctx.arc(this.x,
+                    this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.color + '0.5)'; ctx.fill()
+            }
+        } function init() {
+            w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; particles = []; for (let i = 0; i <
+                count; i++)particles.push(new Particle())
+        } function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, w, h); for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw(); for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x,
+                        dy = particles[i].y - particles[j].y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < connDist) {
+                            ctx.beginPath(); ctx.strokeStyle = 'rgba(65, 105, 225,' + (1 - dist / connDist) * .2 + ')';
+                            ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke()
+                        }
+                }
+            }
+        } init(); animate(); </script>
+</body>
+
+</html>
