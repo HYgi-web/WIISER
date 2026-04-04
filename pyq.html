@@ -214,7 +214,110 @@
         .hidden {
             display: none;
         }
+
+        /* Upload Footer Styles */
+        .upload-footer {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 0.8rem;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .footer-content p strong {
+            color: #2196f3;
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-section {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .upload-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .upload-btn {
+            display: block;
+            padding: 1.2rem;
+            background: rgba(33, 150, 243, 0.1);
+            border: 2px dashed #2196f3;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #2196f3;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .upload-btn:hover {
+            background: rgba(33, 150, 243, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+        }
+
+        .file-info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            min-height: 1.2em;
+        }
+
+        .submit-upload-btn {
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, #2196f3, #1565c0);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .submit-upload-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+        }
+
+        .submit-upload-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .upload-footer {
+                margin-top: 2rem;
+                padding: 2rem 1rem;
+            }
+        }
     </style>
+
     <link rel="stylesheet" href="dark.css">
 </head>
 <body>
@@ -651,6 +754,24 @@
         </div>
     </div>
 
+    <footer class="upload-footer">
+        <div class="footer-content">
+            <p><strong>help us to increase repositary</strong></p>
+            <p>Share the missing previous year paper</p>
+            <div class="upload-section">
+                <div class="upload-wrapper">
+                    <input type="file" id="paper-upload" accept="image/*,application/pdf" multiple style="display: none;">
+                    <label for="paper-upload" class="upload-btn">
+                        <span>Click to Select Papers (PDF or Images)</span>
+                    </label>
+                    <div id="file-list" class="file-info">No files chosen</div>
+                </div>
+                <button id="upload-submit" class="submit-upload-btn" disabled>Upload to Repository</button>
+            </div>
+        </div>
+    </footer>
+
+
     <script>
         function showSubjects() {
             const select = document.getElementById('semesterSelect');
@@ -677,8 +798,39 @@
                 navLinks.classList.toggle('active');
                 authButtons.classList.toggle('active');
             });
-         
+
+        // File upload handling
+        const fileInput = document.getElementById('paper-upload');
+        const fileList = document.getElementById('file-list');
+        const uploadSubmit = document.getElementById('upload-submit');
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (files.length > 0) {
+                const names = Array.from(files).map(f => f.name).join(', ');
+                fileList.textContent = files.length === 1 ? names : `${files.length} files selected`;
+                uploadSubmit.disabled = false;
+            } else {
+                fileList.textContent = 'No files chosen';
+                uploadSubmit.disabled = true;
+            }
+        });
+
+        uploadSubmit.addEventListener('click', () => {
+            uploadSubmit.textContent = 'Uploading...';
+            uploadSubmit.disabled = true;
+            
+            // Simulate upload
+            setTimeout(() => {
+                alert('Thank you! Your contribution has been submitted for review.');
+                uploadSubmit.textContent = 'Upload to Repository';
+                fileInput.value = '';
+                fileList.textContent = 'No files chosen';
+                uploadSubmit.disabled = true;
+            }, 1500);
+        });
     </script>
+
     <script src="dark.js"></script>
 <script type="module" src="/js/sleep_awaker_widget.js"></script>
 </body>
