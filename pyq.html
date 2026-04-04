@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,317 +10,331 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="images/favicon_io/site.webmanifest">
 </head>
-     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-        }
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    }
 
+    body {
+        background-color: #f5f5f5;
+    }
+
+    body {
+        background-image: url('images/bg.jpg');
+        /* Replace with your image path */
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;
+    }
+
+    content-wrapper {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    @media screen and (max-width: 768px) {
         body {
-            background-color: #f5f5f5;
+            /* Adjust background properties for mobile devices if needed */
+            background-attachment: scroll;
         }
-        body {
-            background-image: url('images/bg.jpg');  /* Replace with your image path */
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            min-height: 100vh;}
-        content-wrapper {
-                position: relative;
-                z-index: 1;
-                width: 100%;
-                min-height: 100vh;}
-        @media screen and (max-width: 768px) {
-            body {
-                 /* Adjust background properties for mobile devices if needed */
-                 background-attachment: scroll;
-                }
-        }
+    }
 
 
-        .navbar {
-            background:none;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .navbar {
+        background: none;
+        padding: 1rem 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .logo {
-            color: #2196f3;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-  
+    .logo {
+        color: #2196f3;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+    .hamburger {
+        display: none;
+        cursor: pointer;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-            transition: color 0.2s;
-        }
 
-        .nav-links a:hover {
-            color: #2196f3;
-        }
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
 
+    .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-size: 1rem;
+        transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+        color: #2196f3;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.65rem;
+    }
+
+    .btn-outline {
+        border: 1px solid #333;
+        color: #333;
+    }
+
+    .btn-filled {
+        background-color: #000;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+
+        .nav-links,
         .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.65rem;
-        }
-
-        .btn-outline {
-            border: 1px solid #333;
-            color: #333;
-        }
-
-        .btn-filled {
-            background-color: #000;
-            color: white;
-        }
-        @media (max-width: 768px) {
-            .nav-links, .nav-buttons {
-                display: none;
-            }
-  
-            .hamburger {
-                display: block;
-            }
-  
-        }
-         /* Mobile menu when active */
-         .nav-links.active, .aut-buttons.active{
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          top: 70px;
-          left: 0;
-          right: 0;
-          background: white;
-          padding: 1rem;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 1rem;
-        }
-
-        .header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .semester-select {
-            width: 100%;
-            max-width: 400px;
-            margin: 2rem auto;
-            display: block;
-            padding: 0.8rem;
-            font-size: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background-color: white;
-            cursor: pointer;
-        }
-
-        .subjects-container {
-            margin-top: 2rem;
-        }
-
-        .semester-content {
             display: none;
         }
 
-        .semester-content.active {
+        .hamburger {
             display: block;
         }
 
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
+    }
 
-        .subject-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition-duration:1s;;
-        }
+    /* Mobile menu when active */
+    .nav-links.active,
+    .aut-buttons.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .subject-card:hover {
-            box-shadow: 3px 3px 18px #333;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
 
-        .subject-card h3 {
-            color: #1976d2;
-            margin-bottom: 1rem;
-        }
+    .header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-        .subject-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
+    .header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
 
-        .view-notes-btn {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            background-color: #2196f3;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-        }
+    .header p {
+        color: #666;
+        font-size: 1.1rem;
+    }
 
-        .view-notes-btn:hover {
-            background-color: #1976d2;
-        }
+    .semester-select {
+        width: 100%;
+        max-width: 400px;
+        margin: 2rem auto;
+        display: block;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: white;
+        cursor: pointer;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .subjects-container {
+        margin-top: 2rem;
+    }
 
-        /* Upload Footer Styles */
+    .semester-content {
+        display: none;
+    }
+
+    .semester-content.active {
+        display: block;
+    }
+
+    .subjects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .subject-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition-duration: 1s;
+        ;
+    }
+
+    .subject-card:hover {
+        box-shadow: 3px 3px 18px #333;
+    }
+
+    .subject-card h3 {
+        color: #1976d2;
+        margin-bottom: 1rem;
+    }
+
+    .subject-card p {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .view-notes-btn {
+        display: inline-block;
+        padding: 0.6rem 1.2rem;
+        background-color: #2196f3;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+    }
+
+    .view-notes-btn:hover {
+        background-color: #1976d2;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    /* Upload Footer Styles */
+    .upload-footer {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 3rem 1rem;
+        margin-top: 4rem;
+        text-align: center;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .footer-content p {
+        margin-bottom: 0.8rem;
+        color: #333;
+        font-size: 1.1rem;
+    }
+
+    .footer-content p strong {
+        color: #2196f3;
+        font-size: 1.3rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .upload-section {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .upload-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .upload-btn {
+        display: block;
+        padding: 1.2rem;
+        background: rgba(33, 150, 243, 0.1);
+        border: 2px dashed #2196f3;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #2196f3;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .upload-btn:hover {
+        background: rgba(33, 150, 243, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
+    }
+
+    .file-info {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.5rem;
+        min-height: 1.2em;
+    }
+
+    .submit-upload-btn {
+        padding: 1rem 3rem;
+        background: linear-gradient(135deg, #2196f3, #1565c0);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    }
+
+    .submit-upload-btn:hover:not(:disabled) {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+    }
+
+    .submit-upload-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
         .upload-footer {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 3rem 1rem;
-            margin-top: 4rem;
-            text-align: center;
-            border-radius: 20px 20px 0 0;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
-        }
-
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .footer-content p {
-            margin-bottom: 0.8rem;
-            color: #333;
-            font-size: 1.1rem;
-        }
-
-        .footer-content p strong {
-            color: #2196f3;
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .upload-section {
             margin-top: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.2rem;
+            padding: 2rem 1rem;
         }
+    }
+</style>
 
-        .upload-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .upload-btn {
-            display: block;
-            padding: 1.2rem;
-            background: rgba(33, 150, 243, 0.1);
-            border: 2px dashed #2196f3;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: #2196f3;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .upload-btn:hover {
-            background: rgba(33, 150, 243, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.2);
-        }
-
-        .file-info {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 0.5rem;
-            min-height: 1.2em;
-        }
-
-        .submit-upload-btn {
-            padding: 1rem 3rem;
-            background: linear-gradient(135deg, #2196f3, #1565c0);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
-        }
-
-        .submit-upload-btn:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
-        }
-
-        .submit-upload-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        @media (max-width: 768px) {
-            .upload-footer {
-                margin-top: 2rem;
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
-
-    <link rel="stylesheet" href="dark.css">
+<link rel="stylesheet" href="dark.css">
 </head>
+
 <body>
     <nav class="navbar">
         <a href="index.html" class="logo">WIISER</a>
@@ -354,7 +369,7 @@
             <option value="sem6">Semester 6</option>
             <option value="sem7">Semester 7</option>
             <option value="sem8">Semester 8</option>
-          
+
         </select>
 
         <div class="subjects-container">
@@ -594,9 +609,9 @@
                         <p>Discrete Structures</p>
                         <a href="pyq/SEM-4/MT2233pyq.html" class="view-notes-btn">View PYQ's</a>
                     </div>
-                  </div>
-                  <br><br>
-                  <div class="subjects-grid">
+                </div>
+                <br><br>
+                <div class="subjects-grid">
                     <div class="subject-card">
                         <h3>PH2213</h3>
                         <p>Classical Mechanics</p>
@@ -613,7 +628,7 @@
                         <a href="pyq/SEM-4/PH2233pyq.html" class="view-notes-btn">View PYQ's</a>
                     </div>
                 </div>
-            </div>  
+            </div>
             <div id="sem5" class="semester-content">
                 <div class="subjects-grid">
                     <div class="subject-card">
@@ -750,7 +765,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
@@ -760,7 +775,8 @@
             <p>Share the missing previous year paper</p>
             <div class="upload-section">
                 <div class="upload-wrapper">
-                    <input type="file" id="paper-upload" accept="image/*,application/pdf" multiple style="display: none;">
+                    <input type="file" id="paper-upload" accept="image/*,application/pdf" multiple
+                        style="display: none;">
                     <label for="paper-upload" class="upload-btn">
                         <span>Click to Select Papers (PDF or Images)</span>
                     </label>
@@ -776,12 +792,12 @@
         function showSubjects() {
             const select = document.getElementById('semesterSelect');
             const allContent = document.querySelectorAll('.semester-content');
-            
+
             // Hide all semester content
             allContent.forEach(content => {
                 content.classList.remove('active');
             });
-            
+
             // Show selected semester content
             if (select.value) {
                 const selectedContent = document.getElementById(select.value);
@@ -791,24 +807,26 @@
             }
         }
         const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            const navButtons = document.querySelector('.nav-buttons');
-          
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                authButtons.classList.toggle('active');
-            });
+        const navLinks = document.querySelector('.nav-links');
+        const navButtons = document.querySelector('.nav-buttons');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            authButtons.classList.toggle('active');
+        });
 
         // File upload handling
         const fileInput = document.getElementById('paper-upload');
         const fileList = document.getElementById('file-list');
         const uploadSubmit = document.getElementById('upload-submit');
 
+        // REPLACE THIS with your actual Google Apps Script Web App URL
+        const UPLOAD_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTngKmasUs6QYP5zBwX_baRveJls617ovZ5WUCb_T395ttqDCULbnVTMUcce4KMBcoGg/exec';
+
         fileInput.addEventListener('change', (e) => {
             const files = e.target.files;
             if (files.length > 0) {
-                const names = Array.from(files).map(f => f.name).join(', ');
-                fileList.textContent = files.length === 1 ? names : `${files.length} files selected`;
+                fileList.textContent = files.length === 1 ? files[0].name : `${files.length} files selected`;
                 uploadSubmit.disabled = false;
             } else {
                 fileList.textContent = 'No files chosen';
@@ -816,22 +834,69 @@
             }
         });
 
-        uploadSubmit.addEventListener('click', () => {
+        async function uploadFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async () => {
+                    const base64 = reader.result.split(',')[1];
+                    const data = {
+                        base64: base64,
+                        mimeType: file.type,
+                        name: file.name
+                    };
+
+                    try {
+                        const response = await fetch(UPLOAD_SCRIPT_URL, {
+                            method: 'POST',
+                            mode: 'no-cors', // Standard for Apps Script Web Apps when sending from different domain
+                            body: JSON.stringify(data)
+                        });
+                        // Note: with 'no-cors', we can't actually read the response body, 
+                        // but we can assume success if no error is thrown during fetch
+                        resolve(true);
+                    } catch (error) {
+                        console.error('Upload error:', error);
+                        reject(error);
+                    }
+                };
+                reader.onerror = error => reject(error);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        uploadSubmit.addEventListener('click', async () => {
+            if (UPLOAD_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                alert('Please provide your Google Apps Script URL in the code.');
+                return;
+            }
+
+            const files = fileInput.files;
+            if (files.length === 0) return;
+
             uploadSubmit.textContent = 'Uploading...';
             uploadSubmit.disabled = true;
-            
-            // Simulate upload
-            setTimeout(() => {
-                alert('Thank you! Your contribution has been submitted for review.');
-                uploadSubmit.textContent = 'Upload to Repository';
+
+            try {
+                // Upload all files sequentially or in parallel
+                const uploadPromises = Array.from(files).map(file => uploadFile(file));
+                await Promise.all(uploadPromises);
+
+                alert('Thank you! Your contribution has been submitted to Google Drive.');
                 fileInput.value = '';
                 fileList.textContent = 'No files chosen';
+            } catch (error) {
+                alert('An error occurred during upload. Please check the console.');
+                console.error(error);
+            } finally {
+                uploadSubmit.textContent = 'Upload to Repository';
                 uploadSubmit.disabled = true;
-            }, 1500);
+            }
         });
     </script>
 
+
     <script src="dark.js"></script>
-<script type="module" src="/js/sleep_awaker_widget.js"></script>
+    <script type="module" src="/js/sleep_awaker_widget.js"></script>
 </body>
+
 </html>
